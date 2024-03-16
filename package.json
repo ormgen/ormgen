@@ -1,0 +1,15 @@
+{
+  "name": "ormgen",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "packageManager": "yarn@4.1.1",
+  "scripts": {
+    "dev": "tsup src/index.ts --watch",
+    "build": "tsup src/index.ts"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.2"
+  }
+}
