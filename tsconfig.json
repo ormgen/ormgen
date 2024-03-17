@@ -1,0 +1,16 @@
+{
+	"include": ["src/**/*.ts", "test/**/*.ts"],
+	"compilerOptions": {
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
+
+		"declaration": true,
+
+		"baseUrl": ".",
+		"paths": {
+			"ormgen": ["src"],
+
+			"~/*": ["src/*"]
+		}
+	}
+}
