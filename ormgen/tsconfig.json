@@ -1,0 +1,14 @@
+{
+	"include": ["src/**/*.ts"],
+	"compilerOptions": {
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
+
+		"declaration": true,
+
+		"baseUrl": ".",
+		"paths": {
+			"~/*": ["src/*"]
+		}
+	}
+}

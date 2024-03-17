@@ -1,0 +1,12 @@
+{
+    "name": "@ormgen/test.ecom",
+    "scripts": {
+        "test:ecom": "tsx ecom/index.ts"
+    },
+    "dependencies": {
+        "ormgen": "*"
+    },
+    "devDependencies": {
+        "tsx": "^4.7.1"
+    }
+}
