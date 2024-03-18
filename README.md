@@ -6,7 +6,10 @@
 
 # TODO
 
--   [ ] Figure out how to add extra fields
 -   [ ] Create generators
     -   [ ] Prisma
+        -   [ ] Reversed relations
+        -   [ ] Complete validation
     -   [ ] Zod
+-   [ ] Refactor as a monorepo
+-   [ ] Figure out how to add extra fields

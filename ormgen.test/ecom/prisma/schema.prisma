@@ -1,90 +1,72 @@
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+	provider = "postgresql"
+	url = env("DATABASE_URL")
 }
-
 generator client {
-  provider = "prisma-client-js"
+	provider = "prisma-client-js"
 }
-
 enum ORDER_STATUS {
-  ORDERED
-  SHIPPED
+	ORDERED
+	SHIPPED
 }
-
 enum GLOBAL_ENUM {
-  A
-  B
-  C
+	A
+	B
+	C
 }
-
 model Order {
-  uid        String       @id
-  status     ORDER_STATUS
-  orderDate  DateTime
-  totalPrice Int          @default(0)
-  userUid    String
-  user       User         @relation(fields: [userUid], references: [uid], onDelete: Restrict)
-  OrderItem  OrderItem[]
+uid String @id
+status ORDER_STATUS 
+orderDate DateTime 
+totalPrice Int @default(0)
+userUid String 
+user User @relation(fields: [userUid], references: [uid], onDelete: Restrict)
 }
-
 model OrderItem {
-  uid        String  @id
-  orderUid   String
-  order      Order   @relation(fields: [orderUid], references: [uid], onDelete: Cascade)
-  productUid String
-  product    Product @relation(fields: [productUid], references: [uid], onDelete: Restrict)
-  quantity   Int
+uid String @id
+orderUid String 
+order Order @relation(fields: [orderUid], references: [uid], onDelete: Cascade)
+productUid String 
+product Product @relation(fields: [productUid], references: [uid], onDelete: Restrict)
+quantity Int 
 }
-
 model Product {
-  uid                      String                     @id
-  name                     String
-  description              String
-  price                    Int
-  stockQuantity            Int
-  sku                      String                     @unique
-  attributes               Json
-  createdAt                DateTime
-  OrderItem                OrderItem[]
-  ProductCategoryOnProduct ProductCategoryOnProduct[]
-
-  @@unique(name: "nameAndSku", [name, sku])
+uid String @id
+name String 
+description String 
+price Int 
+stockQuantity Int 
+sku String @unique
+attributes Json 
+createdAt DateTime 
+@@unique(name: "nameAndSku", [name, sku])
 }
-
 model ProductCategory {
-  uid                      String                     @id
-  name                     String                     @unique
-  description              String
-  ProductCategoryOnProduct ProductCategoryOnProduct[]
+uid String @id
+name String @unique
+description String 
 }
-
 model ProductCategoryOnProduct {
-  productUid         String
-  product            Product         @relation(fields: [productUid], references: [uid], onDelete: Cascade)
-  productCategoryUid String
-  productCategory    ProductCategory @relation(fields: [productCategoryUid], references: [uid], onDelete: Cascade)
-
-  @@id(name: "productAndCategory", [productUid, productCategoryUid])
+productUid String 
+product Product @relation(fields: [productUid], references: [uid], onDelete: Cascade)
+productCategoryUid String 
+productCategory ProductCategory @relation(fields: [productCategoryUid], references: [uid], onDelete: Cascade)
+@@id(name: "productAndCategory", [productUid, productCategoryUid])
 }
-
 model Review {
-  uid       String   @id
-  rating    Int
-  comment   String
-  createdAt DateTime
-  userUid   String
-  user      User     @relation(fields: [userUid], references: [uid], onDelete: Cascade)
+uid String @id
+rating Int 
+comment String 
+createdAt DateTime 
+userUid String 
+user User @relation(fields: [userUid], references: [uid], onDelete: Cascade)
 }
-
 model User {
-  uid          String   @id
-  email        String   @unique
-  name         String
-  passwordHash String
-  lastLogin    DateTime
-  createdAt    DateTime
-  updatedAt    DateTime
-  Order        Order[]
-  Review       Review[]
+uid String @id
+email String @unique
+name String 
+passwordHash String 
+lastLogin DateTime 
+createdAt DateTime 
+updatedAt DateTime 
 }

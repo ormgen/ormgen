@@ -44,9 +44,8 @@ export class PrismaGenerator extends OrmGenerator {
 	}
 
 	onComplete() {
-		execSync(`npx prisma format --schema ${this.schemaPath}`, {
-			stdio: 'inherit',
-		});
+		execSync(`npx prisma validate --schema ${this.schemaPath}`, { stdio: 'inherit' });
+		execSync(`npx prisma format --schema ${this.schemaPath}`, { stdio: 'inherit' });
 	}
 }
 
