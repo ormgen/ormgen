@@ -4,11 +4,8 @@ import { createEntity$ } from './createEntity$';
 import { findPaths } from './findPaths';
 
 export async function init(config: RunConfig) {
-	const {
-		cwd = process.cwd(),
+	const { cwd = process.cwd() } = config;
 
-		search,
-	} = config;
 	const {
 		root,
 

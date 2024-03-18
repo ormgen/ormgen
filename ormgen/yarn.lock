@@ -535,6 +535,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"case-anything@npm:^2.1.13":
+  version: 2.1.13
+  resolution: "case-anything@npm:2.1.13"
+  checksum: 10c0/b02ffa51d7d58b9a32df7b40973836e16afad131eae7d343e64cb3ca7be57a936bf3d6c9d57a7aa242cf2f545d9a33990b755e93bcac2517761d77773a4a6a30
+  languageName: node
+  linkType: hard
+
 "chokidar@npm:^3.5.1":
   version: 3.6.0
   resolution: "chokidar@npm:3.6.0"
@@ -1358,6 +1365,7 @@ __metadata:
   resolution: "ormgen@workspace:."
   dependencies:
     "@types/node": "npm:^20.11.28"
+    case-anything: "npm:^2.1.13"
     fast-glob: "npm:^3.3.2"
     prettier: "npm:^3.2.5"
     tsup: "npm:^8.0.2"

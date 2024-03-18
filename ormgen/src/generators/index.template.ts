@@ -1,7 +1,9 @@
-import { Entity, Entity$, Enum } from '~/modelling';
+import { Entity$, Enum } from '~/modelling';
 import { Promisify } from '~/helpers';
 
-export interface OrmGenerator {
-	onEnum(e: Enum): Promisify<any>;
-	onEntity(entity: Entity): Promisify<any>;
+export abstract class OrmGenerator {
+	abstract onEnum(e: Enum): Promisify<any>;
+	abstract onEntity(entity: Entity$, entities: Entity$[]): Promisify<any>;
+	abstract onWrite(): Promisify<any>;
+	abstract onComplete(): Promisify<any>;
 }

@@ -1,4 +1,4 @@
-export interface Relation {
+export interface RelationType {
 	type: 'relation';
 
 	isUnique?: boolean;

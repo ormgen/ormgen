@@ -1,6 +1,6 @@
 import { CreateType } from './index.create';
 
-import { Relation as __Relation } from './index.relation';
+import { RelationType } from './index.relation';
 
 export namespace EntityFieldType {
 	export type Text = CreateType<'text', string>;
@@ -17,7 +17,7 @@ export namespace EntityFieldType {
 
 	export type Vector = CreateType<'vector', number[]>;
 
-	export type Relation = __Relation;
+	export type Relation = RelationType;
 
 	export type ID = Text | Int;
 

@@ -1,4 +1,4 @@
-import { run } from 'ormgen';
+import { run, PrismaGenerator } from 'ormgen';
 
 run({
 	search: {
@@ -6,13 +6,11 @@ run({
 	},
 
 	generators: [
-		{
-			onEnum(e) {
-				console.log('enum', e.name);
+		new PrismaGenerator({
+			datasource: {
+				provider: '"postgresql"',
+				url: 'env("DATABASE_URL")',
 			},
-			onEntity(entity) {
-				console.log('entity', entity.name);
-			},
-		},
+		}),
 	],
 });

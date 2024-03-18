@@ -7,3 +7,6 @@
 # TODO
 
 -   [ ] Figure out how to add extra fields
+-   [ ] Create generators
+    -   [ ] Prisma
+    -   [ ] Zod

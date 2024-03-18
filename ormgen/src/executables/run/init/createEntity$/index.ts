@@ -1,4 +1,5 @@
 import path from 'path';
+import { store } from '~/internals';
 import { Entity, Entity$ } from '~/modelling';
 
 async function importEntity(entityFolderPath: string) {
@@ -22,11 +23,16 @@ export async function createEntity$(entityFolderPath: string): Promise<Entity$> 
 		throw new Error(`Mismatch between folder name (${folderName}) and entity name (${source.name}) at ${entityFolderPath}`);
 	}
 
-	return {
+	const entity$: Entity$ = {
 		source,
 
 		computed: {
 			folderPath: entityFolderPath,
+			folderName,
 		},
 	};
+
+	store.entities$.set(entity$.source.name, entity$);
+
+	return entity$;
 }

@@ -2,7 +2,7 @@ import { createEntity } from 'ormgen';
 
 export default createEntity(({ mx }) => ({
 	name: 'Order',
-	
+
 	id: 'uid',
 
 	fields: {
@@ -15,6 +15,8 @@ export default createEntity(({ mx }) => ({
 
 		totalPrice: {
 			type: 'int',
+
+			defaultValue: 0,
 		},
 
 		user: {

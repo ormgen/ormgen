@@ -6,6 +6,7 @@ export interface Entity$ {
 
 	computed: {
 		folderPath: string;
+		folderName: string;
 
 		// fields: EntityField$ | EntityField$[];
 	};

@@ -1,9 +1,11 @@
-import { Entity, Enum } from '~/modelling/types';
+import { Entity, Entity$, Enum } from '~/modelling/types';
 
 export const store = {
 	enums: new Map<string, Enum>(),
 
 	entities: new Map<string, Entity>(),
+
+	entities$: new Map<string, Entity$>(),
 
 	getEnums() {
 		return Array.from(store.enums.values());
@@ -11,6 +13,10 @@ export const store = {
 
 	getEntities() {
 		return Array.from(store.entities.values());
+	},
+
+	getEntities$() {
+		return Array.from(store.entities$.values());
 	},
 
 	// metas: new Map<string, Record<string, unknown>>(),
