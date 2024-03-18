@@ -1,4 +1,4 @@
-import { Factorized, getFactorized } from '~/helpers';
+import { Callable, flattenCallable } from '~/helpers';
 import { store } from '~/internals';
 import { Mixins, mx } from '~/modelling/mixins';
 import { Entity } from '~/modelling/types';
@@ -7,8 +7,8 @@ interface Params {
 	mx: Mixins;
 }
 
-export function createEntity(input: Factorized<Entity, Params>) {
-	const entity = getFactorized(input, { mx });
+export function createEntity(input: Callable<Entity, Params>) {
+	const entity = flattenCallable(input, { mx });
 
 	store.entities.set(entity.name, entity);
 

@@ -25,13 +25,5 @@ export default createEntity(({ mx }) => {
 				onDelete: 'Cascade',
 			},
 		},
-
-		indexes: [
-			{
-				name: 'productAndUser',
-				fields: ['productUid', 'userUid'],
-				type: 'unique',
-			},
-		],
 	};
 });

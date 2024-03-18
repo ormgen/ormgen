@@ -1,13 +1,13 @@
 import { Entity$, EntityFieldType } from '~/modelling/';
-import { createRelationEntityFieldName, createRelationTargetFieldName, getEntitySafe } from '~/utils';
+import { createRelationKeyFieldName, createRelationTargetFieldName, getEntity$ } from '~/utils';
 
 export function createRelationAttr(field: EntityFieldType.Relation, entities: Entity$[]) {
 	const { onDelete } = field;
 
-	const targetEntity$ = getEntitySafe(field.targetEntityName, entities);
+	const targetEntity = getEntity$.safe(field.targetEntityName, entities);
 
-	const targetFieldName = createRelationTargetFieldName(field, targetEntity$);
-	const entityFieldName = createRelationEntityFieldName(field, targetEntity$);
+	const keyFieldName = createRelationKeyFieldName({ field, targetEntity });
+	const targetFieldName = createRelationTargetFieldName({ field, targetEntity });
 
-	return `@relation(fields: [${entityFieldName}], references: [${targetFieldName}], onDelete: ${onDelete})`;
+	return `@relation(fields: [${keyFieldName}], references: [${targetFieldName}], onDelete: ${onDelete})`;
 }

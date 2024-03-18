@@ -26,7 +26,7 @@ export default createEntity({
 	indexes: [
 		{
 			name: 'productAndCategory',
-			fields: ['productUid', 'categoryUid'],
+			fields: ['productUid', 'productCategoryUid'],
 			type: 'id',
 		},
 	],

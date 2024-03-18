@@ -1,3 +1,3 @@
 export * from './getEntity';
-export * from './createRelationEntityFieldName';
+export * from './createRelationKeyFieldName';
 export * from './createRelationTargetFieldName';

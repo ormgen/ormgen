@@ -1,2 +1,5 @@
-export * from './Factorize';
-export * from './Promisify';
+export * from './Callable';
+export * from './Promisable';
+
+export * from './flattenCallable';
+export * from './flattenArrayable';
