@@ -1,8 +1,10 @@
 {
   "dependencies": {
-    "fs-extra": "^11.2.0"
+    "fs-extra": "^11.2.0",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@types/fs-extra": "^11.0.4"
+    "@types/fs-extra": "^11.0.4",
+    "prettier": "^3.2.5"
   }
 }

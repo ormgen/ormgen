@@ -26,16 +26,16 @@ export class PrismaGenerator extends OrmGenerator {
 		return this.config.schemaPath || 'prisma/schema.prisma';
 	}
 
-	addLines(lines: string[]) {
+	__addLines(lines: string[]) {
 		this.lines = this.lines.concat(lines);
 	}
 
 	onEnum(e: Enum) {
-		this.addLines(createEnumLines(e));
+		this.__addLines(createEnumLines(e));
 	}
 
 	onEntity(entity: Entity$, entities: Entity$[]) {
-		this.addLines(createEntityLines(entity, entities));
+		this.__addLines(createEntityLines(entity, entities));
 	}
 
 	async onWrite() {

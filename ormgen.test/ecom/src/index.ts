@@ -1,4 +1,4 @@
-import { run, PrismaGenerator } from 'ormgen';
+import { run, PrismaGenerator, ZodGenerator } from 'ormgen';
 
 run({
 	search: {
@@ -13,6 +13,9 @@ run({
 				provider: '"postgresql"',
 				url: 'env("DATABASE_URL")',
 			},
+		}),
+		new ZodGenerator({
+			filePath: 'ecom/zod/index.ts',
 		}),
 	],
 });
