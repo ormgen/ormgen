@@ -35,7 +35,7 @@ export function createFieldType(field: EntityField): string {
 	}
 
 	if (field.type === 'relationTarget') {
-		const { targetMode } = field.$getSourceEntityField();
+		const { targetMode } = field.$sourceEntityField;
 
 		const isOne = targetMode == 'one';
 		const array = isOne ? '' : '[]';

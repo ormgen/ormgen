@@ -11,6 +11,7 @@
         -   [ ] Add ID to fields
         -   [ ] Add seed fields
             -   [ ] Partialize some seed fields?
+        -   [ ] Fix metas
 -   [ ] Generate types for ormgen to use
     -   [ ] Make global mixins work
     -   [ ] Typesafe entity names

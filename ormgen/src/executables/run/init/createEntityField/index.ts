@@ -15,7 +15,7 @@ export function createEntityField(fieldName: string, fieldInput: EntityField__In
 
 			$getEntityInput,
 
-			$getTargetEntity() {
+			get $targetEntity() {
 				return store.getEntityInput(fieldInput.targetEntityName);
 			},
 		};

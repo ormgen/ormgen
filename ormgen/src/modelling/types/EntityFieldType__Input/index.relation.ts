@@ -4,6 +4,8 @@ export interface RelationType {
 	isUnique?: boolean;
 	isNullable?: boolean;
 
+	defaultValue?: undefined;
+
 	onDelete: 'Cascade' | 'SetNull' | 'Restrict';
 
 	/**
@@ -35,6 +37,8 @@ export interface RelationTargetType {
 
 	isUnique?: undefined;
 	isNullable?: undefined;
+
+	defaultValue?: undefined;
 
 	sourceEntityName: string;
 }

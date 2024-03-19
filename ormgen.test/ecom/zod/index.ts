@@ -6,7 +6,14 @@ export namespace Order {
 		totalPrice: z.number(),
 		user: z.string(),
 	});
-	export const seed = z.object({});
+	export const seed = z
+		.object({
+			status: z.enum(['ORDERED', 'SHIPPED']),
+			orderDate: z.date(),
+			totalPrice: z.number(),
+			user: z.string(),
+		})
+		.partial({ totalPrice: true });
 	export type ModelSchema = typeof model;
 	export type Model = z.infer<typeof model>;
 	export type SeedSchema = typeof seed;
@@ -18,7 +25,13 @@ export namespace OrderItem {
 		product: z.string(),
 		quantity: z.number(),
 	});
-	export const seed = z.object({});
+	export const seed = z
+		.object({
+			order: z.string(),
+			product: z.string(),
+			quantity: z.number(),
+		})
+		.partial({});
 	export type ModelSchema = typeof model;
 	export type Model = z.infer<typeof model>;
 	export type SeedSchema = typeof seed;
@@ -34,7 +47,17 @@ export namespace Product {
 		attributes: z.any(),
 		createdAt: z.date(),
 	});
-	export const seed = z.object({});
+	export const seed = z
+		.object({
+			name: z.string(),
+			description: z.string(),
+			price: z.number(),
+			stockQuantity: z.number(),
+			sku: z.string(),
+			attributes: z.any(),
+			createdAt: z.date(),
+		})
+		.partial({});
 	export type ModelSchema = typeof model;
 	export type Model = z.infer<typeof model>;
 	export type SeedSchema = typeof seed;
@@ -45,7 +68,12 @@ export namespace ProductCategory {
 		name: z.string(),
 		description: z.string(),
 	});
-	export const seed = z.object({});
+	export const seed = z
+		.object({
+			name: z.string(),
+			description: z.string(),
+		})
+		.partial({});
 	export type ModelSchema = typeof model;
 	export type Model = z.infer<typeof model>;
 	export type SeedSchema = typeof seed;
@@ -56,7 +84,12 @@ export namespace ProductCategoryOnProduct {
 		product: z.string(),
 		productCategory: z.string(),
 	});
-	export const seed = z.object({});
+	export const seed = z
+		.object({
+			product: z.string(),
+			productCategory: z.string(),
+		})
+		.partial({});
 	export type ModelSchema = typeof model;
 	export type Model = z.infer<typeof model>;
 	export type SeedSchema = typeof seed;
@@ -69,7 +102,14 @@ export namespace Review {
 		createdAt: z.date(),
 		user: z.string(),
 	});
-	export const seed = z.object({});
+	export const seed = z
+		.object({
+			rating: z.number(),
+			comment: z.string(),
+			createdAt: z.date(),
+			user: z.string(),
+		})
+		.partial({});
 	export type ModelSchema = typeof model;
 	export type Model = z.infer<typeof model>;
 	export type SeedSchema = typeof seed;
@@ -84,7 +124,16 @@ export namespace User {
 		createdAt: z.date(),
 		updatedAt: z.date(),
 	});
-	export const seed = z.object({});
+	export const seed = z
+		.object({
+			email: z.string(),
+			name: z.string(),
+			passwordHash: z.string(),
+			lastLogin: z.date(),
+			createdAt: z.date(),
+			updatedAt: z.date(),
+		})
+		.partial({});
 	export type ModelSchema = typeof model;
 	export type Model = z.infer<typeof model>;
 	export type SeedSchema = typeof seed;

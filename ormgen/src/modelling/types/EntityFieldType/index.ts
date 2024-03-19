@@ -17,13 +17,13 @@ export namespace EntityFieldType {
 
 	export type Vector = CreateType<EntityFieldType__Input.Vector>;
 
-	export type Relation = CreateType<EntityFieldType__Input.Relation, { $getTargetEntity(): Entity__Input }>;
+	export type Relation = CreateType<EntityFieldType__Input.Relation, { $targetEntity: Entity__Input }>;
 
 	export type RelationTarget = CreateType<
 		EntityFieldType__Input.RelationTarget,
 		{
-			$getSourceEntity(): Entity__Input;
-			$getSourceEntityField(): EntityFieldType__Input.Relation;
+			$sourceEntity: Entity__Input;
+			$sourceEntityField: EntityFieldType__Input.Relation;
 		}
 	>;
 

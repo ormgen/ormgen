@@ -23,10 +23,10 @@ function addRelationTargetFields(entityFields: EntityFields, entityInput: Entity
 				return entityInput;
 			},
 
-			$getSourceEntity() {
+			get $sourceEntity() {
 				return targettingEntityInput;
 			},
-			$getSourceEntityField() {
+			get $sourceEntityField() {
 				return targettingField;
 			},
 		};
