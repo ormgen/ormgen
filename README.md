@@ -8,12 +8,12 @@
 
 -   [ ] Create generators
     -   [ ] Zod
-        -   [ ] Add ID to fields
-        -   [ ] Add seed fields
-            -   [ ] Partialize some seed fields?
         -   [ ] Fix metas
+        -   [ ] Add zod specific fields
 -   [ ] Generate types for ormgen to use
     -   [ ] Make global mixins work
     -   [ ] Typesafe entity names
+    -   [ ] Make zod generators add extra field config
+        -   [ ] field.extra.zod = {}?
 -   [ ] Refactor as a monorepo
 -   [ ] Figure out how to add extra fields

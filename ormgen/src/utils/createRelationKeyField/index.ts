@@ -8,6 +8,7 @@ interface Config {
 
 export function createRelationKeyField(config: Config): EntityFieldType.Text {
 	const { fieldName, field } = config;
+	const { $entityInput } = field;
 
 	return {
 		$input: null,
@@ -15,6 +16,6 @@ export function createRelationKeyField(config: Config): EntityFieldType.Text {
 
 		type: 'text',
 
-		$getEntityInput: field.$getEntityInput,
+		$entityInput,
 	};
 }

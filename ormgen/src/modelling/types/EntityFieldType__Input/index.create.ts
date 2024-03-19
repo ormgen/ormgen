@@ -6,6 +6,8 @@ interface Base<Type, DefaultValue> {
 	isUnique?: boolean;
 
 	defaultValue?: DefaultValue;
+
+	extra?: unknown;
 }
 
 interface Base__One<Type, DefaultValue> extends Base<Type, DefaultValue> {

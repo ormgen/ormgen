@@ -56,6 +56,6 @@ export async function init(config: RunConfig) {
 	const entityInputs = store.getEntityInputs();
 
 	for (const entityInput of entityInputs) {
-		await createEntity(entityInput);
+		await createEntity(entityInput, entityFolderPaths);
 	}
 }

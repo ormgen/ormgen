@@ -1,6 +1,7 @@
 import { z } from 'zod';
 export namespace Order {
 	export const model = z.object({
+		uid: z.string(),
 		status: z.enum(['ORDERED', 'SHIPPED']),
 		orderDate: z.date(),
 		totalPrice: z.number(),
@@ -8,6 +9,7 @@ export namespace Order {
 	});
 	export const seed = z
 		.object({
+			uid: z.string(),
 			status: z.enum(['ORDERED', 'SHIPPED']),
 			orderDate: z.date(),
 			totalPrice: z.number(),
@@ -21,12 +23,14 @@ export namespace Order {
 }
 export namespace OrderItem {
 	export const model = z.object({
+		uid: z.string(),
 		order: z.string(),
 		product: z.string(),
 		quantity: z.number(),
 	});
 	export const seed = z
 		.object({
+			uid: z.string(),
 			order: z.string(),
 			product: z.string(),
 			quantity: z.number(),
@@ -39,6 +43,7 @@ export namespace OrderItem {
 }
 export namespace Product {
 	export const model = z.object({
+		uid: z.string(),
 		name: z.string(),
 		description: z.string(),
 		price: z.number(),
@@ -49,6 +54,7 @@ export namespace Product {
 	});
 	export const seed = z
 		.object({
+			uid: z.string(),
 			name: z.string(),
 			description: z.string(),
 			price: z.number(),
@@ -65,11 +71,13 @@ export namespace Product {
 }
 export namespace ProductCategory {
 	export const model = z.object({
+		uid: z.string(),
 		name: z.string(),
 		description: z.string(),
 	});
 	export const seed = z
 		.object({
+			uid: z.string(),
 			name: z.string(),
 			description: z.string(),
 		})
@@ -97,6 +105,7 @@ export namespace ProductCategoryOnProduct {
 }
 export namespace Review {
 	export const model = z.object({
+		uid: z.string(),
 		rating: z.number(),
 		comment: z.string(),
 		createdAt: z.date(),
@@ -104,6 +113,7 @@ export namespace Review {
 	});
 	export const seed = z
 		.object({
+			uid: z.string(),
 			rating: z.number(),
 			comment: z.string(),
 			createdAt: z.date(),
@@ -117,6 +127,7 @@ export namespace Review {
 }
 export namespace User {
 	export const model = z.object({
+		uid: z.string(),
 		email: z.string(),
 		name: z.string(),
 		passwordHash: z.string(),
@@ -126,6 +137,7 @@ export namespace User {
 	});
 	export const seed = z
 		.object({
+			uid: z.string(),
 			email: z.string(),
 			name: z.string(),
 			passwordHash: z.string(),

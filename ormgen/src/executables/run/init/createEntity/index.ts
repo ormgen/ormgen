@@ -2,11 +2,21 @@ import { store } from '~/internals';
 import { Entity__Input, Entity } from '~/modelling';
 import { createEntityFields } from '../createEntityFields';
 
-export async function createEntity(input: Entity__Input): Promise<Entity> {
+export async function createEntity(input: Entity__Input, entityFolderPaths: string[]): Promise<Entity> {
+	const folderPath = entityFolderPaths.find((folderPath) => {
+		return folderPath.endsWith('/' + input.name);
+	});
+
+	if (!folderPath) {
+		throw new Error(`Entity folder path not found for ${input.name}`);
+	}
+
 	const entity: Entity = {
 		...input,
 
 		$input: input,
+
+		folderPath,
 
 		fields: createEntityFields(input),
 	};

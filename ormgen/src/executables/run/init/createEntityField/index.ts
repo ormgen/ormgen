@@ -2,9 +2,7 @@ import { store } from '~/internals';
 import { EntityField, EntityField__Input, Entity__Input } from '~/modelling';
 
 export function createEntityField(fieldName: string, fieldInput: EntityField__Input, entityInput: Entity__Input): EntityField {
-	function $getEntityInput() {
-		return entityInput;
-	}
+	const $entityInput = entityInput;
 
 	if (fieldInput.type === 'relation') {
 		return {
@@ -13,7 +11,7 @@ export function createEntityField(fieldName: string, fieldInput: EntityField__In
 			$input: fieldInput,
 			$name: fieldName,
 
-			$getEntityInput,
+			$entityInput,
 
 			get $targetEntity() {
 				return store.getEntityInput(fieldInput.targetEntityName);
@@ -27,6 +25,6 @@ export function createEntityField(fieldName: string, fieldInput: EntityField__In
 		$input: fieldInput,
 		$name: fieldName,
 
-		$getEntityInput,
+		$entityInput,
 	} as EntityField;
 }

@@ -1,6 +1,5 @@
 import { Entity } from '~/modelling';
 import { EntityIndex } from '~/modelling/types/EntityIndex';
-import { createIdField } from './index.lines.entity.id';
 import { createField } from './index.lines.entity.field';
 
 function createIndexField(index: EntityIndex) {
@@ -21,8 +20,6 @@ export function createEntityLines(entity: Entity) {
 
 	return [
 		`model ${name} {`,
-
-		createIdField(entity),
 
 		...fieldArray.map(([name, field]) => {
 			return createField(name, field);

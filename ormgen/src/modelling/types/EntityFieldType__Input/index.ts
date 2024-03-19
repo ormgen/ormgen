@@ -3,9 +3,9 @@ import { CreateType } from './index.create';
 import { RelationTargetType, RelationType } from './index.relation';
 
 export namespace EntityFieldType__Input {
-	export type Text = CreateType<'text', string>;
+	export type Text = CreateType<'text', string, { isID?: boolean }>;
 
-	export type Int = CreateType<'int', number>;
+	export type Int = CreateType<'int', number, { isID?: boolean }>;
 
 	export type Boolean = CreateType<'boolean', boolean>;
 
