@@ -1,4 +1,3 @@
-export * from './getEntity';
 export * from './createRelationKeyField';
 export * from './createRelationKeyFieldName';
 export * from './createRelationTargetFieldName';

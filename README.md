@@ -7,9 +7,12 @@
 # TODO
 
 -   [ ] Create generators
-    -   [ ] Prisma
-        -   [ ] Reversed relations
-        -   [ ] Complete validation
     -   [ ] Zod
+        -   [ ] Add ID to fields
+        -   [ ] Add seed fields
+            -   [ ] Partialize some seed fields?
+-   [ ] Generate types for ormgen to use
+    -   [ ] Make global mixins work
+    -   [ ] Typesafe entity names
 -   [ ] Refactor as a monorepo
 -   [ ] Figure out how to add extra fields

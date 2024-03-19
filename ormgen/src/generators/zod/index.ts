@@ -3,6 +3,7 @@ import { execSync } from 'child_process';
 import { Entity, Enum } from '~/modelling';
 import { OrmGenerator } from '../index.template';
 import fs from 'fs-extra';
+import { createEntityLines } from './index.lines.entity';
 
 interface Config {
 	filePath?: string;
@@ -31,21 +32,7 @@ export class ZodGenerator extends OrmGenerator {
 	onEnum(e: Enum) {}
 
 	onEntity(entity: Entity, entities: Entity[]) {
-		this.__addLines([
-			// <>
-			`export namespace ${entity.name} {`,
-			`export const model = z.object({`,
-			`})`,
-			`export const seed = z.object({`,
-			`})`,
-
-			`export type ModelSchema = typeof model;`,
-			`export type Model = z.infer<typeof model>;`,
-
-			`export type SeedSchema = typeof seed;`,
-			`export type Seed = z.infer<typeof seed>;`,
-			`}`,
-		]);
+		this.__addLines(createEntityLines(entity, entities));
 	}
 
 	async onWrite() {

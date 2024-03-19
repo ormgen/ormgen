@@ -1,7 +1,8 @@
 import { flattenArrayable } from '~/helpers';
 import { Entity__Input, EntityField__Input, EntityFields, EntityFieldType } from '~/modelling';
 import { createEntityField } from '../createEntityField';
-import { createRelationKeyField, createRelationKeyFieldName, findTargettingEntities, getEntityInput } from '~/utils';
+import { createRelationKeyField, createRelationKeyFieldName, findTargettingEntities } from '~/utils';
+import { store } from '~/internals';
 
 function addRelationTargetFields(entityFields: EntityFields, entityInput: Entity__Input) {
 	const results = findTargettingEntities(entityInput.name);
@@ -36,7 +37,7 @@ function addEntityFields(entityFields: EntityFields, fieldName: string, fieldInp
 	if (fieldInput.type === 'relation') {
 		const field = createEntityField(fieldName, fieldInput, entity) as EntityFieldType.Relation;
 
-		const targetEntity = getEntityInput.safe(fieldInput.targetEntityName);
+		const targetEntity = store.getEntityInput(fieldInput.targetEntityName);
 		const relationKeyFieldName = createRelationKeyFieldName({ field, targetEntity });
 
 		entityFields[relationKeyFieldName] = createRelationKeyField({ fieldName, field, targetEntity });

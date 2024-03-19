@@ -1,5 +1,5 @@
+import { store } from '~/internals';
 import { EntityField, EntityField__Input, Entity__Input } from '~/modelling';
-import { getEntityInput } from '~/utils';
 
 export function createEntityField(fieldName: string, fieldInput: EntityField__Input, entityInput: Entity__Input): EntityField {
 	function $getEntityInput() {
@@ -10,17 +10,23 @@ export function createEntityField(fieldName: string, fieldInput: EntityField__In
 		return {
 			...fieldInput,
 
-			$name: fieldName,
-
 			$input: fieldInput,
+			$name: fieldName,
 
 			$getEntityInput,
 
 			$getTargetEntity() {
-				return getEntityInput.safe(fieldInput.targetEntityName);
+				return store.getEntityInput(fieldInput.targetEntityName);
 			},
 		};
 	}
 
-	return { ...fieldInput, $input: fieldInput, $getEntityInput } as EntityField;
+	return {
+		...fieldInput,
+
+		$input: fieldInput,
+		$name: fieldName,
+
+		$getEntityInput,
+	} as EntityField;
 }

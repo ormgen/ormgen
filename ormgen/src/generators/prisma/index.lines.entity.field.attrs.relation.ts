@@ -1,10 +1,11 @@
+import { store } from '~/internals';
 import { EntityFieldType } from '~/modelling/';
-import { createRelationKeyFieldName, createRelationTargetFieldName, getEntity } from '~/utils';
+import { createRelationKeyFieldName, createRelationTargetFieldName } from '~/utils';
 
 export function createRelationAttr(field: EntityFieldType.Relation) {
 	const { onDelete } = field;
 
-	const targetEntity = getEntity.safe(field.targetEntityName);
+	const targetEntity = store.getEntity(field.targetEntityName);
 
 	const keyFieldName = createRelationKeyFieldName({ field: field, targetEntity });
 	const targetFieldName = createRelationTargetFieldName({ field, targetEntity });
