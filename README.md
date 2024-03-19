@@ -8,7 +8,6 @@
 
 -   [ ] Create generators
     -   [ ] Zod
-        -   [ ] Enums
         -   [ ] Add zod specific fields - what is this?
 -   [ ] Generate types for ormgen to use
     -   [ ] Make global mixins work
@@ -19,3 +18,4 @@
             -   [ ] More?
 -   [ ] Refactor as a monorepo
 -   [ ] Figure out how to add extra fields
+-   [ ] Documentation

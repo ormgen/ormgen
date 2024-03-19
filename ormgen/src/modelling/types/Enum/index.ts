@@ -1,6 +1,5 @@
 export interface Enum {
 	name: string;
-	namePlural?: string;
 
 	values: string[];
 

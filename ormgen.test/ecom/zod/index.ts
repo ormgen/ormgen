@@ -1,5 +1,13 @@
 import { z } from 'zod';
 import * as ProductMeta from '../src/entities/Product/index.meta';
+export const ORDER_STATUS = { ORDERED: 'ORDERED', SHIPPED: 'SHIPPED' } as const;
+export type ORDER_STATUS = keyof typeof ORDER_STATUS;
+export const ORDER_STATUS__SCHEMA = z.nativeEnum(ORDER_STATUS);
+export const ORDER_STATUS__VALUES = Object.keys(ORDER_STATUS) as [ORDER_STATUS, ...ORDER_STATUS[]];
+export const GLOBAL_ENUM = { A: 'A', B: 'B', C: 'C' } as const;
+export type GLOBAL_ENUM = keyof typeof GLOBAL_ENUM;
+export const GLOBAL_ENUM__SCHEMA = z.nativeEnum(GLOBAL_ENUM);
+export const GLOBAL_ENUM__VALUES = Object.keys(GLOBAL_ENUM) as [GLOBAL_ENUM, ...GLOBAL_ENUM[]];
 export namespace Order {
 	export const model = z.object({
 		uid: z.string(),

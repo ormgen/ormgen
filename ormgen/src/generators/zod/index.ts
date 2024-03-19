@@ -6,6 +6,7 @@ import fs from 'fs-extra';
 import { createEntityLines } from './index.lines.entity';
 import path from 'path';
 import { createImportMetaLines } from './index.lines.meta';
+import { createEnumLines } from './index.lines.enum';
 
 interface Config {
 	filePath?: string;
@@ -38,7 +39,9 @@ export class ZodGenerator extends OrmGenerator {
 		this.__addLines(createImportMetaLines(this, metaFilePath, entity));
 	}
 
-	onEnum(e: Enum) {}
+	onEnum(e: Enum) {
+		this.__addLines(createEnumLines(e));
+	}
 
 	onEntity(entity: Entity, entities: Entity[]) {
 		this.__addLines(createEntityLines(entity, entities));
