@@ -8,9 +8,8 @@
 
 -   [ ] Create generators
     -   [ ] Zod
-        -   [ ] Fix metas
         -   [ ] Enums
-        -   [ ] Add zod specific fields
+        -   [ ] Add zod specific fields - what is this?
 -   [ ] Generate types for ormgen to use
     -   [ ] Make global mixins work
     -   [ ] Typesafe entity names
