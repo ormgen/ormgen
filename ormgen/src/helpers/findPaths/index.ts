@@ -1,6 +1,5 @@
 import { join } from 'path';
 import { globSync, Options as GlobOptions } from 'fast-glob';
-import { RunConfig } from '../../index.config';
 
 interface Config {
 	prefixes: string[];

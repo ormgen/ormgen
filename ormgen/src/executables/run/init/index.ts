@@ -2,7 +2,7 @@ import { store } from '~/internals';
 import { RunConfig } from '../index.config';
 
 import { createEntity } from './createEntity';
-import { findPaths } from './findPaths';
+import { findPaths } from '../../../helpers/findPaths';
 import { initEntityInput } from './initEntityInput';
 
 export async function init(config: RunConfig) {
@@ -13,12 +13,11 @@ export async function init(config: RunConfig) {
 
 		entities = ['entities/*'],
 		entityEnum = ['enums.ts', 'enums/index.ts', 'index.enums.ts', 'index.enums/index.ts'],
-		entityMeta = ['meta.ts', 'meta/index.ts', 'index.meta.ts', 'index.meta/index.ts'],
-		entitySeed = ['seed.ts', 'seed/index.ts', 'index.seed.ts', 'index.seed/index.ts'], // TODO: Move to seed config?
+		// entitySeed = ['seed.ts', 'seed/index.ts', 'index.seed.ts', 'index.seed/index.ts'], // TODO: Move to seed config?
 
 		globalEnums = ['enums/index.ts'],
-		globalMixins = ['mixins/index.ts'],
-		globalSeeds = ['seeds/index.ts'],
+		// globalMixins = ['mixins/index.ts'],
+		// globalSeeds = ['seeds/index.ts'],
 	} = config.search;
 
 	const entityFolderPaths = findPaths({
@@ -56,6 +55,6 @@ export async function init(config: RunConfig) {
 	const entityInputs = store.getEntityInputs();
 
 	for (const entityInput of entityInputs) {
-		await createEntity(entityInput, entityFolderPaths);
+		await createEntity(config, entityInput, entityFolderPaths);
 	}
 }

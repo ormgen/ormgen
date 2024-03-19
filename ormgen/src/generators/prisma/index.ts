@@ -30,6 +30,8 @@ export class PrismaGenerator extends OrmGenerator {
 		this.lines = this.lines.concat(lines);
 	}
 
+	onMetaFile() {}
+
 	onEnum(e: Enum) {
 		this.__addLines(createEnumLines(e));
 	}

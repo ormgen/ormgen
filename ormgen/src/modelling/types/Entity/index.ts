@@ -4,7 +4,7 @@ import { EntityFields } from '../EntityField';
 export interface Entity extends Entity__Input {
 	$input: Entity__Input;
 
-	folderPath: string;
+	absolutePath: string;
 
 	fields: EntityFields;
 }

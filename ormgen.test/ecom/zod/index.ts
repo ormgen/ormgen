@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import * as ProductMeta from '../src/entities/Product/index.meta';
 export namespace Order {
 	export const model = z.object({
 		uid: z.string(),
@@ -49,7 +50,7 @@ export namespace Product {
 		price: z.number(),
 		stockQuantity: z.number(),
 		sku: z.string(),
-		attributes: z.any(),
+		attributes: ProductMeta.attributes,
 		createdAt: z.date(),
 	});
 	export const seed = z
@@ -60,7 +61,7 @@ export namespace Product {
 			price: z.number(),
 			stockQuantity: z.number(),
 			sku: z.string(),
-			attributes: z.any(),
+			attributes: ProductMeta.attributes,
 			createdAt: z.date(),
 		})
 		.partial({});

@@ -4,6 +4,8 @@ import { Entity, Enum } from '~/modelling';
 import { OrmGenerator } from '../index.template';
 import fs from 'fs-extra';
 import { createEntityLines } from './index.lines.entity';
+import path from 'path';
+import { createImportMetaLines } from './index.lines.meta';
 
 interface Config {
 	filePath?: string;
@@ -21,12 +23,19 @@ export class ZodGenerator extends OrmGenerator {
 
 	lines: string[];
 
-	get filePath() {
-		return this.config.filePath || 'zod/index.ts';
+	get outputFilePath() {
+		const relative = this.config.filePath || 'zod/index.ts';
+		const absolute = path.join(process.cwd(), relative);
+
+		return { relative, absolute };
 	}
 
 	__addLines(lines: string[]) {
 		this.lines = this.lines.concat(lines);
+	}
+
+	onMetaFile(metaFilePath: string, entity: Entity) {
+		this.__addLines(createImportMetaLines(this, metaFilePath, entity));
 	}
 
 	onEnum(e: Enum) {}
@@ -36,12 +45,12 @@ export class ZodGenerator extends OrmGenerator {
 	}
 
 	async onWrite() {
-		await fs.ensureFile(this.filePath);
-		await fs.writeFile(this.filePath, this.lines.join('\n'));
+		await fs.ensureFile(this.outputFilePath.relative);
+		await fs.writeFile(this.outputFilePath.relative, this.lines.join('\n'));
 	}
 
 	onComplete() {
-		execSync(`npx prettier --write ${this.filePath}`, {
+		execSync(`npx prettier --write ${this.outputFilePath.relative}`, {
 			stdio: 'inherit',
 		});
 	}

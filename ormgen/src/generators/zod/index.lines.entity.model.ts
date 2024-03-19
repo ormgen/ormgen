@@ -1,7 +1,13 @@
 import { store } from '~/internals';
 import { EntityField } from '~/modelling';
+import { createMetaName } from './index.meta';
 
 function createModelFieldType(field: EntityField): string {
+	const fieldName = field.$name;
+	const entityName = field.$entityInput.name;
+
+	const entity = store.getEntity(entityName);
+
 	switch (field.type) {
 		case 'text':
 			return 'z.string()';
@@ -17,7 +23,9 @@ function createModelFieldType(field: EntityField): string {
 
 			return `z.enum(${valueString})`;
 		case 'json':
-			return 'z.any()';
+			const metaName = createMetaName(entity);
+
+			return `${metaName}.${fieldName}`;
 		case 'vector':
 			return `z.number().array()`;
 	}

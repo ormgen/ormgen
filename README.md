@@ -9,11 +9,14 @@
 -   [ ] Create generators
     -   [ ] Zod
         -   [ ] Fix metas
+        -   [ ] Enums
         -   [ ] Add zod specific fields
 -   [ ] Generate types for ormgen to use
     -   [ ] Make global mixins work
     -   [ ] Typesafe entity names
     -   [ ] Make zod generators add extra field config
         -   [ ] field.extra.zod = {}?
+            -   [ ] Hide field?
+            -   [ ] More?
 -   [ ] Refactor as a monorepo
 -   [ ] Figure out how to add extra fields

@@ -1,8 +1,11 @@
 import { store } from '~/internals';
 import { Entity__Input, Entity } from '~/modelling';
 import { createEntityFields } from '../createEntityFields';
+import { RunConfig } from '../../index.config';
 
-export async function createEntity(input: Entity__Input, entityFolderPaths: string[]): Promise<Entity> {
+export async function createEntity(config: RunConfig, input: Entity__Input, entityFolderPaths: string[]): Promise<Entity> {
+	const { root } = config.search;
+
 	const folderPath = entityFolderPaths.find((folderPath) => {
 		return folderPath.endsWith('/' + input.name);
 	});
@@ -16,7 +19,7 @@ export async function createEntity(input: Entity__Input, entityFolderPaths: stri
 
 		$input: input,
 
-		folderPath,
+		absolutePath: folderPath,
 
 		fields: createEntityFields(input),
 	};
