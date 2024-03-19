@@ -1,21 +1,8 @@
-interface Base<Type, DefaultValue> {
-	type: Type;
+import { Entity__Input } from '../Entity__Input';
 
-	isPrimary?: boolean;
-	isNullable?: boolean;
-	isUnique?: boolean;
-
-	defaultValue?: DefaultValue;
-}
-
-interface Base__One<Type, DefaultValue> extends Base<Type, DefaultValue> {
-	isArray?: false;
-}
-
-interface Base__Many<Type, DefaultValue> extends Base<Type, DefaultValue> {
-	isArray: true;
-}
-
-type Merge<T1, T2> = T1 & T2;
-
-export type CreateType<Type, DefaultValue, Extra = {}> = Merge<Base__One<Type, DefaultValue>, Extra> | Merge<Base__Many<Type, DefaultValue[]>, Extra>;
+export type CreateType<T, K = {}> = T &
+	K & {
+		$name: string;
+		$input: T | null; // Null if the field is auto-generated
+		$getEntityInput(): Entity__Input; // The field will always have a corresponding entity input.
+	};

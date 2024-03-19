@@ -1,6 +1,6 @@
 import { EntityField } from '~/modelling';
 
-export function createFieldType(field: EntityField) {
+function createFieldTypeSingle(field: EntityField): string {
 	switch (field.type) {
 		case 'text':
 			return 'String';
@@ -18,5 +18,30 @@ export function createFieldType(field: EntityField) {
 			return field.enum;
 		case 'relation':
 			return field.targetEntityName;
+		case 'relationTarget':
+			return field.sourceEntityName;
 	}
+}
+
+export function createFieldType(field: EntityField): string {
+	const { isNullable } = field;
+
+	const type = createFieldTypeSingle(field);
+
+	const optional = isNullable ? '?' : '';
+
+	if (field.type === 'relation') {
+		return `${type}${optional}`;
+	}
+
+	if (field.type === 'relationTarget') {
+		const { targetMode } = field.$getSourceEntityField();
+
+		const isOne = targetMode == 'one';
+		const array = isOne ? '' : '[]';
+
+		return `${type}${optional}${array}`;
+	}
+
+	return `${type}${optional}`;
 }

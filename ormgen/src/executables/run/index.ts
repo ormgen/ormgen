@@ -7,14 +7,14 @@ export async function run(config: RunConfig) {
 
 	for (const gen of config.generators) {
 		const enums = store.getEnums();
-		const entities$ = store.getEntities$();
+		const entities = store.getEntities();
 
 		for (const e of enums) {
 			await gen.onEnum(e);
 		}
 
-		for (const entity$ of entities$) {
-			await gen.onEntity(entity$, entities$);
+		for (const entity of entities) {
+			await gen.onEntity(entity, entities);
 		}
 
 		await gen.onWrite();

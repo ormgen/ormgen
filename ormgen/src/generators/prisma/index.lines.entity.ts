@@ -1,4 +1,4 @@
-import { Entity$ } from '~/modelling';
+import { Entity } from '~/modelling';
 import { EntityIndex } from '~/modelling/types/EntityIndex';
 import { createIdField } from './index.lines.entity.id';
 import { createField } from './index.lines.entity.field';
@@ -14,9 +14,8 @@ function createIndexField(index: EntityIndex) {
 	}
 }
 
-export function createEntityLines(entity: Entity$, entities: Entity$[]) {
-	const { name, indexes = [] } = entity.source;
-	const { fields } = entity.computed;
+export function createEntityLines(entity: Entity) {
+	const { name, fields, indexes = [] } = entity;
 
 	const fieldArray = Object.entries(fields);
 
@@ -26,7 +25,7 @@ export function createEntityLines(entity: Entity$, entities: Entity$[]) {
 		createIdField(entity),
 
 		...fieldArray.map(([name, field]) => {
-			return createField(name, field, entities);
+			return createField(name, field);
 		}),
 
 		...indexes.map(createIndexField),

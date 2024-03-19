@@ -21,6 +21,7 @@ export default createEntity(({ mx }) => {
 				type: 'relation',
 
 				targetEntityName: 'User',
+				targetEntityFieldName: 'reviews',
 
 				onDelete: 'Cascade',
 			},

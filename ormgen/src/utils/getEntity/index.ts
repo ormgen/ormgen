@@ -1,13 +1,13 @@
-import { Entity, Entity$ } from '~/modelling';
+import { store } from '~/internals';
 
-export function getEntity(name: string, entities: Entity[]) {
-	return entities.find((entity) => {
+export function getEntityInput(name: string) {
+	return store.getEntityInputs().find((entity) => {
 		return entity.name === name;
 	});
 }
 
-getEntity.safe = (name: string, entities: Entity[]) => {
-	const entity = getEntity(name, entities);
+getEntityInput.safe = (name: string) => {
+	const entity = getEntityInput(name);
 
 	if (!entity) {
 		throw new Error(`Entity not found: ${name}`);
@@ -16,14 +16,14 @@ getEntity.safe = (name: string, entities: Entity[]) => {
 	return entity;
 };
 
-export function getEntity$(name: string, entities: Entity$[]) {
-	return entities.find((entity) => {
-		return entity.source.name === name;
+export function getEntity(name: string) {
+	return store.getEntities().find((entity) => {
+		return entity.name === name;
 	});
 }
 
-getEntity$.safe = (name: string, entities: Entity$[]) => {
-	const entity = getEntity$(name, entities);
+getEntity.safe = (name: string) => {
+	const entity = getEntity(name);
 
 	if (!entity) {
 		throw new Error(`Entity not found: ${name}`);

@@ -7,7 +7,7 @@ import { createBasicLines } from './index.lines.basic';
 import fs from 'fs-extra';
 import { createEnumLines } from './index.lines.enum';
 import { createEntityLines } from './index.lines.entity';
-import { Entity$, Enum } from '~/modelling';
+import { Entity, Enum } from '~/modelling';
 
 export class PrismaGenerator extends OrmGenerator {
 	constructor(config: PrismaConfig) {
@@ -34,8 +34,8 @@ export class PrismaGenerator extends OrmGenerator {
 		this.__addLines(createEnumLines(e));
 	}
 
-	onEntity(entity: Entity$, entities: Entity$[]) {
-		this.__addLines(createEntityLines(entity, entities));
+	onEntity(entity: Entity) {
+		this.__addLines(createEntityLines(entity));
 	}
 
 	async onWrite() {

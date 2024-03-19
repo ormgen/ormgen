@@ -17,11 +17,9 @@ export interface RelationType {
 	targetEntityName: string;
 
 	/**
-	 * The name of the field in the target entity.
-	 *
-	 * Default to the id field
+	 * The name of the the source entity field in the target entity.
 	 */
-	targetEntityFieldName?: string;
+	targetEntityFieldName: string;
 
 	/**
 	 * How many of the target model can this model connect to?
@@ -30,4 +28,13 @@ export interface RelationType {
 	 * Defaults to 'many'
 	 */
 	targetMode?: 'one' | 'many';
+}
+
+export interface RelationTargetType {
+	type: 'relationTarget';
+
+	isUnique?: undefined;
+	isNullable?: undefined;
+
+	sourceEntityName: string;
 }

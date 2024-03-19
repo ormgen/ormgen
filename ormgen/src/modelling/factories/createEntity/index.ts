@@ -1,16 +1,16 @@
 import { Callable, flattenCallable } from '~/helpers';
 import { store } from '~/internals';
 import { Mixins, mx } from '~/modelling/mixins';
-import { Entity } from '~/modelling/types';
+import { Entity__Input } from '~/modelling/types';
 
 interface Params {
 	mx: Mixins;
 }
 
-export function createEntity(input: Callable<Entity, Params>) {
+export function createEntity(input: Callable<Entity__Input, Params>) {
 	const entity = flattenCallable(input, { mx });
 
-	store.entities.set(entity.name, entity);
+	store.entityInputs.set(entity.name, entity);
 
 	return entity;
 }

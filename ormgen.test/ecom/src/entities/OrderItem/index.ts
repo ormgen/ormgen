@@ -10,6 +10,7 @@ export default createEntity({
 			type: 'relation',
 
 			targetEntityName: 'Order',
+			targetEntityFieldName: 'orderItems',
 
 			onDelete: 'Cascade',
 		},
@@ -18,6 +19,7 @@ export default createEntity({
 			type: 'relation',
 
 			targetEntityName: 'Product',
+			targetEntityFieldName: 'orderItems',
 
 			onDelete: 'Restrict',
 		},

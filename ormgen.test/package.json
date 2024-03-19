@@ -1,12 +1,15 @@
 {
 	"name": "@ormgen/test.ecom",
 	"scripts": {
-		"test:ecom": "tsx ecom/src/index.ts"
+		"test:types": "tsc --noEmit",
+		"test:types:watch": "tsc --noEmit --watch",
+		"test:ecom": "DATABASE_URL=postgres://test tsx ecom/src/index.ts"
 	},
 	"dependencies": {
 		"ormgen": "*"
 	},
 	"devDependencies": {
-		"tsx": "^4.7.1"
+		"tsx": "^4.7.1",
+		"typescript": "^5.4.2"
 	}
 }

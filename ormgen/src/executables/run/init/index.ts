@@ -1,9 +1,9 @@
 import { store } from '~/internals';
 import { RunConfig } from '../index.config';
 
-import { createEntity$ } from './createEntity$';
+import { createEntity } from './createEntity';
 import { findPaths } from './findPaths';
-import { initEntity } from './initEntity';
+import { initEntityInput } from './initEntityInput';
 
 export async function init(config: RunConfig) {
 	const { cwd = process.cwd() } = config;
@@ -36,7 +36,7 @@ export async function init(config: RunConfig) {
 	// const globalSeedPaths = findPaths(config, globalSeeds);
 
 	for (const entityFolderPath of entityFolderPaths) {
-		await initEntity(entityFolderPath);
+		await initEntityInput(entityFolderPath);
 
 		const entityEnumPaths = findPaths({
 			prefixes: [entityFolderPath],
@@ -53,9 +53,9 @@ export async function init(config: RunConfig) {
 		await import(enumPath);
 	}
 
-	const allEntities = store.getEntities();
+	const entityInputs = store.getEntityInputs();
 
-	for (const entity of allEntities) {
-		await createEntity$(entity, allEntities);
+	for (const entityInput of entityInputs) {
+		await createEntity(entityInput);
 	}
 }

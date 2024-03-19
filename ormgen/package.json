@@ -6,7 +6,9 @@
 	"packageManager": "yarn@4.1.1",
 	"scripts": {
 		"dev": "tsup --watch",
-		"build": "tsup"
+		"build": "tsup",
+		"test:types": "tsc --noEmit",
+		"test:types:watch": "tsc --noEmit --watch"
 	},
 	"devDependencies": {
 		"@types/node": "^20.11.28",

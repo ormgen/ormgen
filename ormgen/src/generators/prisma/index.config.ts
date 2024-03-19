@@ -1,4 +1,4 @@
-import { Entity, Enum } from '~/modelling';
+import { Entity__Input, Enum } from '~/modelling';
 
 export interface PrismaConfig {
 	schemaPath?: string;
@@ -26,8 +26,8 @@ export interface PrismaConfig {
 			post?(e: Enum): string;
 		};
 		Entity?: {
-			pre?(entity: Entity): Entity;
-			post?(entity: Entity): string;
+			pre?(entity: Entity__Input): Entity__Input;
+			post?(entity: Entity__Input): string;
 		};
 	};
 }

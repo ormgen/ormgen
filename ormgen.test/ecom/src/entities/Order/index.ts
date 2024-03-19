@@ -23,6 +23,7 @@ export default createEntity(({ mx }) => ({
 			type: 'relation',
 
 			targetEntityName: 'User',
+			targetEntityFieldName: 'orders',
 
 			onDelete: 'Restrict',
 		},

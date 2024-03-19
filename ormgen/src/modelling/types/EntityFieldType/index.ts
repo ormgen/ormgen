@@ -1,27 +1,35 @@
+import { EntityFieldType__Input } from '../EntityFieldType__Input';
+import { Entity__Input } from '../Entity__Input';
 import { CreateType } from './index.create';
 
-import { RelationType } from './index.relation';
-
 export namespace EntityFieldType {
-	export type Text = CreateType<'text', string>;
+	export type Text = CreateType<EntityFieldType__Input.Text>;
 
-	export type Int = CreateType<'int', number>;
+	export type Int = CreateType<EntityFieldType__Input.Int>;
 
-	export type Boolean = CreateType<'boolean', boolean>;
+	export type Boolean = CreateType<EntityFieldType__Input.Boolean>;
 
-	export type DateTime = CreateType<'datetime', Date, { defaultNow?: boolean; onUpdate?: boolean }>;
+	export type DateTime = CreateType<EntityFieldType__Input.DateTime>;
 
-	export type Enum = CreateType<'enum', string, { enum: string }>;
+	export type Enum = CreateType<EntityFieldType__Input.Enum>;
 
-	export type Json = CreateType<'json', any>;
+	export type Json = CreateType<EntityFieldType__Input.Json>;
 
-	export type Vector = CreateType<'vector', number[]>;
+	export type Vector = CreateType<EntityFieldType__Input.Vector>;
 
-	export type Relation = RelationType;
+	export type Relation = CreateType<EntityFieldType__Input.Relation, { $getTargetEntity(): Entity__Input }>;
+
+	export type RelationTarget = CreateType<
+		EntityFieldType__Input.RelationTarget,
+		{
+			$getSourceEntity(): Entity__Input;
+			$getSourceEntityField(): EntityFieldType__Input.Relation;
+		}
+	>;
 
 	export type ID = Text | Int;
 
 	export type Primitive = Text | Int | Boolean | DateTime | Enum | Json | Vector;
 
-	export type Any = Text | Int | Boolean | DateTime | Enum | Json | Vector | Relation;
+	export type Any = Primitive | Relation | RelationTarget;
 }

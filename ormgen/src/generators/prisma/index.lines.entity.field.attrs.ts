@@ -1,4 +1,4 @@
-import { Entity$, EntityField } from '~/modelling';
+import { EntityField } from '~/modelling';
 import { createRelationAttr } from './index.lines.entity.field.attrs.relation';
 
 function createDefaultAttr(field: EntityField) {
@@ -7,9 +7,9 @@ function createDefaultAttr(field: EntityField) {
 	}
 }
 
-function createTypeAttrs(field: EntityField, entities: Entity$[]): string[] {
+function createTypeAttrs(field: EntityField): string[] {
 	if (field.type === 'relation') {
-		return [createRelationAttr(field, entities)];
+		return [createRelationAttr(field)];
 	}
 
 	const defaultAttr = createDefaultAttr(field);
@@ -17,12 +17,12 @@ function createTypeAttrs(field: EntityField, entities: Entity$[]): string[] {
 	return [defaultAttr].filter(Boolean) as string[];
 }
 
-export function createAttrs(field: EntityField, entities: Entity$[]): string[] {
+export function createAttrs(field: EntityField): string[] {
 	const { isUnique } = field;
 
 	const uniqueAttr = isUnique && '@unique';
 
-	const typeAttrs = createTypeAttrs(field, entities);
+	const typeAttrs = createTypeAttrs(field);
 
 	return [uniqueAttr, ...typeAttrs].filter(Boolean) as string[];
 }

@@ -10,6 +10,7 @@ export default createEntity({
 			type: 'relation',
 
 			targetEntityName: 'Product',
+			targetEntityFieldName: 'onCategories',
 
 			onDelete: 'Cascade',
 		},
@@ -18,6 +19,7 @@ export default createEntity({
 			type: 'relation',
 
 			targetEntityName: 'ProductCategory',
+			targetEntityFieldName: 'onProducts',
 
 			onDelete: 'Cascade',
 		},

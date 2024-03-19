@@ -1,6 +1,6 @@
 import { execSync } from 'child_process';
 
-import { Entity$, Enum } from '~/modelling';
+import { Entity, Enum } from '~/modelling';
 import { OrmGenerator } from '../index.template';
 import fs from 'fs-extra';
 
@@ -30,10 +30,10 @@ export class ZodGenerator extends OrmGenerator {
 
 	onEnum(e: Enum) {}
 
-	onEntity(entity: Entity$, entities: Entity$[]) {
+	onEntity(entity: Entity, entities: Entity[]) {
 		this.__addLines([
 			// <>
-			`export namespace ${entity.source.name} {`,
+			`export namespace ${entity.name} {`,
 			`export const model = z.object({`,
 			`})`,
 			`export const seed = z.object({`,

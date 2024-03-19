@@ -1,22 +1,21 @@
-import { Entity, Entity$, Enum } from '~/modelling/types';
+import { Entity__Input, Entity, Enum } from '~/modelling/types';
 
 export const store = {
 	enums: new Map<string, Enum>(),
 
+	entityInputs: new Map<string, Entity__Input>(),
 	entities: new Map<string, Entity>(),
-
-	entities$: new Map<string, Entity$>(),
 
 	getEnums() {
 		return Array.from(store.enums.values());
 	},
 
-	getEntities() {
-		return Array.from(store.entities.values());
+	getEntityInputs() {
+		return Array.from(store.entityInputs.values());
 	},
 
-	getEntities$() {
-		return Array.from(store.entities$.values());
+	getEntities() {
+		return Array.from(store.entities.values());
 	},
 
 	// metas: new Map<string, Record<string, unknown>>(),

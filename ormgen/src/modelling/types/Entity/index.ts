@@ -1,18 +1,8 @@
+import { Entity__Input } from '../Entity__Input';
 import { EntityFields } from '../EntityField';
-import { EntityIndex } from '../EntityIndex';
 
-export interface Entity {
-	name: string;
+export interface Entity extends Entity__Input {
+	$input: Entity__Input;
 
-	description?: string;
-
-	id?: Entity.ID;
-
-	fields: EntityFields | EntityFields[];
-
-	indexes?: EntityIndex[];
-}
-
-export namespace Entity {
-	export type ID = 'id' | 'uid' | 'alias' | null;
+	fields: EntityFields;
 }

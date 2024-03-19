@@ -1,7 +1,7 @@
-import { Entity$ } from '~/modelling';
+import { Entity } from '~/modelling';
 
-export function createIdField(entity: Entity$): string {
-	switch (entity.source.id) {
+export function createIdField(entity: Entity): string {
+	switch (entity.id) {
 		case 'id':
 			return 'id Int @id @default(autoincrement())';
 		case 'uid':
