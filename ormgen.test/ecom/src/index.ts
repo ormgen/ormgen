@@ -1,6 +1,6 @@
-import { run, PrismaGenerator, ZodGenerator } from 'ormgen';
+import { sync, PrismaGenerator, ZodGenerator } from 'ormgen';
 
-run({
+sync({
 	search: {
 		root: 'ecom/src',
 	},

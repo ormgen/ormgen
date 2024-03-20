@@ -12,10 +12,10 @@ export function addIdField(entityFields: EntityFields, entityInput: Entity__Inpu
 
 	switch (id) {
 		case 'alias':
-			entityFields.alias = { ...base, $name: 'alias', type: 'text' };
+			entityFields.alias = { ...base, $name: 'alias', type: 'text', isPrimary: true };
 		case 'id':
-			entityFields.id = { ...base, $name: 'id', type: 'text' };
+			entityFields.id = { ...base, $name: 'id', type: 'text', isPrimary: true };
 		case 'uid':
-			entityFields.uid = { ...base, $name: 'uid', type: 'text' };
+			entityFields.uid = { ...base, $name: 'uid', type: 'text', isPrimary: true };
 	}
 }

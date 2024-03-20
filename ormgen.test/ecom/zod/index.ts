@@ -72,7 +72,7 @@ export namespace Product {
 			attributes: ProductMeta.attributes,
 			createdAt: z.date(),
 		})
-		.partial({});
+		.partial({ attributes: true });
 	export type ModelSchema = typeof model;
 	export type Model = z.infer<typeof model>;
 	export type SeedSchema = typeof seed;
@@ -117,6 +117,7 @@ export namespace Review {
 		uid: z.string(),
 		rating: z.number(),
 		comment: z.string(),
+		commentVector: z.number().array(),
 		createdAt: z.date(),
 		user: z.string(),
 	});
@@ -125,6 +126,7 @@ export namespace Review {
 			uid: z.string(),
 			rating: z.number(),
 			comment: z.string(),
+			commentVector: z.number().array(),
 			createdAt: z.date(),
 			user: z.string(),
 		})

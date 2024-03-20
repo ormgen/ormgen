@@ -1,4 +1,6 @@
 export interface Entity__Input__Extra {
-	prisma?: {};
 	zod?: {};
+	prisma?: {
+		customAttributes?: Record<string, string>;
+	};
 }

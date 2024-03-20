@@ -3,9 +3,9 @@ import { CreateType } from './index.create';
 import { RelationTargetType, RelationType } from './index.relation';
 
 export namespace EntityField__Input {
-	export type Text = CreateType<'text', string, { isID?: boolean }>;
+	export type Text = CreateType<'text', string, { isPrimary?: boolean }>;
 
-	export type Int = CreateType<'int', number, { isID?: boolean }>;
+	export type Int = CreateType<'int', number, { isPrimary?: boolean }>;
 
 	export type Boolean = CreateType<'boolean', boolean>;
 
@@ -15,7 +15,7 @@ export namespace EntityField__Input {
 
 	export type Json = CreateType<'json', any>;
 
-	export type Vector = CreateType<'vector', number[]>;
+	export type Unknown = CreateType<'unknown', unknown>;
 
 	export type Relation = RelationType;
 
@@ -23,7 +23,7 @@ export namespace EntityField__Input {
 
 	export type ID = Text | Int;
 
-	export type Primitive = Text | Int | Boolean | DateTime | Enum | Json | Vector;
+	export type Primitive = Text | Int | Boolean | DateTime | Enum | Json | Unknown;
 
 	export type Any = Primitive | Relation | RelationTarget;
 }

@@ -15,7 +15,7 @@ export namespace EntityField {
 
 	export type Json = CreateType<EntityField__Input.Json>;
 
-	export type Vector = CreateType<EntityField__Input.Vector>;
+	export type Unknown = CreateType<EntityField__Input.Unknown>;
 
 	export type Relation = CreateType<EntityField__Input.Relation, { $targetEntity: Entity__Input }>;
 
@@ -29,7 +29,7 @@ export namespace EntityField {
 
 	export type ID = Text | Int;
 
-	export type Primitive = Text | Int | Boolean | DateTime | Enum | Json | Vector;
+	export type Primitive = Text | Int | Boolean | DateTime | Enum | Json | Unknown;
 
 	export type Any = Primitive | Relation | RelationTarget;
 }

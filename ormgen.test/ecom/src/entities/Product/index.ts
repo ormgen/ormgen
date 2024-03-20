@@ -26,6 +26,8 @@ export default createEntity(({ mx }) => {
 
 			attributes: {
 				type: 'json',
+
+				defaultValue: { test: true },
 			},
 
 			createdAt: mx.$createdAtField(),

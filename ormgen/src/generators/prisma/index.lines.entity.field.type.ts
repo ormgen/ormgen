@@ -1,5 +1,23 @@
 import { EntityField } from '~/modelling';
 
+function createFieldTypeModifier(field: EntityField): string {
+	if (field.isNullable) {
+		return '?';
+	}
+
+	if (field.type === 'relation') {
+		return '';
+	}
+
+	if (field.type === 'relationTarget') {
+		const isOne = field.$sourceEntityField.targetMode === 'one';
+
+		return isOne ? '' : '[]';
+	}
+
+	return field.isArray ? '[]' : '';
+}
+
 function createFieldTypeSingle(field: EntityField): string {
 	switch (field.type) {
 		case 'text':
@@ -12,36 +30,29 @@ function createFieldTypeSingle(field: EntityField): string {
 			return 'DateTime';
 		case 'json':
 			return 'Json';
-		case 'vector':
-			return 'Vector';
 		case 'enum':
 			return field.enum;
 		case 'relation':
 			return field.targetEntityName;
 		case 'relationTarget':
 			return field.sourceEntityName;
+		case 'unknown':
+			const { customType } = field.extra?.prisma || {};
+
+			if (customType) {
+				return customType;
+			}
+
+			throw new Error(`Unknown field type: ${field.type}`);
 	}
 }
 
 export function createFieldType(field: EntityField): string {
-	const { isNullable } = field;
+	const { extra } = field;
 
-	const type = createFieldTypeSingle(field);
+	const type = extra?.prisma?.customType || createFieldTypeSingle(field);
 
-	const optional = isNullable ? '?' : '';
+	const modifier = createFieldTypeModifier(field);
 
-	if (field.type === 'relation') {
-		return `${type}${optional}`;
-	}
-
-	if (field.type === 'relationTarget') {
-		const { targetMode } = field.$sourceEntityField;
-
-		const isOne = targetMode == 'one';
-		const array = isOne ? '' : '[]';
-
-		return `${type}${optional}${array}`;
-	}
-
-	return `${type}${optional}`;
+	return `${type}${modifier}`;
 }

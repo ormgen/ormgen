@@ -26,19 +26,17 @@ function createModelFieldType(field: EntityField): string {
 			const metaName = createMetaName(entity);
 
 			return `${metaName}.${fieldName}`;
-		case 'vector':
-			return `z.number().array()`;
 	}
 
 	return '';
 }
 
 export function createModelField(field: EntityField): string {
-	const { $name } = field;
+	const { $name, extra } = field;
 
-	const type = createModelFieldType(field);
+	const type = extra?.zod?.customType || createModelFieldType(field);
 
-	if (field.extra?.zod?.hide) {
+	if (extra?.zod?.hide) {
 		return '';
 	}
 

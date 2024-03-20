@@ -1,18 +1,30 @@
 import { EntityField } from '~/modelling';
 import { createRelationAttr } from './index.lines.entity.field.attrs.relation';
 
-function createIdAttr(field: EntityField) {
-	if ('isID' in field) {
-		if (field.isID) {
-			return '@id';
-		}
+function createDefaultValueString(field: EntityField) {
+	const { type, defaultValue } = field;
+
+	if (defaultValue === undefined) {
+		return undefined;
 	}
+
+	const defaultValueString = JSON.stringify(defaultValue);
+
+	if (type === 'enum') {
+		return defaultValue;
+	}
+
+	if (type === 'json') {
+		return JSON.stringify(defaultValueString);
+	}
+
+	return defaultValueString;
 }
 
 function createDefaultAttr(field: EntityField) {
-	if ('defaultValue' in field) {
-		return `@default(${field.defaultValue})`;
-	}
+	const defaultValueString = createDefaultValueString(field);
+
+	return defaultValueString && `@default(${defaultValueString})`;
 }
 
 function createTypeAttrs(field: EntityField): string[] {
@@ -20,19 +32,17 @@ function createTypeAttrs(field: EntityField): string[] {
 		return [createRelationAttr(field)];
 	}
 
-	const defaultAttr = createDefaultAttr(field);
-
-	return [defaultAttr].filter(Boolean) as string[];
+	return [];
 }
 
 export function createAttrs(field: EntityField): string[] {
-	const { isUnique } = field;
+	const { isUnique, isPrimary, extra } = field;
 
-	const idAttr = createIdAttr(field);
-
+	const idAttr = isPrimary && '@id';
 	const uniqueAttr = isUnique && '@unique';
 
+	const defaultAttr = createDefaultAttr(field);
 	const typeAttrs = createTypeAttrs(field);
 
-	return [idAttr, uniqueAttr, ...typeAttrs].filter(Boolean) as string[];
+	return [idAttr, uniqueAttr, defaultAttr, ...typeAttrs, extra?.prisma?.customAttributes].filter(Boolean) as string[];
 }

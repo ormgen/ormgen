@@ -44,7 +44,7 @@ model Product {
   price         Int
   stockQuantity Int
   sku           String                     @unique
-  attributes    Json
+  attributes    Json                       @default("{\"test\":true}")
   createdAt     DateTime
   orderItems    OrderItem[]
   onCategories  ProductCategoryOnProduct[]
@@ -69,12 +69,13 @@ model ProductCategoryOnProduct {
 }
 
 model Review {
-  uid       String   @id
-  rating    Int
-  comment   String
-  createdAt DateTime
-  userUid   String
-  user      User     @relation(fields: [userUid], references: [uid], onDelete: Cascade)
+  uid           String                @id
+  rating        Int
+  comment       String
+  commentVector Unsupported("vector")
+  createdAt     DateTime
+  userUid       String
+  user          User                  @relation(fields: [userUid], references: [uid], onDelete: Cascade)
 }
 
 model User {
