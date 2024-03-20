@@ -1,6 +1,6 @@
 import { OrmGenerator } from '~/generators';
 
-export interface RunConfig {
+export interface SyncConfig {
 	cwd?: string;
 
 	search: {

@@ -1,9 +1,9 @@
 import { store } from '~/internals';
-import { RunConfig } from './index.config';
+import { SyncConfig } from './index.config';
 import { init } from './init';
 import { findPaths } from '~/helpers';
 
-export async function run(config: RunConfig) {
+export async function sync(config: SyncConfig) {
 	const { entityMeta = ['meta.ts', 'meta/index.ts', 'index.meta.ts', 'index.meta/index.ts'] } = config.search;
 
 	await init(config);

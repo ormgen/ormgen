@@ -1,11 +1,11 @@
 import { store } from '~/internals';
-import { RunConfig } from '../index.config';
+import { SyncConfig } from '../index.config';
 
 import { createEntity } from './createEntity';
 import { findPaths } from '../../../helpers/findPaths';
 import { initEntityInput } from './initEntityInput';
 
-export async function init(config: RunConfig) {
+export async function init(config: SyncConfig) {
 	const { cwd = process.cwd() } = config;
 
 	const {
