@@ -7,14 +7,18 @@
 # TODO
 
 -   [ ] Seed
--   [ ] Deploy
+-   [ ] Generators
+    -   [ ] Prisma
+        -   [ ] "extra" field for specific prisma syntax
+    -   [ ] Zod
+        -   [ ] "extra" field for specific zod syntax?
+        -   [ ] "extra.hide?" for hiding fields in zod?
+-   [ ] Mixins
 -   [ ] Generate types for ormgen to use
     -   [ ] Make global mixins work
     -   [ ] Typesafe entity names
-    -   [ ] Make zod generators add extra field config
-        -   [ ] field.extra.zod = {}?
-            -   [ ] Hide field?
-            -   [ ] More?
+    -   [ ] Create global type for Field.extra property?
+    -   [ ] Create global type for Entity.extra property?
 -   [ ] Refactor as a monorepo
 -   [ ] Figure out how to add extra fields
 -   [ ] Documentation
