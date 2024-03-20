@@ -16,7 +16,7 @@
         -   [ ] config.includeDefaultValues
 -   [ ] Documentation
 -   [ ] Refactor as a monorepo
-    -   [ ] Or do a better linking. Maybe we want to keep two separate node_modules?
+    -   [ ] Or do a better linking. Maybe we want to keep two separate node_modules? Or one node_modules for each testing case?
 -   [ ] Add types
     -   [ ] BigInt
     -   [ ] Float
