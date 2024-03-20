@@ -1,3 +1,5 @@
+import { Entity__Input__Extra } from '../Entity__Input__Extra';
+
 interface Base<Type, DefaultValue> {
 	type: Type;
 
@@ -7,7 +9,7 @@ interface Base<Type, DefaultValue> {
 
 	defaultValue?: DefaultValue;
 
-	extra?: unknown;
+	extra?: Entity__Input__Extra;
 }
 
 interface Base__One<Type, DefaultValue> extends Base<Type, DefaultValue> {
