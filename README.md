@@ -7,6 +7,7 @@
 # TODO
 
 -   [ ] Seed
+-   [ ] Deploy
 -   [ ] Generate types for ormgen to use
     -   [ ] Make global mixins work
     -   [ ] Typesafe entity names
