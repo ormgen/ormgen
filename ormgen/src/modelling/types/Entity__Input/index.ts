@@ -6,7 +6,7 @@ export interface Entity__Input {
 
 	description?: string;
 
-	id?: Entity__Input.ID;
+	id: Entity__Input.ID;
 
 	fields: EntityFields__Input | EntityFields__Input[];
 
