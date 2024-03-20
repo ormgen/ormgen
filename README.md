@@ -6,23 +6,24 @@
 
 # TODO
 
--   [ ] Seed
 -   [ ] Generators
     -   [ ] Prisma
+        -   [ ] More defaultValue testing
         -   [ ] "extra" field for specific prisma syntax
             -   [ ] Figure out what we want here
         -   [ ] More config?
             -   [ ] Datetime stuff?
             -   [ ] More?
     -   [ ] Zod
-        -   [ ] "extra" field for specific zod syntax?
-        -   [ ] "extra.hide?" for hiding fields in zod?
+        -   [ ] config.includeDefaultValues
+-   [ ] Seed
 -   [ ] Mixins
 -   [ ] Generate types for ormgen to use
     -   [ ] Make global mixins work
     -   [ ] Typesafe entity names
     -   [ ] Create global type for Field.extra property?
     -   [ ] Create global type for Entity.extra property?
--   [ ] Refactor as a monorepo
--   [ ] Figure out how to add extra fields
+-   [ ] Figure out how to add extra field types
+    -   [ ] Unknown and then up to generator?
 -   [ ] Documentation
+-   [ ] Refactor as a monorepo

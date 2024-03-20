@@ -1,10 +1,7 @@
-export interface RelationType {
+import { Base } from './index.create';
+
+export interface RelationType extends Base<'relation', undefined, undefined> {
 	type: 'relation';
-
-	isUnique?: boolean;
-	isNullable?: boolean;
-
-	defaultValue?: undefined;
 
 	onDelete: 'Cascade' | 'SetNull' | 'Restrict';
 
@@ -32,13 +29,8 @@ export interface RelationType {
 	targetMode?: 'one' | 'many';
 }
 
-export interface RelationTargetType {
+export interface RelationTargetType extends Base<'relationTarget', undefined, undefined> {
 	type: 'relationTarget';
-
-	isUnique?: undefined;
-	isNullable?: undefined;
-
-	defaultValue?: undefined;
 
 	sourceEntityName: string;
 }

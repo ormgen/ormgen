@@ -1,22 +1,22 @@
-import { Entity__Input__Extra } from '../Entity__Input__Extra';
+import { EntityField__Input__Extra } from '../EntityField__Input__Extra';
 
-interface Base<Type, DefaultValue> {
+export interface Base<Type, DefaultValue, Flag> {
 	type: Type;
 
-	isPrimary?: boolean;
-	isNullable?: boolean;
-	isUnique?: boolean;
+	isPrimary?: Flag;
+	isNullable?: Flag;
+	isUnique?: Flag;
 
 	defaultValue?: DefaultValue;
 
-	extra?: Entity__Input__Extra;
+	extra?: EntityField__Input__Extra;
 }
 
-interface Base__One<Type, DefaultValue> extends Base<Type, DefaultValue> {
+interface Base__One<Type, DefaultValue> extends Base<Type, DefaultValue, boolean> {
 	isArray?: false;
 }
 
-interface Base__Many<Type, DefaultValue> extends Base<Type, DefaultValue> {
+interface Base__Many<Type, DefaultValue> extends Base<Type, DefaultValue, boolean> {
 	isArray: true;
 }
 

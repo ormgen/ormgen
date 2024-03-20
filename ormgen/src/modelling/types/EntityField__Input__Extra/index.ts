@@ -1,4 +1,6 @@
 export interface EntityField__Input__Extra {
-	zod?: {};
+	zod?: {
+		hide?: boolean;
+	};
 	prisma?: {};
 }

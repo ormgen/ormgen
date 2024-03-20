@@ -38,6 +38,10 @@ export function createModelField(field: EntityField): string {
 
 	const type = createModelFieldType(field);
 
+	if (field.extra?.zod?.hide) {
+		return '';
+	}
+
 	if (type) {
 		return `${$name}: ${type},`;
 	}
