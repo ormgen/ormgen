@@ -1,9 +1,9 @@
 import { camelCase } from 'case-anything';
-import { Entity__Input, Entity, EntityFieldType } from '~/modelling';
+import { Entity__Input, Entity, EntityField } from '~/modelling';
 import { createRelationTargetFieldName } from '../createRelationTargetFieldName';
 
 interface Config {
-	field: EntityFieldType.Relation;
+	field: EntityField.Relation;
 	targetEntity: Entity__Input | Entity;
 }
 

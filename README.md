@@ -6,11 +6,14 @@
 
 # TODO
 
--   [ ] EntityFieldType -> EntityField
 -   [ ] Seed
 -   [ ] Generators
     -   [ ] Prisma
         -   [ ] "extra" field for specific prisma syntax
+            -   [ ] Figure out what we want here
+        -   [ ] More config?
+            -   [ ] Datetime stuff?
+            -   [ ] More?
     -   [ ] Zod
         -   [ ] "extra" field for specific zod syntax?
         -   [ ] "extra.hide?" for hiding fields in zod?

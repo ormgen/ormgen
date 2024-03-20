@@ -1,12 +1,12 @@
 import { flattenArrayable } from '~/helpers';
 import { store } from '~/internals';
-import { EntityFieldType__Input, Entity__Input } from '~/modelling';
+import { EntityField__Input, Entity__Input } from '~/modelling';
 
 interface EntityTargetResult {
 	targettingEntityInput: Entity__Input;
 
 	targettingFieldName: string;
-	targettingField: EntityFieldType__Input.Relation;
+	targettingField: EntityField__Input.Relation;
 }
 
 export function findTargettingEntities(sourceEntityName: string): EntityTargetResult[] {

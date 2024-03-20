@@ -1,12 +1,12 @@
-import { Entity__Input, Entity, EntityFieldType } from '~/modelling';
+import { Entity__Input, Entity, EntityField } from '~/modelling';
 
 interface Config {
 	fieldName: string;
-	field: EntityFieldType.Relation;
+	field: EntityField.Relation;
 	targetEntity: Entity__Input | Entity;
 }
 
-export function createRelationKeyField(config: Config): EntityFieldType.Text {
+export function createRelationKeyField(config: Config): EntityField.Text {
 	const { fieldName, field } = config;
 	const { $entityInput } = field;
 
