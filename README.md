@@ -18,7 +18,6 @@
         -   [ ] "extra" field for specific zod syntax?
         -   [ ] "extra.hide?" for hiding fields in zod?
 -   [ ] Mixins
--   [ ] Run -> Sync
 -   [ ] Generate types for ormgen to use
     -   [ ] Make global mixins work
     -   [ ] Typesafe entity names

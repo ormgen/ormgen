@@ -1,2 +1,2 @@
-export * from './run';
+export * from './sync';
 export * from './seed';
