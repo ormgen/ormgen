@@ -7,13 +7,6 @@
 # TODO
 
 -   [ ] Generators
-    -   [ ] Prisma
-        -   [ ] More defaultValue testing
-        -   [ ] "extra" field for specific prisma syntax
-            -   [ ] Figure out what we want here
-        -   [ ] More config?
-            -   [ ] Datetime stuff?
-            -   [ ] More?
     -   [ ] Zod
         -   [ ] config.includeDefaultValues
 -   [ ] Seed
@@ -21,9 +14,13 @@
 -   [ ] Generate types for ormgen to use
     -   [ ] Make global mixins work
     -   [ ] Typesafe entity names
-    -   [ ] Create global type for Field.extra property?
-    -   [ ] Create global type for Entity.extra property?
 -   [ ] Figure out how to add extra field types
     -   [ ] Unknown and then up to generator?
 -   [ ] Documentation
 -   [ ] Refactor as a monorepo
+    -   [ ] Or do a better linking. Maybe we want to keep two separate node_modules?
+-   [ ] Add types
+    -   [ ] BigInt
+    -   [ ] Float
+    -   [ ] Decimal
+    -   [ ] Bytes
