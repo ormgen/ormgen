@@ -7,14 +7,25 @@
 # TODO
 
 -   [ ] Seed
+    -   [ ] Sort by dependencies
+    -   [ ] Prisma generator
+    -   [ ] TypeSafe seeds
+    -   [ ] TypeSafe entity names
 -   [ ] Mixins
+    -   [ ] Make available
+-   [ ] Use object instead of classes for generators
+    -   [ ] Use an interface instead of abstract class
+    -   [ ] Use sync.x() & seed.y()
 -   [ ] Generate types for ormgen to use
     -   [ ] Make global mixins work
     -   [ ] Typesafe entity names
+-   [ ] Documentation
+
+## Future
+
 -   [ ] Generators
     -   [ ] Zod
         -   [ ] config.includeDefaultValues
--   [ ] Documentation
 -   [ ] Refactor as a monorepo
     -   [ ] Or do a better linking. Maybe we want to keep two separate node_modules? Or one node_modules for each testing case?
 -   [ ] Add types
@@ -22,3 +33,5 @@
     -   [ ] Float
     -   [ ] Decimal
     -   [ ] Bytes
+-   [ ] Seed
+    -   [ ] Take in data from previous seeds

@@ -18,6 +18,7 @@
 		"test:types:watch": "tsc --noEmit --watch"
 	},
 	"devDependencies": {
+		"@prisma/client": "^5.11.0",
 		"@types/node": "^20.11.28",
 		"fast-glob": "^3.3.2",
 		"prettier": "^3.2.5",
@@ -27,5 +28,8 @@
 	},
 	"dependencies": {
 		"case-anything": "^2.1.13"
+	},
+	"peerDependencies": {
+		"@prisma/client": "*"
 	}
 }

@@ -4,10 +4,12 @@ import { createEntity } from './createEntity';
 import { findPaths } from '../../helpers/findPaths';
 import { initEntityInput } from './initEntityInput';
 import { InitConfig } from './index.config';
+import { createSeed } from './createSeed';
+import { initEntitySeed } from './initEntitySeed';
 
 export async function init(config: InitConfig) {
 	const { cwd, search } = config;
-	const { root, entities, entityEnum, globalEnums } = search;
+	const { root, entities, entityEnum, entitySeed, globalEnums } = search;
 
 	const entityFolderPaths = findPaths({
 		prefixes: [cwd, root],
@@ -31,8 +33,18 @@ export async function init(config: InitConfig) {
 			options: { onlyFiles: true },
 		});
 
+		const entitySeedPaths = findPaths({
+			prefixes: [entityFolderPath],
+			patterns: entitySeed,
+			options: { onlyFiles: true },
+		});
+
 		for (const entityEnumPath of entityEnumPaths) {
 			await import(entityEnumPath);
+		}
+
+		for (const entitySeedPath of entitySeedPaths) {
+			await initEntitySeed(entityFolderPath, entitySeedPath);
 		}
 	}
 
@@ -40,9 +52,11 @@ export async function init(config: InitConfig) {
 		await import(enumPath);
 	}
 
-	const entityInputs = store.getEntityInputs();
+	for (const entityInput of store.getEntityInputs()) {
+		await createEntity(entityInput, entityFolderPaths);
+	}
 
-	for (const entityInput of entityInputs) {
-		await createEntity(config, entityInput, entityFolderPaths);
+	for (const seedInput of store.getSeedInputs()) {
+		await createSeed(config, seedInput);
 	}
 }

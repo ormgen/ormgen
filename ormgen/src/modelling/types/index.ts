@@ -7,3 +7,6 @@ export * from './EntityField';
 export * from './EntityField__Input';
 
 export * from './EntityIndex';
+
+export * from './Seed';
+export * from './Seed__Input';

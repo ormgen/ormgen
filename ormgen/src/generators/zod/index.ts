@@ -57,4 +57,6 @@ export class ZodGenerator extends OrmGenerator {
 			stdio: 'inherit',
 		});
 	}
+
+	onEntitySeed() {}
 }

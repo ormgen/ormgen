@@ -8,6 +8,7 @@ import fs from 'fs-extra';
 import { createEnumLines } from './index.lines.enum';
 import { createEntityLines } from './index.lines.entity';
 import { Entity, Enum } from '~/modelling';
+import { Seed } from '~/modelling/types/Seed';
 
 export class PrismaGenerator extends OrmGenerator {
 	constructor(config: PrismaConfig) {
@@ -48,6 +49,10 @@ export class PrismaGenerator extends OrmGenerator {
 	onComplete() {
 		execSync(`npx prisma validate --schema ${this.schemaPath}`, { stdio: 'inherit' });
 		execSync(`npx prisma format --schema ${this.schemaPath}`, { stdio: 'inherit' });
+	}
+
+	onEntitySeed<T extends string>(seed: Seed<T>) {
+		console.log('seed', seed.name);
 	}
 }
 

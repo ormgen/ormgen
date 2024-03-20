@@ -1,4 +1,4 @@
-import { Entity__Input, Entity, Enum } from '~/modelling/types';
+import { Entity__Input, Entity, Enum, Seed__Input, Seed } from '~/modelling/types';
 
 const store__enums = {
 	enums: new Map<string, Enum>(),
@@ -24,6 +24,7 @@ const store__enums = {
 
 const store__entityInputs = {
 	entityInputs: new Map<string, Entity__Input>(),
+	entityInputByPath: new Map<string, Entity__Input>(),
 
 	getEntityInputs() {
 		return Array.from(store__entityInputs.entityInputs.values());
@@ -66,14 +67,58 @@ const store__entities = {
 	},
 };
 
+const store__seedInputs = {
+	seedInputs: new Map<string, Seed__Input<string>>(),
+
+	getSeedInputs() {
+		return Array.from(store__seedInputs.seedInputs.values());
+	},
+
+	findSeedInput(name: string) {
+		return store__seedInputs.seedInputs.get(name);
+	},
+
+	getSeedInput(name: string) {
+		const seed = store__seedInputs.findSeedInput(name);
+
+		if (!seed) {
+			throw new Error(`Seed not found: ${name}`);
+		}
+
+		return seed;
+	},
+};
+
+const store__seed = {
+	seeds: new Map<string, Seed<string>>(),
+
+	getSeeds() {
+		return Array.from(store__seed.seeds.values());
+	},
+
+	findSeed(name: string) {
+		return store__seed.seeds.get(name);
+	},
+
+	getSeed(name: string) {
+		const seed = store__seed.findSeed(name);
+
+		if (!seed) {
+			throw new Error(`Seed not found: ${name}`);
+		}
+
+		return seed;
+	},
+};
+
 export const store = {
 	...store__enums,
+
 	...store__entityInputs,
 	...store__entities,
 
-	// metas: new Map<string, Record<string, unknown>>(),
-
-	// seed: new Map<string, Record<string, unknown>>(),
+	...store__seedInputs,
+	...store__seed,
 
 	// mixins: new Map<string, Record<string, unknown>>(),
 };
