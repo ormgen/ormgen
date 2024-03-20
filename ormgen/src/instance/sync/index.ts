@@ -1,12 +1,9 @@
 import { store } from '~/internals';
-import { SyncConfig } from './index.config';
-import { init } from './init';
 import { findPaths } from '~/helpers';
+import { InstanceConfig } from '../index.config';
 
-export async function sync(config: SyncConfig) {
+export async function sync(config: InstanceConfig) {
 	const { entityMeta = ['meta.ts', 'meta/index.ts', 'index.meta.ts', 'index.meta/index.ts'] } = config.search;
-
-	await init(config);
 
 	for (const gen of config.generators) {
 		const enums = store.getEnums();

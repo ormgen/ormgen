@@ -1,11 +1,9 @@
 import { store } from '~/internals';
 import { Entity__Input, Entity } from '~/modelling';
 import { createEntityFields } from '../createEntityFields';
-import { SyncConfig } from '../../index.config';
+import { InitConfig } from '../index.config';
 
-export async function createEntity(config: SyncConfig, input: Entity__Input, entityFolderPaths: string[]): Promise<Entity> {
-	const { root } = config.search;
-
+export async function createEntity(config: InitConfig, input: Entity__Input, entityFolderPaths: string[]): Promise<Entity> {
 	const folderPath = entityFolderPaths.find((folderPath) => {
 		return folderPath.endsWith('/' + input.name);
 	});

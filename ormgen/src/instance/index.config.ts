@@ -1,6 +1,6 @@
 import { OrmGenerator } from '~/generators';
 
-export interface SyncConfig {
+export interface InstanceConfig {
 	cwd?: string;
 
 	search: {
@@ -42,11 +42,6 @@ export interface SyncConfig {
 		 * Where to look for global mixins.
 		 */
 		globalMixins?: string[];
-
-		/**
-		 * Where to look for global seeds.
-		 */
-		globalSeeds?: string[];
 	};
 
 	generators: OrmGenerator[];

@@ -1,6 +1,6 @@
-import { sync, PrismaGenerator, ZodGenerator } from 'ormgen';
+import { PrismaGenerator, ZodGenerator, createInstance } from 'ormgen';
 
-sync({
+const instance = createInstance({
 	search: {
 		root: 'ecom/src',
 	},
@@ -19,3 +19,11 @@ sync({
 		}),
 	],
 });
+
+if (process.argv.includes('--sync')) {
+	instance.sync();
+}
+
+if (process.argv.includes('--seed')) {
+	instance.seed();
+}

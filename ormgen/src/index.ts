@@ -1,4 +1,4 @@
 export * from './modelling';
-export * from './executables';
+export * from './instance';
 export * from './modelling';
 export * from './generators';

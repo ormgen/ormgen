@@ -1,24 +1,13 @@
 import { store } from '~/internals';
-import { SyncConfig } from '../index.config';
 
 import { createEntity } from './createEntity';
-import { findPaths } from '../../../helpers/findPaths';
+import { findPaths } from '../../helpers/findPaths';
 import { initEntityInput } from './initEntityInput';
+import { InitConfig } from './index.config';
 
-export async function init(config: SyncConfig) {
-	const { cwd = process.cwd() } = config;
-
-	const {
-		root,
-
-		entities = ['entities/*'],
-		entityEnum = ['enums.ts', 'enums/index.ts', 'index.enums.ts', 'index.enums/index.ts'],
-		// entitySeed = ['seed.ts', 'seed/index.ts', 'index.seed.ts', 'index.seed/index.ts'], // TODO: Move to seed config?
-
-		globalEnums = ['enums/index.ts'],
-		// globalMixins = ['mixins/index.ts'],
-		// globalSeeds = ['seeds/index.ts'],
-	} = config.search;
+export async function init(config: InitConfig) {
+	const { cwd, search } = config;
+	const { root, entities, entityEnum, globalEnums } = search;
 
 	const entityFolderPaths = findPaths({
 		prefixes: [cwd, root],
@@ -32,7 +21,6 @@ export async function init(config: SyncConfig) {
 		options: { onlyFiles: true },
 	});
 	// const globalMixinPaths = findPaths(config, globalMixins);
-	// const globalSeedPaths = findPaths(config, globalSeeds);
 
 	for (const entityFolderPath of entityFolderPaths) {
 		await initEntityInput(entityFolderPath);
