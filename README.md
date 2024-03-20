@@ -6,9 +6,7 @@
 
 # TODO
 
--   [ ] Create generators
-    -   [ ] Zod
-        -   [ ] Add zod specific fields - what is this?
+-   [ ] Seed
 -   [ ] Generate types for ormgen to use
     -   [ ] Make global mixins work
     -   [ ] Typesafe entity names
