@@ -1,14 +1,21 @@
 import { Entity, Enum, Seed } from '~/modelling';
 import { Promisable } from '~/helpers';
 
-export abstract class OrmGenerator {
-	// Sync
-	abstract onMetaFile(metaFilePath: string, entity: Entity): Promisable<any>;
-	abstract onEnum(e: Enum): Promisable<any>;
-	abstract onEntity(entity: Entity, entities: Entity[]): Promisable<any>;
-	abstract onWrite(): Promisable<any>;
-	abstract onComplete(): Promisable<any>;
+export interface OrmGenerator {
+	sync?: {
+		onEnums?(enums: Enum[]): Promisable<any>;
+		onEnum?(e: Enum, enums: Enum[]): Promisable<any>;
 
-	// Seed
-	abstract onEntitySeed<T extends string>(seed: Seed<T>): Promisable<any>;
+		onEntities?(entities: Entity[]): Promisable<any>;
+		onEntity?(entity: Entity, entities: Entity[]): Promisable<any>;
+
+		onMetaFile?(entityMetaFilePath: string, entity: Entity): Promisable<any>;
+
+		onWrite?(): Promisable<any>;
+		onComplete?(): Promisable<any>;
+	};
+
+	seed?: {
+		onEntity?(seed: Seed<string>): Promisable<any>;
+	};
 }

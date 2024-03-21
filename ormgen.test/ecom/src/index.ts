@@ -1,4 +1,4 @@
-import { PrismaGenerator, ZodGenerator, createInstance } from 'ormgen';
+import { prismaGenerator, zodGenerator, createInstance } from 'ormgen';
 
 const instance = createInstance({
 	search: {
@@ -6,7 +6,7 @@ const instance = createInstance({
 	},
 
 	generators: [
-		new PrismaGenerator({
+		prismaGenerator({
 			schemaPath: 'ecom/prisma/schema.prisma',
 
 			datasource: {
@@ -14,7 +14,7 @@ const instance = createInstance({
 				url: 'env("DATABASE_URL")',
 			},
 		}),
-		new ZodGenerator({
+		zodGenerator({
 			filePath: 'ecom/zod/index.ts',
 		}),
 	],

@@ -1,14 +1,22 @@
 import { Entity } from '~/modelling';
-import { ZodGenerator } from '.';
+
 import path from 'path';
 import { createMetaName } from './index.meta';
 
-export function createImportMetaLines(self: ZodGenerator, metaFilePath: string, entity: Entity) {
+interface Config {
+	absoluteOutputFilePath: string;
+	absoluteMetaFilePath: string;
+	entity: Entity;
+}
+
+export function createImportMetaLines(config: Config) {
+	const { absoluteOutputFilePath, absoluteMetaFilePath, entity } = config;
+
 	const metaName = createMetaName(entity);
 
-	const absoluteOutputDir = path.dirname(self.outputFilePath.absolute);
+	const absoluteOutputDir = path.dirname(absoluteOutputFilePath);
 
-	const relativeFilePath = path.relative(absoluteOutputDir, metaFilePath);
+	const relativeFilePath = path.relative(absoluteOutputDir, absoluteMetaFilePath);
 
 	const importPath = relativeFilePath.split('.').slice(0, -1).join('.');
 

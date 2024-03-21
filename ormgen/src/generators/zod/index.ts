@@ -4,59 +4,56 @@ import { Entity, Enum } from '~/modelling';
 import { OrmGenerator } from '../index.template';
 import fs from 'fs-extra';
 import { createEntityLines } from './index.lines.entity';
-import path from 'path';
+import path, { relative } from 'path';
 import { createImportMetaLines } from './index.lines.meta';
 import { createEnumLines } from './index.lines.enum';
 
 interface Config {
 	filePath?: string;
+
+	zodPackage?: string;
 }
 
-export class ZodGenerator extends OrmGenerator {
-	constructor(config: Config) {
-		super();
+export function zodGenerator(config: Config): OrmGenerator {
+	const { filePath = 'zod/index.ts', zodPackage = 'zod' } = config;
 
-		this.config = config;
-		this.lines = ['import {z} from "zod";'];
-	}
+	const relativeOutputFilePath = filePath;
+	const absoluteOutputFilePath = path.resolve(filePath);
 
-	config: Config;
+	const lines = [`import {z} from "${zodPackage}";`];
 
-	lines: string[];
-
-	get outputFilePath() {
-		const relative = this.config.filePath || 'zod/index.ts';
-		const absolute = path.join(process.cwd(), relative);
-
-		return { relative, absolute };
-	}
-
-	__addLines(lines: string[]) {
-		this.lines = this.lines.concat(lines);
-	}
-
-	onMetaFile(metaFilePath: string, entity: Entity) {
-		this.__addLines(createImportMetaLines(this, metaFilePath, entity));
-	}
-
-	onEnum(e: Enum) {
-		this.__addLines(createEnumLines(e));
-	}
-
-	onEntity(entity: Entity, entities: Entity[]) {
-		this.__addLines(createEntityLines(entity, entities));
-	}
-
-	async onWrite() {
-		await fs.ensureFile(this.outputFilePath.relative);
-		await fs.writeFile(this.outputFilePath.relative, this.lines.join('\n'));
-	}
-
-	onComplete() {
-		execSync(`npx prettier --write ${this.outputFilePath.relative}`, {
-			stdio: 'inherit',
+	function addLines(lines: string[]) {
+		lines.forEach((line) => {
+			lines.push(line);
 		});
 	}
 
-	onEntitySeed() {}
+	return {
+		sync: {
+			onEnum(e: Enum) {
+				addLines(createEnumLines(e));
+			},
+
+			onEntity(entity, entities) {
+				addLines(createEntityLines(entity, entities));
+			},
+
+			onMetaFile(absoluteMetaFilePath: string, entity: Entity) {
+				addLines(createImportMetaLines({ absoluteOutputFilePath, absoluteMetaFilePath, entity }));
+			},
+
+			async onWrite() {
+				await fs.ensureFile(relativeOutputFilePath);
+				await fs.writeFile(relativeOutputFilePath, lines.join('\n'));
+			},
+
+			onComplete() {
+				execSync(`npx prettier --write ${filePath}`, {
+					stdio: 'inherit',
+				});
+			},
+		},
+
+		seed: {},
+	};
 }

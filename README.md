@@ -13,9 +13,6 @@
     -   [ ] TypeSafe entity names
 -   [ ] Mixins
     -   [ ] Make available
--   [ ] Use object instead of classes for generators
-    -   [ ] Use an interface instead of abstract class
-    -   [ ] Use sync.x() & seed.y()
 -   [ ] Generate types for ormgen to use
     -   [ ] Make global mixins work
     -   [ ] Typesafe entity names

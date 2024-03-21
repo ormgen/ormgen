@@ -7,53 +7,36 @@ import { createBasicLines } from './index.lines.basic';
 import fs from 'fs-extra';
 import { createEnumLines } from './index.lines.enum';
 import { createEntityLines } from './index.lines.entity';
-import { Entity, Enum } from '~/modelling';
-import { Seed } from '~/modelling/types/Seed';
 
-export class PrismaGenerator extends OrmGenerator {
-	constructor(config: PrismaConfig) {
-		super();
+export function prismaGenerator(config: PrismaConfig): OrmGenerator {
+	const { schemaPath = 'prisma/schema.prisma' } = config;
 
-		this.config = config;
+	const lines = [...createBasicLines(config)];
 
-		this.lines = [...createBasicLines(config)];
-	}
+	return {
+		sync: {
+			onEnum(e) {
+				lines.push(...createEnumLines(e));
+			},
 
-	config: PrismaConfig;
+			onEntity(entity) {
+				lines.push(...createEntityLines(entity));
+			},
 
-	lines: string[];
+			onWrite() {
+				return fs.writeFile(schemaPath, lines.join('\n'));
+			},
 
-	get schemaPath() {
-		return this.config.schemaPath || 'prisma/schema.prisma';
-	}
+			onComplete() {
+				execSync(`npx prisma validate --schema ${schemaPath}`, { stdio: 'inherit' });
+				execSync(`npx prisma format --schema ${schemaPath}`, { stdio: 'inherit' });
+			},
+		},
 
-	__addLines(lines: string[]) {
-		this.lines = this.lines.concat(lines);
-	}
-
-	onMetaFile() {}
-
-	onEnum(e: Enum) {
-		this.__addLines(createEnumLines(e));
-	}
-
-	onEntity(entity: Entity) {
-		this.__addLines(createEntityLines(entity));
-	}
-
-	async onWrite() {
-		await fs.ensureFile(this.schemaPath);
-		await fs.writeFile(this.schemaPath, this.lines.join('\n'));
-	}
-
-	onComplete() {
-		execSync(`npx prisma validate --schema ${this.schemaPath}`, { stdio: 'inherit' });
-		execSync(`npx prisma format --schema ${this.schemaPath}`, { stdio: 'inherit' });
-	}
-
-	onEntitySeed<T extends string>(seed: Seed<T>) {
-		console.log('seed', seed.name);
-	}
+		seed: {
+			onEntity(seed) {
+				console.log('seed', seed.name);
+			},
+		},
+	};
 }
-
-export { PrismaConfig };
