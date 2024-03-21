@@ -15,13 +15,14 @@ export function createEntityLines(entity: Entity, entities: Entity[]): string[] 
 		`export const model = z.object({`,
 		...modelFieldLines,
 		`})`,
+		'',
 		`export const seed = z.object({`,
 		...modelFieldLines,
 		`})${seedPartials}`,
-
+		'',
 		`export type ModelSchema = typeof model;`,
 		`export type Model = z.infer<typeof model>;`,
-
+		'',
 		`export type SeedSchema = typeof seed;`,
 		`export type Seed = z.infer<typeof seed>;`,
 		`}`,

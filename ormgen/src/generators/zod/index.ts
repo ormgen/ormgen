@@ -22,22 +22,28 @@ export function zodGenerator(config: ZodGeneratorConfig): OrmGenerator {
 
 	const lines = [`import {z} from "${zodPackage}";`];
 
-	function addLines(newLines: string[]) {
-		lines.push(...newLines);
+	function addLines(newLines: string[], ...rest: string[]) {
+		lines.push(...newLines, ...rest);
 	}
 
 	return {
 		sync: {
 			onEnum(e: Enum) {
-				addLines(createEnumLines(e));
+				addLines(createEnumLines(e), '');
 			},
 
 			onEntity(entity, entities) {
-				addLines(createEntityLines(entity, entities));
+				addLines(createEntityLines(entity, entities), '');
 			},
 
 			onMetaFile(absoluteMetaFilePath: string, entity: Entity) {
-				addLines(createImportMetaLines({ absoluteOutputFilePath, absoluteMetaFilePath, entity }));
+				const metaLines = createImportMetaLines({
+					absoluteOutputFilePath,
+					absoluteMetaFilePath,
+					entity,
+				});
+
+				addLines(metaLines, '');
 			},
 
 			async onWrite() {

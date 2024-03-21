@@ -1,13 +1,16 @@
 import { z } from 'zod';
 import { meta as ProductMeta } from '../src/entities/Product/index.meta';
+
 export const ORDER_STATUS = { ORDERED: 'ORDERED', SHIPPED: 'SHIPPED' } as const;
 export type ORDER_STATUS = keyof typeof ORDER_STATUS;
 export const ORDER_STATUS__SCHEMA = z.nativeEnum(ORDER_STATUS);
 export const ORDER_STATUS__VALUES = Object.keys(ORDER_STATUS) as [ORDER_STATUS, ...ORDER_STATUS[]];
+
 export const GLOBAL_ENUM = { A: 'A', B: 'B', C: 'C' } as const;
 export type GLOBAL_ENUM = keyof typeof GLOBAL_ENUM;
 export const GLOBAL_ENUM__SCHEMA = z.nativeEnum(GLOBAL_ENUM);
 export const GLOBAL_ENUM__VALUES = Object.keys(GLOBAL_ENUM) as [GLOBAL_ENUM, ...GLOBAL_ENUM[]];
+
 export namespace Order {
 	export const model = z.object({
 		uid: z.string(),
@@ -16,6 +19,7 @@ export namespace Order {
 		totalPrice: z.number(),
 		userUid: z.string(),
 	});
+
 	export const seed = z
 		.object({
 			uid: z.string(),
@@ -25,11 +29,14 @@ export namespace Order {
 			userUid: z.string(),
 		})
 		.partial({ totalPrice: true });
+
 	export type ModelSchema = typeof model;
 	export type Model = z.infer<typeof model>;
+
 	export type SeedSchema = typeof seed;
 	export type Seed = z.infer<typeof seed>;
 }
+
 export namespace OrderItem {
 	export const model = z.object({
 		uid: z.string(),
@@ -37,6 +44,7 @@ export namespace OrderItem {
 		productUid: z.string(),
 		quantity: z.number(),
 	});
+
 	export const seed = z
 		.object({
 			uid: z.string(),
@@ -45,11 +53,14 @@ export namespace OrderItem {
 			quantity: z.number(),
 		})
 		.partial({});
+
 	export type ModelSchema = typeof model;
 	export type Model = z.infer<typeof model>;
+
 	export type SeedSchema = typeof seed;
 	export type Seed = z.infer<typeof seed>;
 }
+
 export namespace Product {
 	export const model = z.object({
 		uid: z.string(),
@@ -61,6 +72,7 @@ export namespace Product {
 		attributes: ProductMeta.attributes,
 		createdAt: z.date(),
 	});
+
 	export const seed = z
 		.object({
 			uid: z.string(),
@@ -73,17 +85,21 @@ export namespace Product {
 			createdAt: z.date(),
 		})
 		.partial({ attributes: true });
+
 	export type ModelSchema = typeof model;
 	export type Model = z.infer<typeof model>;
+
 	export type SeedSchema = typeof seed;
 	export type Seed = z.infer<typeof seed>;
 }
+
 export namespace ProductCategory {
 	export const model = z.object({
 		uid: z.string(),
 		name: z.string(),
 		description: z.string(),
 	});
+
 	export const seed = z
 		.object({
 			uid: z.string(),
@@ -91,27 +107,34 @@ export namespace ProductCategory {
 			description: z.string(),
 		})
 		.partial({});
+
 	export type ModelSchema = typeof model;
 	export type Model = z.infer<typeof model>;
+
 	export type SeedSchema = typeof seed;
 	export type Seed = z.infer<typeof seed>;
 }
+
 export namespace ProductCategoryOnProduct {
 	export const model = z.object({
 		productUid: z.string(),
 		productCategoryUid: z.string(),
 	});
+
 	export const seed = z
 		.object({
 			productUid: z.string(),
 			productCategoryUid: z.string(),
 		})
 		.partial({});
+
 	export type ModelSchema = typeof model;
 	export type Model = z.infer<typeof model>;
+
 	export type SeedSchema = typeof seed;
 	export type Seed = z.infer<typeof seed>;
 }
+
 export namespace Review {
 	export const model = z.object({
 		uid: z.string(),
@@ -121,6 +144,7 @@ export namespace Review {
 		createdAt: z.date(),
 		userUid: z.string(),
 	});
+
 	export const seed = z
 		.object({
 			uid: z.string(),
@@ -131,11 +155,14 @@ export namespace Review {
 			userUid: z.string(),
 		})
 		.partial({});
+
 	export type ModelSchema = typeof model;
 	export type Model = z.infer<typeof model>;
+
 	export type SeedSchema = typeof seed;
 	export type Seed = z.infer<typeof seed>;
 }
+
 export namespace User {
 	export const model = z.object({
 		uid: z.string(),
@@ -146,6 +173,7 @@ export namespace User {
 		createdAt: z.date(),
 		updatedAt: z.date(),
 	});
+
 	export const seed = z
 		.object({
 			uid: z.string(),
@@ -157,8 +185,10 @@ export namespace User {
 			updatedAt: z.date(),
 		})
 		.partial({});
+
 	export type ModelSchema = typeof model;
 	export type Model = z.infer<typeof model>;
+
 	export type SeedSchema = typeof seed;
 	export type Seed = z.infer<typeof seed>;
 }
