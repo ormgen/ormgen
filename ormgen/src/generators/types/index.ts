@@ -1,20 +1,14 @@
-import fs from 'fs-extra';
 import { OrmGenerator } from '../index.template';
 import { createEntitiesNamespaceLines } from './index.entities';
 import { createEntityNameLines } from './index.entities.name';
 import { execSync } from 'child_process';
 import { createEntitiesUtils } from './index.entities.utils';
 import { TypesGeneratorConfig, configStore } from './index.config';
-import { createPaths } from './index.paths';
-
-const packageJson = {
-	name: '@ormgen/__generated',
-	main: 'index.js',
-	types: 'index.d.ts',
-};
+import { GeneratedPackage } from '~/helpers';
+import fs from 'fs-extra';
 
 export function typesGenerator(config: TypesGeneratorConfig = {}): OrmGenerator {
-	const { typesFilePath } = config;
+	const { nodeModulesPath = '', typesFilePath } = config;
 
 	configStore.config = config;
 
@@ -42,14 +36,11 @@ export function typesGenerator(config: TypesGeneratorConfig = {}): OrmGenerator 
 			},
 
 			async onWrite() {
-				const { packagePath, packageJsonPath, indexPath, indexTypesPath } = await createPaths(config);
+				const { indexTypesPath } = await GeneratedPackage.createPaths({ nodeModulesPath });
 
-				await fs.remove(packagePath);
-				await fs.ensureDir(packagePath);
+				const typesContent = lines.join('\n');
 
-				await fs.writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2));
-				await fs.writeFile(indexPath, 'modules.exports = {}');
-				await fs.writeFile(indexTypesPath, lines.join('\n'));
+				await GeneratedPackage.init({ nodeModulesPath, typesContent });
 
 				if (typesFilePath) {
 					await fs.ensureFile(typesFilePath);

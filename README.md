@@ -6,8 +6,6 @@
 
 # TODO
 
--   [ ] typesGenerator
-    -   [ ] Generate package on install. How?
 -   [ ] Seed
     -   [ ] Sort by dependencies
     -   [ ] Prisma generator
@@ -15,7 +13,6 @@
     -   [ ] Make available
 -   [ ] Generate types for ormgen to use
     -   [ ] Make global mixins work
-    -   [ ] Typesafe entity names
 -   [ ] Add "OBS", do not change message
 -   [ ] Add better readability (use more line breaks)
 -   [ ] Documentation

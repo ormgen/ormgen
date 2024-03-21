@@ -11,6 +11,7 @@
 		"access": "public"
 	},
 	"scripts": {
+		"postinstall": "node setup.js",
 		"dev": "tsup --watch",
 		"build": "tsup",
 		"deploy": "npm run build && npm publish",
