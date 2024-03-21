@@ -1,5 +1,4 @@
 import { OrmGenerator } from '~/generators';
-import { TypesGeneratorConfig } from '~/generators/types';
 
 export interface OrmgenConfig {
 	cwd?: string;
@@ -44,8 +43,6 @@ export interface OrmgenConfig {
 		 */
 		globalMixins?: string[];
 	};
-
-	types?: TypesGeneratorConfig;
 
 	generators: OrmGenerator[];
 }

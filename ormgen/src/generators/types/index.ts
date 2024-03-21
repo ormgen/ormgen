@@ -27,7 +27,7 @@ async function createPaths(config: TypesGeneratorConfig = {}) {
 	return { packagePath, packageJsonPath, indexPath, indexTypesPath };
 }
 
-export function typesGenerator(config: TypesGeneratorConfig): OrmGenerator {
+export function typesGenerator(config: TypesGeneratorConfig = {}): OrmGenerator {
 	let lines = [] as string[];
 
 	function addLines(newLines: string[]) {

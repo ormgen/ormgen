@@ -2,21 +2,8 @@ import { init } from '~/instance/init';
 import { OrmgenConfig } from './index.config';
 import { sync } from './sync';
 import { seed } from './seed';
-import { typesGenerator } from '~/generators/types';
-
-function createEnhancedConfig(config: OrmgenConfig): OrmgenConfig {
-	const { types = {} } = config;
-
-	const typesGen = typesGenerator(types);
-
-	const generators = [...config.generators, typesGen];
-
-	return { ...config, generators };
-}
 
 export function createInstance(config: OrmgenConfig) {
-	const enhancedConfig = createEnhancedConfig(config);
-
 	async function runInit() {
 		await init({
 			cwd: config.cwd || process.cwd(),
@@ -37,12 +24,12 @@ export function createInstance(config: OrmgenConfig) {
 	return {
 		async sync() {
 			await runInit();
-			await sync(enhancedConfig);
+			await sync(config);
 		},
 
 		async seed() {
 			await runInit();
-			await seed(enhancedConfig);
+			await seed(config);
 		},
 	};
 }
