@@ -5,3 +5,5 @@ export * from './flattenCallable';
 export * from './flattenArrayable';
 
 export * from './findPaths';
+
+export * from './getNodeModulesPath';

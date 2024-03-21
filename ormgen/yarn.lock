@@ -5,6 +5,13 @@ __metadata:
   version: 8
   cacheKey: 10c0
 
+"@amono/find-up@npm:^0.0.5":
+  version: 0.0.5
+  resolution: "@amono/find-up@npm:0.0.5"
+  checksum: 10c0/993f55c622e96d17138b74b7b5ac6f856e6fbdaa07bb478d408331fe080b4cda7017e6deecdb95f32cbabf985a9a6919531534896f2252ad3fb3405233a47e84
+  languageName: node
+  linkType: hard
+
 "@esbuild/aix-ppc64@npm:0.19.12":
   version: 0.19.12
   resolution: "@esbuild/aix-ppc64@npm:0.19.12"
@@ -1376,6 +1383,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "ormgen@workspace:."
   dependencies:
+    "@amono/find-up": "npm:^0.0.5"
     "@prisma/client": "npm:^5.11.0"
     "@types/node": "npm:^20.11.28"
     case-anything: "npm:^2.1.13"

@@ -1,6 +1,6 @@
 import { Entity__Input, Enum } from '~/modelling';
 
-export interface PrismaConfig {
+export interface PrismaGeneratorConfig {
 	schemaPath?: string;
 
 	datasource: {

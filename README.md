@@ -9,8 +9,12 @@
 -   [ ] Seed
     -   [ ] Sort by dependencies
     -   [ ] Prisma generator
+    -   [ ] TypeSafe generated package
+        -   [ ] Entities
+            -   [ ] Model
+            -   [ ] Seed
+        -   [ ] Generate package on install?
     -   [ ] TypeSafe seeds
-    -   [ ] TypeSafe entity names
 -   [ ] Mixins
     -   [ ] Make available
 -   [ ] Generate types for ormgen to use

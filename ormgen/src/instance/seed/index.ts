@@ -1,8 +1,8 @@
 import { store } from '~/internals';
 
-import { InstanceConfig } from '../index.config';
+import { OrmgenConfig } from '../index.config';
 
-export async function seed(config: InstanceConfig) {
+export async function seed(config: OrmgenConfig) {
 	for (const gen of config.generators) {
 		for (const seed of store.getSeeds()) {
 			gen.seed?.onEntity?.(seed);

@@ -4,17 +4,17 @@ import { Entity, Enum } from '~/modelling';
 import { OrmGenerator } from '../index.template';
 import fs from 'fs-extra';
 import { createEntityLines } from './index.lines.entity';
-import path, { relative } from 'path';
+import path from 'path';
 import { createImportMetaLines } from './index.lines.meta';
 import { createEnumLines } from './index.lines.enum';
 
-interface Config {
+interface ZodGeneratorConfig {
 	filePath?: string;
 
 	zodPackage?: string;
 }
 
-export function zodGenerator(config: Config): OrmGenerator {
+export function zodGenerator(config: ZodGeneratorConfig): OrmGenerator {
 	const { filePath = 'zod/index.ts', zodPackage = 'zod' } = config;
 
 	const relativeOutputFilePath = filePath;

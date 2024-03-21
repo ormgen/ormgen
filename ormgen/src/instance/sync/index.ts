@@ -1,8 +1,8 @@
 import { store } from '~/internals';
 import { findPaths } from '~/helpers';
-import { InstanceConfig } from '../index.config';
+import { OrmgenConfig } from '../index.config';
 
-export async function sync(config: InstanceConfig) {
+export async function sync(config: OrmgenConfig) {
 	const { entityMeta = ['meta.ts', 'meta/index.ts', 'index.meta.ts', 'index.meta/index.ts'] } = config.search;
 
 	for (const gen of config.generators) {

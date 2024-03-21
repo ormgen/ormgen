@@ -1,14 +1,14 @@
 import { execSync } from 'child_process';
 
 import { OrmGenerator } from '../index.template';
-import { PrismaConfig } from './index.config';
+import { PrismaGeneratorConfig } from './index.config';
 import { createBasicLines } from './index.lines.basic';
 
 import fs from 'fs-extra';
 import { createEnumLines } from './index.lines.enum';
 import { createEntityLines } from './index.lines.entity';
 
-export function prismaGenerator(config: PrismaConfig): OrmGenerator {
+export function prismaGenerator(config: PrismaGeneratorConfig): OrmGenerator {
 	const { schemaPath = 'prisma/schema.prisma' } = config;
 
 	const lines = [...createBasicLines(config)];

@@ -27,6 +27,7 @@
 		"zod": "^3.22.4"
 	},
 	"dependencies": {
+		"@amono/find-up": "^0.0.5",
 		"case-anything": "^2.1.13"
 	},
 	"peerDependencies": {
