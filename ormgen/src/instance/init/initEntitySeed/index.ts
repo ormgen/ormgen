@@ -1,5 +1,6 @@
 import path from 'path';
 import { Seed__Input } from '~/modelling';
+import { EntityName } from '~/generated';
 
 export async function initEntitySeed(entityFolderPath: string, entitySeedPath: string) {
 	const imports = await import(entitySeedPath);
@@ -12,7 +13,7 @@ export async function initEntitySeed(entityFolderPath: string, entitySeedPath: s
 		throw new Error(`Entity seed needs to be the default export at ${entitySeedPath}`);
 	}
 
-	const entitySeed = defaultExport as Seed__Input<string>;
+	const entitySeed = defaultExport as Seed__Input<EntityName>;
 
 	if (entityName !== entitySeed.name) {
 		throw new Error(`Mismatch between entity name (${entityName}) and entity seed name (${entitySeed.name}) at ${entitySeedPath}`);

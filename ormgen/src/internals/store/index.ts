@@ -68,7 +68,7 @@ const store__entities = {
 };
 
 const store__seedInputs = {
-	seedInputs: new Map<string, Seed__Input<string>>(),
+	seedInputs: new Map<string, Seed__Input>(),
 
 	getSeedInputs() {
 		return Array.from(store__seedInputs.seedInputs.values());
@@ -90,7 +90,7 @@ const store__seedInputs = {
 };
 
 const store__seed = {
-	seeds: new Map<string, Seed<string>>(),
+	seeds: new Map<string, Seed>(),
 
 	getSeeds() {
 		return Array.from(store__seed.seeds.values());

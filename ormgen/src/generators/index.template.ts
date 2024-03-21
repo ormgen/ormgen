@@ -16,6 +16,6 @@ export interface OrmGenerator {
 	};
 
 	seed?: {
-		onEntity?(seed: Seed<string>): Promisable<any>;
+		onEntity?(seed: Seed): Promisable<any>;
 	};
 }
