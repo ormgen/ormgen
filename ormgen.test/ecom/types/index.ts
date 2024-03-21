@@ -1,3 +1,8 @@
+//################################################################
+//################################################################
+//#### OBS: This file is generated, do not modify it manually ####
+//################################################################
+//################################################################
 export type EnumName = 'ORDER_STATUS' | 'GLOBAL_ENUM';
 export type EntityName = 'Order' | 'OrderItem' | 'Product' | 'ProductCategory' | 'ProductCategoryOnProduct' | 'Review' | 'User';
 

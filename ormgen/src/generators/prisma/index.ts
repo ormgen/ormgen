@@ -7,11 +7,12 @@ import { createBasicLines } from './index.lines.basic';
 import fs from 'fs-extra';
 import { createEnumLines } from './index.lines.enum';
 import { createEntityLines } from './index.lines.entity';
+import { createObsMessage } from '~/helpers';
 
 export function prismaGenerator(config: PrismaGeneratorConfig): OrmGenerator {
 	const { schemaPath = 'prisma/schema.prisma' } = config;
 
-	const lines = [...createBasicLines(config)];
+	const lines = [createObsMessage(), ...createBasicLines(config)];
 
 	return {
 		sync: {

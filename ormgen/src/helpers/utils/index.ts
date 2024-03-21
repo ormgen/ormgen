@@ -10,3 +10,4 @@ export * from './flattenArrayable';
 export * from './findPaths';
 
 export * from './getNodeModulesPath';
+export * from './createObsMessage';

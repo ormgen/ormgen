@@ -13,7 +13,6 @@
     -   [ ] Make available
 -   [ ] Generate types for ormgen to use
     -   [ ] Make global mixins work
--   [ ] Add "OBS", do not change message
 -   [ ] Documentation
 
 ## Future

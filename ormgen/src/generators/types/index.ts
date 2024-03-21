@@ -4,7 +4,7 @@ import { createEntityNameLines } from './index.entities.name';
 import { execSync } from 'child_process';
 import { createEntitiesUtils } from './index.entities.utils';
 import { TypesGeneratorConfig, configStore } from './index.config';
-import { GeneratedPackage } from '~/helpers';
+import { GeneratedPackage, createObsMessage } from '~/helpers';
 import fs from 'fs-extra';
 
 export function typesGenerator(config: TypesGeneratorConfig = {}): OrmGenerator {
@@ -12,7 +12,7 @@ export function typesGenerator(config: TypesGeneratorConfig = {}): OrmGenerator 
 
 	configStore.config = config;
 
-	let lines = [] as string[];
+	let lines = [createObsMessage()] as string[];
 
 	function addLines(newLines: string[]) {
 		lines.push(...newLines);

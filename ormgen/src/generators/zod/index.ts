@@ -7,6 +7,7 @@ import { createEntityLines } from './index.lines.entity';
 import path from 'path';
 import { createImportMetaLines } from './index.lines.meta';
 import { createEnumLines } from './index.lines.enum';
+import { createObsMessage } from '~/helpers';
 
 interface ZodGeneratorConfig {
 	filePath?: string;
@@ -20,7 +21,7 @@ export function zodGenerator(config: ZodGeneratorConfig): OrmGenerator {
 	const relativeOutputFilePath = filePath;
 	const absoluteOutputFilePath = path.resolve(filePath);
 
-	const lines = [`import {z} from "${zodPackage}";`];
+	const lines = [createObsMessage(), `import {z} from "${zodPackage}";`];
 
 	function addLines(newLines: string[], ...rest: string[]) {
 		lines.push(...newLines, ...rest);
