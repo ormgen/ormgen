@@ -7,7 +7,6 @@
 # TODO
 
 -   [ ] typesGenerator
-    -   [ ] Custom types (e.g. override the datetime type)
     -   [ ] Generate package on install. How?
 -   [ ] Seed
     -   [ ] Sort by dependencies

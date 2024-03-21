@@ -1,6 +1,9 @@
+import { PartialRecord } from '~/helpers';
+import { EntityFieldType } from '~/modelling';
+
 export interface Entity__Input__Extra {
 	zod?: {};
 	prisma?: {
-		customAttributes?: Record<string, string>;
+		customAttributes?: PartialRecord<EntityFieldType.Primitive, string>;
 	};
 }

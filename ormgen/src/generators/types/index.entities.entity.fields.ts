@@ -1,35 +1,5 @@
 import { Entity, EntityField } from '~/modelling';
-
-function createFieldType(field: EntityField) {
-	switch (field.type) {
-		case 'text':
-			return 'string';
-		case 'boolean':
-			return 'boolean';
-		case 'int':
-			return 'number';
-		case 'datetime':
-			return 'Date';
-		case 'json':
-			return 'any';
-	}
-
-	return null;
-}
-
-function createFieldTypeString(field: EntityField) {
-	const { isNullable } = field;
-
-	const type = createFieldType(field);
-
-	if (!type) {
-		return null;
-	}
-
-	const nullString = isNullable ? ' | null' : '';
-
-	return type + nullString;
-}
+import { createFieldTypeString } from './index.entities.entity.fields.type';
 
 function createNameString(field: EntityField, isSeed: boolean) {
 	const { $name, defaultValue } = field;

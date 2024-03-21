@@ -5,14 +5,14 @@ export namespace Entities {
 	export namespace Order {
 		export interface Model {
 			uid: string;
-			orderDate: Date;
+			orderDate: string;
 			totalPrice: number;
 			userUid: string;
 		}
 
 		export interface Seed {
 			uid: string;
-			orderDate: Date;
+			orderDate: string;
 			totalPrice?: number;
 			userUid: string;
 		}
@@ -43,7 +43,7 @@ export namespace Entities {
 			stockQuantity: number;
 			sku: string;
 			attributes: any;
-			createdAt: Date;
+			createdAt: string;
 		}
 
 		export interface Seed {
@@ -54,7 +54,7 @@ export namespace Entities {
 			stockQuantity: number;
 			sku: string;
 			attributes?: any;
-			createdAt: Date;
+			createdAt: string;
 		}
 	}
 
@@ -89,7 +89,7 @@ export namespace Entities {
 			uid: string;
 			rating: number;
 			comment: string;
-			createdAt: Date;
+			createdAt: string;
 			userUid: string;
 		}
 
@@ -97,7 +97,7 @@ export namespace Entities {
 			uid: string;
 			rating: number;
 			comment: string;
-			createdAt: Date;
+			createdAt: string;
 			userUid: string;
 		}
 	}
@@ -108,9 +108,9 @@ export namespace Entities {
 			email: string;
 			name: string;
 			passwordHash: string;
-			lastLogin: Date;
-			createdAt: Date;
-			updatedAt: Date;
+			lastLogin: string;
+			createdAt: string;
+			updatedAt: string;
 		}
 
 		export interface Seed {
@@ -118,9 +118,9 @@ export namespace Entities {
 			email: string;
 			name: string;
 			passwordHash: string;
-			lastLogin: Date;
-			createdAt: Date;
-			updatedAt: Date;
+			lastLogin: string;
+			createdAt: string;
+			updatedAt: string;
 		}
 	}
 }

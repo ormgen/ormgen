@@ -119,6 +119,4 @@ export const store = {
 
 	...store__seedInputs,
 	...store__seed,
-
-	// mixins: new Map<string, Record<string, unknown>>(),
 };

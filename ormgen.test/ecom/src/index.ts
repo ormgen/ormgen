@@ -8,6 +8,10 @@ const instance = createInstance({
 	generators: [
 		typesGenerator({
 			typesFilePath: 'ecom/types/index.ts',
+
+			customTypes: {
+				datetime: 'string',
+			},
 		}),
 		prismaGenerator({
 			schemaPath: 'ecom/prisma/schema.prisma',

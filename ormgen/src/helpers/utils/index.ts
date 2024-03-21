@@ -1,3 +1,4 @@
+export * from './PartialRecord';
 export * from './Callable';
 export * from './Promisable';
 

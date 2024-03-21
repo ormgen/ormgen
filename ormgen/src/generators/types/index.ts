@@ -1,16 +1,11 @@
 import fs from 'fs-extra';
-import { getNodeModulesPath } from '~/helpers/utils/getNodeModulesPath';
 import { OrmGenerator } from '../index.template';
 import { createEntitiesNamespaceLines } from './index.entities';
 import { createEntityNameLines } from './index.entities.name';
 import { execSync } from 'child_process';
 import { createEntitiesUtils } from './index.entities.utils';
-
-export interface TypesGeneratorConfig {
-	nodeModulesPath?: string;
-
-	typesFilePath?: string;
-}
+import { TypesGeneratorConfig, configStore } from './index.config';
+import { createPaths } from './index.paths';
 
 const packageJson = {
 	name: '@ormgen/__generated',
@@ -18,21 +13,10 @@ const packageJson = {
 	types: 'index.d.ts',
 };
 
-async function createPaths(config: TypesGeneratorConfig = {}) {
-	const { nodeModulesPath } = config;
-
-	const nmPath = nodeModulesPath || (await getNodeModulesPath());
-
-	const packagePath = `${nmPath}/@ormgen/__generated`;
-	const packageJsonPath = `${packagePath}/package.json`;
-	const indexPath = `${packagePath}/index.js`;
-	const indexTypesPath = `${packagePath}/index.d.ts`;
-
-	return { packagePath, packageJsonPath, indexPath, indexTypesPath };
-}
-
 export function typesGenerator(config: TypesGeneratorConfig = {}): OrmGenerator {
 	const { typesFilePath } = config;
+
+	configStore.config = config;
 
 	let lines = [] as string[];
 
