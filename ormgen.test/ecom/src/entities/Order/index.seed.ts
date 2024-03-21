@@ -6,9 +6,9 @@ export default createSeed({
 	data: [
 		{
 			uid: 'order-1',
-			orderDate: new Date(),
+			orderDate: new Date().toISOString(),
 			totalPrice: 100,
-			user: 'user-1',
+			userUid: 'user-1',
 		},
 	],
 });

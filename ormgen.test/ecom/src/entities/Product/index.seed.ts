@@ -12,7 +12,7 @@ export default createSeed({
 			price: 100,
 			stockQuantity: 10,
 			attributes: {},
-			createdAt: new Date(),
+			createdAt: new Date().toISOString(),
 		},
 	],
 });

@@ -9,6 +9,7 @@ interface EntityTargetResult {
 	targettingField: EntityField__Input.Relation;
 }
 
+// Find all entities that is targeting the given entity
 export function findTargettingEntities(sourceEntityName: string): EntityTargetResult[] {
 	const entityInputs = store.getEntityInputs();
 
