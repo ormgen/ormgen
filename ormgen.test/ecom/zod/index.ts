@@ -14,7 +14,7 @@ export namespace Order {
 		status: z.enum(['ORDERED', 'SHIPPED']),
 		orderDate: z.date(),
 		totalPrice: z.number(),
-		user: z.string(),
+		userUid: z.string(),
 	});
 	export const seed = z
 		.object({
@@ -22,7 +22,7 @@ export namespace Order {
 			status: z.enum(['ORDERED', 'SHIPPED']),
 			orderDate: z.date(),
 			totalPrice: z.number(),
-			user: z.string(),
+			userUid: z.string(),
 		})
 		.partial({ totalPrice: true });
 	export type ModelSchema = typeof model;
@@ -33,15 +33,15 @@ export namespace Order {
 export namespace OrderItem {
 	export const model = z.object({
 		uid: z.string(),
-		order: z.string(),
-		product: z.string(),
+		orderUid: z.string(),
+		productUid: z.string(),
 		quantity: z.number(),
 	});
 	export const seed = z
 		.object({
 			uid: z.string(),
-			order: z.string(),
-			product: z.string(),
+			orderUid: z.string(),
+			productUid: z.string(),
 			quantity: z.number(),
 		})
 		.partial({});
@@ -98,13 +98,13 @@ export namespace ProductCategory {
 }
 export namespace ProductCategoryOnProduct {
 	export const model = z.object({
-		product: z.string(),
-		productCategory: z.string(),
+		productUid: z.string(),
+		productCategoryUid: z.string(),
 	});
 	export const seed = z
 		.object({
-			product: z.string(),
-			productCategory: z.string(),
+			productUid: z.string(),
+			productCategoryUid: z.string(),
 		})
 		.partial({});
 	export type ModelSchema = typeof model;
@@ -119,7 +119,7 @@ export namespace Review {
 		comment: z.string(),
 		commentVector: z.number().array(),
 		createdAt: z.date(),
-		user: z.string(),
+		userUid: z.string(),
 	});
 	export const seed = z
 		.object({
@@ -128,7 +128,7 @@ export namespace Review {
 			comment: z.string(),
 			commentVector: z.number().array(),
 			createdAt: z.date(),
-			user: z.string(),
+			userUid: z.string(),
 		})
 		.partial({});
 	export type ModelSchema = typeof model;

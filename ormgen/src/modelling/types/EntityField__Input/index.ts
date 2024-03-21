@@ -31,3 +31,11 @@ export namespace EntityField__Input {
 export type EntityField__Input = EntityField__Input.Any;
 
 export type EntityFields__Input = Record<string, EntityField__Input>;
+
+export namespace EntityFieldType {
+	export type ID = EntityField__Input.ID['type'];
+
+	export type Primitive = EntityField__Input.Primitive['type'];
+
+	export type Any = EntityField__Input.Any['type'];
+}

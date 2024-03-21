@@ -1,4 +1,4 @@
-import { flattenArrayable } from '~/helpers';
+import { flattenArrayable } from '~/helpers/utils';
 import { store } from '~/internals';
 import { EntityField__Input, Entity__Input } from '~/modelling';
 

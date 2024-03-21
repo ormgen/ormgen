@@ -1,4 +1,4 @@
-import { Callable, flattenCallable } from '~/helpers';
+import { Callable, flattenCallable } from '~/helpers/utils';
 import { store } from '~/internals';
 import { Mixins, mx } from '~/modelling/mixins';
 import { Entity__Input } from '~/modelling/types';

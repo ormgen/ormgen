@@ -1,7 +1,7 @@
 import { store } from '~/internals';
 
 import { createEntity } from './createEntity';
-import { findPaths } from '../../helpers/findPaths';
+import { findPaths } from '../../helpers/utils/findPaths';
 import { initEntityInput } from './initEntityInput';
 import { InitConfig } from './index.config';
 import { createSeed } from './createSeed';

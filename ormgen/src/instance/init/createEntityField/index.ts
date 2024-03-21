@@ -13,7 +13,7 @@ export function createEntityField(fieldName: string, fieldInput: EntityField__In
 
 			$entityInput,
 
-			get $targetEntity() {
+			get $targetEntityInput() {
 				return store.getEntityInput(fieldInput.targetEntityName);
 			},
 		};

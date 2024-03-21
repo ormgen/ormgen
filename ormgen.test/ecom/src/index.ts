@@ -1,5 +1,4 @@
-import { prismaGenerator, zodGenerator, createInstance } from 'ormgen';
-import { typesGenerator } from '../../../ormgen/src/generators/types/index';
+import { typesGenerator, prismaGenerator, zodGenerator, createInstance } from 'ormgen';
 
 const instance = createInstance({
 	search: {
@@ -7,7 +6,9 @@ const instance = createInstance({
 	},
 
 	generators: [
-		typesGenerator(),
+		typesGenerator({
+			typesFilePath: 'ecom/types/index.ts',
+		}),
 		prismaGenerator({
 			schemaPath: 'ecom/prisma/schema.prisma',
 

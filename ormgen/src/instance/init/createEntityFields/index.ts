@@ -1,4 +1,4 @@
-import { flattenArrayable } from '~/helpers';
+import { flattenArrayable } from '~/helpers/utils';
 import { Entity__Input, EntityFields } from '~/modelling';
 import { addIdField } from './index.fields.id';
 import { addRelationTargetFields } from './index.fields.relationTarget';

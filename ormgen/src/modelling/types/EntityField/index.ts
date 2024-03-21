@@ -17,7 +17,7 @@ export namespace EntityField {
 
 	export type Unknown = CreateType<EntityField__Input.Unknown>;
 
-	export type Relation = CreateType<EntityField__Input.Relation, { $targetEntity: Entity__Input }>;
+	export type Relation = CreateType<EntityField__Input.Relation, { $targetEntityInput: Entity__Input }>;
 
 	export type RelationTarget = CreateType<
 		EntityField__Input.RelationTarget,

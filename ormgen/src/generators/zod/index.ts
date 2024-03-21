@@ -46,9 +46,7 @@ export function zodGenerator(config: ZodGeneratorConfig): OrmGenerator {
 			},
 
 			onComplete() {
-				execSync(`npx prettier --write ${filePath}`, {
-					stdio: 'inherit',
-				});
+				execSync(`npx prettier --write ${filePath}`, { stdio: 'inherit' });
 			},
 		},
 

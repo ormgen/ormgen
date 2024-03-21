@@ -7,17 +7,8 @@
 # TODO
 
 -   [ ] typesGenerator
-    -   [ ] Entities
-        -   [ ] Model
-        -   [ ] Seed
-    -   [ ] Use namespaces?
-        -   [ ] Entities (interface with all entities)
-        -   [ ] Entities.<EntityName>.Model (interface with the entity)
-        -   [ ] Entities.<EntityName>.Seed (interface with the seed)
     -   [ ] Custom types (e.g. override the datetime type)
     -   [ ] Generate package on install. How?
-    -   [ ] Generate to commitable file instead?
-        -   [ ] Let @ormgen/types just export everything from the generated file?
 -   [ ] Seed
     -   [ ] Sort by dependencies
     -   [ ] Prisma generator

@@ -1,5 +1,5 @@
 import { Entity, Enum, Seed } from '~/modelling';
-import { Promisable } from '~/helpers';
+import { Promisable } from '~/helpers/utils';
 
 export interface OrmGenerator {
 	sync?: {

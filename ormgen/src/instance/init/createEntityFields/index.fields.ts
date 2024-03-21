@@ -1,7 +1,7 @@
 import { EntityField, EntityField__Input, EntityFields, Entity__Input } from '~/modelling';
 import { createEntityField } from '../createEntityField';
 import { store } from '~/internals';
-import { createRelationKeyField, createRelationKeyFieldName } from '~/utils';
+import { createRelationKeyField, createRelationKeyFieldName } from '~/helpers';
 
 export function addEntityFields(entityFields: EntityFields, fieldName: string, fieldInput: EntityField__Input, entity: Entity__Input) {
 	if (fieldInput.type === 'relation') {
@@ -10,7 +10,11 @@ export function addEntityFields(entityFields: EntityFields, fieldName: string, f
 		const targetEntity = store.getEntityInput(fieldInput.targetEntityName);
 		const relationKeyFieldName = createRelationKeyFieldName({ field, targetEntity });
 
-		entityFields[relationKeyFieldName] = createRelationKeyField({ fieldName, field, targetEntity });
+		entityFields[relationKeyFieldName] = createRelationKeyField({
+			fieldName: relationKeyFieldName,
+			field,
+			targetEntity,
+		});
 	}
 
 	entityFields[fieldName] = createEntityField(fieldName, fieldInput, entity);

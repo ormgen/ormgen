@@ -1,5 +1,5 @@
 import { EntityFields, Entity__Input } from '~/modelling';
-import { findTargettingEntities } from '~/utils';
+import { findTargettingEntities } from '~/helpers';
 
 export function addRelationTargetFields(entityFields: EntityFields, entityInput: Entity__Input) {
 	const results = findTargettingEntities(entityInput.name);

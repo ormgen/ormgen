@@ -1,11 +1,15 @@
-import { getNodeModulesPath } from '~/helpers/getNodeModulesPath';
-import { OrmGenerator } from '../index.template';
 import fs from 'fs-extra';
-import { createEntityLines } from './index.entity';
-import { createEntities } from './index.entities';
+import { getNodeModulesPath } from '~/helpers/utils/getNodeModulesPath';
+import { OrmGenerator } from '../index.template';
+import { createEntitiesNamespaceLines } from './index.entities';
+import { createEntityNameLines } from './index.entities.name';
+import { execSync } from 'child_process';
+import { createEntitiesUtils } from './index.entities.utils';
 
 export interface TypesGeneratorConfig {
 	nodeModulesPath?: string;
+
+	typesFilePath?: string;
 }
 
 const packageJson = {
@@ -28,6 +32,8 @@ async function createPaths(config: TypesGeneratorConfig = {}) {
 }
 
 export function typesGenerator(config: TypesGeneratorConfig = {}): OrmGenerator {
+	const { typesFilePath } = config;
+
 	let lines = [] as string[];
 
 	function addLines(newLines: string[]) {
@@ -37,16 +43,18 @@ export function typesGenerator(config: TypesGeneratorConfig = {}): OrmGenerator 
 	return {
 		sync: {
 			onEnums(enums) {
-				addLines([`export type EnumName = ${enums.map((e) => `'${e.name}'`).join(' | ')};`]);
+				const enumNames = enums.map((e) => `'${e.name}'`);
+				const enumNamesString = enumNames.join(' | ');
+				const enumLines = `export type EnumName = ${enumNamesString};`;
+
+				addLines([enumLines]);
 			},
 
 			onEntities(entities) {
-				addLines([`export type EntityName = ${entities.map((e) => `'${e.name}'`).join(' | ')};`]);
-				addLines(createEntities(entities));
-			},
-
-			onEntity(entity) {
-				addLines(createEntityLines(entity));
+				addLines(createEntityNameLines(entities));
+				addLines(['']);
+				addLines(createEntitiesNamespaceLines(entities));
+				addLines(createEntitiesUtils(entities));
 			},
 
 			async onWrite() {
@@ -58,6 +66,17 @@ export function typesGenerator(config: TypesGeneratorConfig = {}): OrmGenerator 
 				await fs.writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2));
 				await fs.writeFile(indexPath, 'modules.exports = {}');
 				await fs.writeFile(indexTypesPath, lines.join('\n'));
+
+				if (typesFilePath) {
+					await fs.ensureFile(typesFilePath);
+					await fs.copy(indexTypesPath, typesFilePath, { overwrite: true });
+				}
+			},
+
+			async onComplete() {
+				if (typesFilePath) {
+					execSync(`npx prettier --write ${typesFilePath}`, { stdio: 'inherit' });
+				}
 			},
 		},
 	};

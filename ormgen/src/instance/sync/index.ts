@@ -1,5 +1,5 @@
 import { store } from '~/internals';
-import { findPaths } from '~/helpers';
+import { findPaths } from '~/helpers/utils';
 import { OrmgenConfig } from '../index.config';
 
 export async function sync(config: OrmgenConfig) {
