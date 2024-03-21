@@ -1,6 +1,7 @@
+import path from 'path';
+
 import { Entity } from '~/modelling';
 
-import path from 'path';
 import { createMetaName } from './index.meta';
 
 interface Config {
@@ -20,5 +21,5 @@ export function createImportMetaLines(config: Config) {
 
 	const importPath = relativeFilePath.split('.').slice(0, -1).join('.');
 
-	return [`import * as ${metaName} from '${importPath}';`];
+	return [`import {meta as ${metaName}} from '${importPath}';`];
 }

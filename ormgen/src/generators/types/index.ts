@@ -1,6 +1,8 @@
 import { getNodeModulesPath } from '~/helpers/getNodeModulesPath';
 import { OrmGenerator } from '../index.template';
 import fs from 'fs-extra';
+import { createEntityLines } from './index.entity';
+import { createEntities } from './index.entities';
 
 export interface TypesGeneratorConfig {
 	nodeModulesPath?: string;
@@ -26,16 +28,25 @@ async function createPaths(config: TypesGeneratorConfig = {}) {
 }
 
 export function typesGenerator(config: TypesGeneratorConfig): OrmGenerator {
-	const lines = [] as string[];
+	let lines = [] as string[];
+
+	function addLines(newLines: string[]) {
+		lines.push(...newLines);
+	}
 
 	return {
 		sync: {
 			onEnums(enums) {
-				lines.push(`export type EnumName = ${enums.map((e) => `'${e.name}'`).join(' | ')};`);
+				addLines([`export type EnumName = ${enums.map((e) => `'${e.name}'`).join(' | ')};`]);
 			},
 
 			onEntities(entities) {
-				lines.push(`export type EntityName = ${entities.map((e) => `'${e.name}'`).join(' | ')};`);
+				addLines([`export type EntityName = ${entities.map((e) => `'${e.name}'`).join(' | ')};`]);
+				addLines(createEntities(entities));
+			},
+
+			onEntity(entity) {
+				addLines(createEntityLines(entity));
 			},
 
 			async onWrite() {

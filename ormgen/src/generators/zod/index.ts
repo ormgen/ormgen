@@ -22,10 +22,8 @@ export function zodGenerator(config: ZodGeneratorConfig): OrmGenerator {
 
 	const lines = [`import {z} from "${zodPackage}";`];
 
-	function addLines(lines: string[]) {
-		lines.forEach((line) => {
-			lines.push(line);
-		});
+	function addLines(newLines: string[]) {
+		lines.push(...newLines);
 	}
 
 	return {

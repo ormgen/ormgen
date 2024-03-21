@@ -7,19 +7,25 @@
 # TODO
 
 -   [ ] Seed
-    -   [ ] Sort by dependencies
-    -   [ ] Prisma generator
     -   [ ] TypeSafe generated package
+        -   [ ] Use namespaces?
+            -   [ ] Entities (interface with all entities)
+            -   [ ] Entities.<EntityName>.Model (interface with the entity)
+            -   [ ] Entities.<EntityName>.Seed (interface with the seed)
         -   [ ] Entities
             -   [ ] Model
             -   [ ] Seed
+        -   [ ] Custom types (e.g. override the datetime type)
         -   [ ] Generate package on install?
-    -   [ ] TypeSafe seeds
+    -   [ ] Sort by dependencies
+    -   [ ] Prisma generator
 -   [ ] Mixins
     -   [ ] Make available
 -   [ ] Generate types for ormgen to use
     -   [ ] Make global mixins work
     -   [ ] Typesafe entity names
+-   [ ] Add "OBS", do not change message
+-   [ ] Add better readability (use more line breaks)
 -   [ ] Documentation
 
 ## Future
