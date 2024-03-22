@@ -11,8 +11,10 @@ Ormgen allows you to define your database entities in a file tree and generate a
 # Quick start
 
 1. Install the `ormgen` package.
-2. Run `ormgen init path/to/source`
-3. Run `ormgen sync` to run generators
+2. Run `ormgen init path/to/source`.
+3. Run `ts-node index.ts` (or `ts-node` equivalent) to run generators.
+
+Or check the `Example` section for a more detailed guide.
 
 # Documentation
 

@@ -1,6 +1,6 @@
 import { GeneratedPackage } from '~/helpers';
 
-export async function setup() {
+export async function install() {
 	GeneratedPackage.init({
 		nodeModulesPath: '',
 

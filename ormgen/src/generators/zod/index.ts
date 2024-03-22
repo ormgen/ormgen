@@ -7,7 +7,7 @@ import { createEntityLines } from './index.lines.entity';
 import path from 'path';
 import { createImportMetaLines } from './index.lines.meta';
 import { createEnumLines } from './index.lines.enum';
-import { createObsMessage } from '~/helpers';
+import { createObsMessage, runPrettierSync } from '~/helpers';
 
 interface ZodGeneratorConfig {
 	filePath?: string;
@@ -53,7 +53,7 @@ export function zodGenerator(config: ZodGeneratorConfig): OrmGenerator {
 			},
 
 			onComplete() {
-				execSync(`npx prettier --write ${filePath}`, { stdio: 'inherit' });
+				runPrettierSync(filePath);
 			},
 		},
 

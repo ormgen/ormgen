@@ -1,10 +1,9 @@
 import { OrmGenerator } from '../index.template';
 import { createEntitiesNamespaceLines } from './index.entities';
 import { createEntityNameLines } from './index.entities.name';
-import { execSync } from 'child_process';
 import { createEntitiesUtils } from './index.entities.utils';
 import { TypesGeneratorConfig, configStore } from './index.config';
-import { GeneratedPackage, createObsMessage } from '~/helpers';
+import { GeneratedPackage, createObsMessage, runPrettierSync } from '~/helpers';
 import fs from 'fs-extra';
 
 export function typesGenerator(config: TypesGeneratorConfig = {}): OrmGenerator {
@@ -50,7 +49,7 @@ export function typesGenerator(config: TypesGeneratorConfig = {}): OrmGenerator 
 
 			async onComplete() {
 				if (typesFilePath) {
-					execSync(`npx prettier --write ${typesFilePath}`, { stdio: 'inherit' });
+					runPrettierSync(typesFilePath);
 				}
 			},
 		},

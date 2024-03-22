@@ -7,15 +7,19 @@
 	"packageManager": "yarn@4.1.1",
 	"files": [
 		"dist",
-		"setup.js"
+		"dist.cli"
 	],
+	"bin": "dist.cli/index.js",
 	"publishConfig": {
 		"access": "public"
 	},
 	"scripts": {
-		"postinstall": "node setup.js",
-		"dev": "tsup-node --watch",
-		"build": "tsup-node",
+		"postinstall": "node dist.cli/setup.js || exit 0",
+		"dev:src": "yarn build:src --watch",
+		"dev:cli": "yarn build:cli --watch",
+		"build": "yarn build:src && yarn build:cli",
+		"build:src": "tsup-node",
+		"build:cli": "tsup-node --config tsup.config.cli.ts",
 		"deploy": "npm run build && npm publish",
 		"deploy:patch": "npm version patch && npm run deploy",
 		"test:types": "tsc --noEmit",
@@ -24,6 +28,7 @@
 	"devDependencies": {
 		"@prisma/client": "^5.11.0",
 		"@types/node": "^20.11.28",
+		"@types/yargs": "^17.0.32",
 		"fast-glob": "^3.3.2",
 		"prettier": "^3.2.5",
 		"tsup": "^8.0.2",
@@ -32,7 +37,8 @@
 	},
 	"dependencies": {
 		"@amono/find-up": "^0.0.5",
-		"case-anything": "^2.1.13"
+		"case-anything": "^2.1.13",
+		"yargs": "^17.7.2"
 	},
 	"peerDependencies": {
 		"@prisma/client": "*"

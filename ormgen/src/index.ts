@@ -2,4 +2,4 @@ export * from './modelling';
 export * from './instance';
 export * from './modelling';
 export * from './generators';
-export * from './setup';
+export * from './install';
