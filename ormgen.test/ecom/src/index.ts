@@ -7,14 +7,14 @@ const instance = createInstance({
 
 	generators: [
 		typesGenerator({
-			typesFilePath: 'ecom/types/index.ts',
+			typesFilePath: 'ecom/output/types/index.ts',
 
 			customTypes: {
 				datetime: 'string',
 			},
 		}),
 		prismaGenerator({
-			schemaPath: 'ecom/prisma/schema.prisma',
+			schemaPath: 'ecom/output/prisma/schema.prisma',
 
 			datasource: {
 				provider: '"postgresql"',
@@ -22,7 +22,7 @@ const instance = createInstance({
 			},
 		}),
 		zodGenerator({
-			filePath: 'ecom/zod/index.ts',
+			filePath: 'ecom/output/zod/index.ts',
 		}),
 	],
 });

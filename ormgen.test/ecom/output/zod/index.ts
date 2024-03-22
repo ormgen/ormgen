@@ -4,7 +4,7 @@
 //################################################################
 //################################################################
 import { z } from 'zod';
-import { meta as ProductMeta } from '../src/entities/Product/index.meta';
+import { meta as ProductMeta } from '../../src/entities/Product/index.meta';
 
 export const ORDER_STATUS = { ORDERED: 'ORDERED', SHIPPED: 'SHIPPED' } as const;
 export type ORDER_STATUS = keyof typeof ORDER_STATUS;
