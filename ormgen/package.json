@@ -1,6 +1,6 @@
 {
 	"name": "ormgen",
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"main": "dist/index.js",
 	"license": "MIT",
 	"packageManager": "yarn@4.1.1",
@@ -13,8 +13,8 @@
 	},
 	"scripts": {
 		"postinstall": "node setup.js",
-		"dev": "tsup --watch",
-		"build": "tsup",
+		"dev": "tsup-node --watch",
+		"build": "tsup-node",
 		"deploy": "npm run build && npm publish",
 		"deploy:patch": "npm version patch && npm run deploy",
 		"test:types": "tsc --noEmit",
