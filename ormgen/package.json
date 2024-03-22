@@ -1,11 +1,12 @@
 {
 	"name": "ormgen",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"main": "dist/index.js",
 	"license": "MIT",
 	"packageManager": "yarn@4.1.1",
 	"files": [
-		"dist"
+		"dist",
+		"setup.js"
 	],
 	"publishConfig": {
 		"access": "public"
@@ -15,6 +16,7 @@
 		"dev": "tsup --watch",
 		"build": "tsup",
 		"deploy": "npm run build && npm publish",
+		"deploy:patch": "npm version patch && npm run deploy",
 		"test:types": "tsc --noEmit",
 		"test:types:watch": "tsc --noEmit --watch"
 	},
