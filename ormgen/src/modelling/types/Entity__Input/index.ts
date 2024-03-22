@@ -1,9 +1,10 @@
+import { EntityName } from '~/generated';
 import { EntityFields__Input } from '../EntityField__Input';
 import { EntityIndex } from '../EntityIndex';
 import { Entity__Input__Extra } from '../Entity__Input__Extra';
 
 export interface Entity__Input {
-	name: string;
+	name: EntityName | string;
 
 	description?: string;
 
