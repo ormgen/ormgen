@@ -16,6 +16,8 @@ export function prismaGenerator(config: PrismaGeneratorConfig): OrmGenerator {
 	const lines = [createObsMessage(), ...createBasicLines(config)];
 
 	return {
+		name: 'Prisma',
+
 		sync: {
 			onEnum(e) {
 				lines.push(...createEnumLines(e));
@@ -37,6 +39,7 @@ export function prismaGenerator(config: PrismaGeneratorConfig): OrmGenerator {
 
 		seed: {
 			onEntity(seed) {
+				console.log('--', seed.name);
 				return seedEntity(seed);
 			},
 		},

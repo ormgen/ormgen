@@ -19,6 +19,8 @@ export function typesGenerator(config: TypesGeneratorConfig = {}): OrmGenerator 
 	}
 
 	return {
+		name: 'Types',
+
 		sync: {
 			onStart() {
 				addLines(createMixinLines());

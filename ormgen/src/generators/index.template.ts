@@ -2,6 +2,8 @@ import { Entity, Enum, Seed } from '~/modelling';
 import { Promisable } from '~/helpers/utils';
 
 export interface OrmGenerator {
+	name: string;
+
 	sync?: {
 		onStart?(): Promisable<any>;
 

@@ -26,6 +26,8 @@ export function zodGenerator(config: ZodGeneratorConfig): OrmGenerator {
 	}
 
 	return {
+		name: 'Zod',
+
 		sync: {
 			onEnums(enums) {
 				addLines(createEnumsLines(enums));

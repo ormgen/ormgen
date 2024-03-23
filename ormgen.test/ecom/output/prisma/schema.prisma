@@ -4,94 +4,82 @@
 //################################################################
 //################################################################
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+	provider = "sqlite"
+	url = "file:dev.db"
 }
-
 generator client {
-  provider = "prisma-client-js"
+	provider = "prisma-client-js"
 }
-
 enum GLOBAL_ENUM {
-  A
-  B
-  C
+	A
+	B
+	C
 }
-
 enum ORDER_STATUS {
-  ORDERED
-  SHIPPED
+	ORDERED
+	SHIPPED
 }
-
 model Order {
-  uid        String       @id
-  status     ORDER_STATUS
-  orderDate  DateTime     @default(now())
-  totalPrice Int          @default(0)
-  userUid    String
-  user       User         @relation(fields: [userUid], references: [uid], onDelete: Restrict)
-  createdAt  DateTime     @default(now())
-  updatedAt  DateTime     @default(now())
-  orderItems OrderItem[]
+uid String @id
+status ORDER_STATUS 
+orderDate DateTime @default(now())
+totalPrice Int @default(0)
+userUid String 
+user User @relation(fields: [userUid], references: [uid], onDelete: Restrict)
+createdAt DateTime @default(now())
+updatedAt DateTime @default(now())
+orderItems OrderItem[] 
 }
-
 model OrderItem {
-  uid        String  @id
-  orderUid   String
-  order      Order   @relation(fields: [orderUid], references: [uid], onDelete: Cascade)
-  productUid String
-  product    Product @relation(fields: [productUid], references: [uid], onDelete: Restrict)
-  quantity   Int
+uid String @id
+orderUid String 
+order Order @relation(fields: [orderUid], references: [uid], onDelete: Cascade)
+productUid String 
+product Product @relation(fields: [productUid], references: [uid], onDelete: Restrict)
+quantity Int 
 }
-
 model Product {
-  uid           String                     @id
-  name          String
-  description   String
-  price         Int
-  stockQuantity Int
-  sku           String                     @unique
-  attributes    Json                       @default("{\"test\":true}")
-  createdAt     DateTime                   @default(now())
-  orderItems    OrderItem[]
-  onCategories  ProductCategoryOnProduct[]
-
-  @@unique(name: "nameAndSku", [name, sku])
+uid String @id
+name String 
+description String 
+price Int 
+stockQuantity Int 
+sku String @unique
+attributes Json @default("{\"test\":true}")
+createdAt DateTime @default(now())
+orderItems OrderItem[] 
+onCategories ProductCategoryOnProduct[] 
+@@unique(name: "nameAndSku", [name, sku])
 }
-
 model ProductCategory {
-  uid         String                     @id
-  name        String                     @unique
-  description String
-  onProducts  ProductCategoryOnProduct[]
+uid String @id
+name String @unique
+description String 
+onProducts ProductCategoryOnProduct[] 
 }
-
 model ProductCategoryOnProduct {
-  productUid         String
-  product            Product         @relation(fields: [productUid], references: [uid], onDelete: Cascade)
-  productCategoryUid String
-  productCategory    ProductCategory @relation(fields: [productCategoryUid], references: [uid], onDelete: Cascade)
-
-  @@id(name: "productAndCategory", [productUid, productCategoryUid])
+productUid String 
+product Product @relation(fields: [productUid], references: [uid], onDelete: Cascade)
+productCategoryUid String 
+productCategory ProductCategory @relation(fields: [productCategoryUid], references: [uid], onDelete: Cascade)
+@@id(name: "productAndCategory", [productUid, productCategoryUid])
 }
-
 model Review {
-  uid       String   @id
-  rating    Int
-  comment   String
-  createdAt DateTime @default(now())
-  userUid   String
-  user      User     @relation(fields: [userUid], references: [uid], onDelete: Cascade)
+uid String @id
+rating Int 
+comment String 
+createdAt DateTime @default(now())
+userUid String 
+user User @relation(fields: [userUid], references: [uid], onDelete: Cascade)
 }
-
 model User {
-  uid          String   @id
-  email        String   @unique
-  name         String
-  passwordHash String
-  lastLogin    DateTime
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @default(now()) @updatedAt
-  orders       Order[]
-  reviews      Review[]
+uid String @id
+email String @unique
+name String 
+passwordHash String 
+lastLogin DateTime 
+createdAt DateTime @default(now())
+updatedAt DateTime @default(now()) @updatedAt
+orders Order[] 
+reviews Review[] 
 }

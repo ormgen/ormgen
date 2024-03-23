@@ -2,33 +2,36 @@ import { store } from '~/internals';
 
 import { OrmgenConfig } from '../index.config';
 import { findTargettedEntities } from '~/helpers';
+import { Seed } from '~/modelling';
+import { OrmGenerator } from '~/generators';
 
-function getSortedSeeds() {
-	const seeds = store.getSeeds();
+type SeedStore = Record<string, boolean>;
 
-	return seeds.sort((a, b) => {
-		const aTargetEntities = findTargettedEntities(a.entity);
-		const aTargetEntityNames = aTargetEntities.map((e) => e.name);
+async function runSeed(gen: OrmGenerator, seed: Seed, seedStore: SeedStore) {
+	const { entity } = seed;
 
-		const bTargetEntities = findTargettedEntities(b.entity);
-		const bTargetEntityNames = bTargetEntities.map((e) => e.name);
+	const entityName = entity.name;
+	const relatedEntities = findTargettedEntities(entity);
 
-		if (aTargetEntityNames.includes(b.entity.name)) {
-			return 1;
-		}
+	for (const relatedEntity of relatedEntities) {
+		await runSeed(gen, store.getSeed(relatedEntity.name), seedStore);
+	}
 
-		if (bTargetEntityNames.includes(a.entity.name)) {
-			return -1;
-		}
+	if (seedStore[entityName]) {
+		return;
+	}
 
-		return 0;
-	});
+	await gen.seed?.onEntity?.(seed);
+
+	seedStore[entityName] = true;
 }
 
 export async function seed(config: OrmgenConfig) {
 	for (const gen of config.generators) {
-		for (const seed of getSortedSeeds()) {
-			await gen.seed?.onEntity?.(seed);
+		const seedStore: SeedStore = {};
+
+		for (const seed of store.getSeeds()) {
+			await runSeed(gen, seed, seedStore);
 		}
 	}
 }
