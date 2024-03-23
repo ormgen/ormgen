@@ -9,6 +9,8 @@ export default createSeed({
 			orderDate: new Date().toISOString(),
 			totalPrice: 100,
 			userUid: 'user-1',
+			// createdAt: new Date().toISOString(),
+			// updatedAt: new Date().toISOString(),
 		},
 	],
 });

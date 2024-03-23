@@ -29,7 +29,6 @@
 		"@prisma/client": "^5.11.0",
 		"@types/node": "^20.11.28",
 		"@types/yargs": "^17.0.32",
-		"fast-glob": "^3.3.2",
 		"prettier": "^3.2.5",
 		"tsup": "^8.0.2",
 		"typescript": "^5.4.2",
@@ -38,9 +37,7 @@
 	"dependencies": {
 		"@amono/find-up": "^0.0.5",
 		"case-anything": "^2.1.13",
+		"fast-glob": "^3.3.2",
 		"yargs": "^17.7.2"
-	},
-	"peerDependencies": {
-		"@prisma/client": "*"
 	}
 }

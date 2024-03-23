@@ -11,7 +11,7 @@ interface Params {
 function createMixins() {
 	const externalMixins = store.mixins?.content || {};
 
-	return { ...defaultMixins, ...externalMixins };
+	return { ...defaultMixins, ...externalMixins } as Mixins;
 }
 
 export function createEntity(input: Callable<Entity__Input, Params>) {
