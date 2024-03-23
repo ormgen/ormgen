@@ -36,12 +36,12 @@ export interface OrmgenConfig {
 		/**
 		 * Where to look for global enums.
 		 */
-		globalEnums?: string[];
+		globalEnums?: string;
 
 		/**
 		 * Where to look for global mixins.
 		 */
-		globalMixins?: string[];
+		globalMixins?: string;
 	};
 
 	generators: OrmGenerator[];

@@ -1,8 +1,8 @@
-import { EntityFields__Input, mixins } from 'ormgen';
+import { EntityFields__Input, defaultMixins } from 'ormgen';
 
 export function timestamps(): EntityFields__Input {
 	return {
-		createdAt: mixins.$createdAtField(),
-		updatedAt: mixins.$createdAtField(),
+		createdAt: defaultMixins.$createdAtField(),
+		updatedAt: defaultMixins.$createdAtField(),
 	};
 }

@@ -3,6 +3,8 @@ import { Promisable } from '~/helpers/utils';
 
 export interface OrmGenerator {
 	sync?: {
+		onStart?(): Promisable<any>;
+
 		onEnums?(enums: Enum[]): Promisable<any>;
 		onEnum?(e: Enum, enums: Enum[]): Promisable<any>;
 
@@ -16,6 +18,8 @@ export interface OrmGenerator {
 	};
 
 	seed?: {
+		onStart?(): Promisable<any>;
+
 		onEntity?(seed: Seed): Promisable<any>;
 	};
 }

@@ -9,6 +9,7 @@ export async function sync(config: OrmgenConfig) {
 		const enums = store.getEnums();
 		const entities = store.getEntities();
 
+		await gen.sync?.onStart?.();
 		await gen.sync?.onEnums?.(enums);
 		await gen.sync?.onEntities?.(entities);
 

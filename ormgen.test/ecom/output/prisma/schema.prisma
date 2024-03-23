@@ -12,15 +12,15 @@ generator client {
   provider = "prisma-client-js"
 }
 
-enum ORDER_STATUS {
-  ORDERED
-  SHIPPED
-}
-
 enum GLOBAL_ENUM {
   A
   B
   C
+}
+
+enum ORDER_STATUS {
+  ORDERED
+  SHIPPED
 }
 
 model Order {
@@ -30,6 +30,8 @@ model Order {
   totalPrice Int          @default(0)
   userUid    String
   user       User         @relation(fields: [userUid], references: [uid], onDelete: Restrict)
+  createdAt  DateTime
+  updatedAt  DateTime
   orderItems OrderItem[]
 }
 

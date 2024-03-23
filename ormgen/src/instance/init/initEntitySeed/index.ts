@@ -1,9 +1,10 @@
 import path from 'path';
 import { Seed__Input } from '~/modelling';
 import { EntityName } from '~/generated';
+import { tryImport } from '~/helpers';
 
 export async function initEntitySeed(entityFolderPath: string, entitySeedPath: string) {
-	const imports = await import(entitySeedPath);
+	const imports = await tryImport(entitySeedPath);
 
 	const entityName = path.basename(entityFolderPath);
 

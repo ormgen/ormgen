@@ -1,8 +1,9 @@
 import path from 'path';
+import { tryImport } from '~/helpers';
 import { Entity__Input } from '~/modelling';
 
 export async function initEntityInput(entityFolderPath: string) {
-	const imports = await import(entityFolderPath + '/index.ts');
+	const imports = await tryImport(entityFolderPath + '/index.ts');
 
 	const folderName = path.basename(entityFolderPath);
 

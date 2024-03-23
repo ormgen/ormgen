@@ -13,3 +13,5 @@ export * from './getNodeModulesPath';
 export * from './createObsMessage';
 
 export * from './runPrettier';
+
+export * from './tryImport';

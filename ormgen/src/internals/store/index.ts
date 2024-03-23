@@ -1,4 +1,4 @@
-import { Entity__Input, Entity, Enum, Seed__Input, Seed } from '~/modelling/types';
+import { Entity__Input, Entity, Enum, Seed__Input, Seed, Mixins } from '~/modelling/types';
 
 const store__enums = {
 	enums: new Map<string, Enum>(),
@@ -111,6 +111,10 @@ const store__seed = {
 	},
 };
 
+const store__mixins = {
+	mixins: null as Mixins | null,
+};
+
 export const store = {
 	...store__enums,
 
@@ -119,4 +123,6 @@ export const store = {
 
 	...store__seedInputs,
 	...store__seed,
+
+	...store__mixins,
 };

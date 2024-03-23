@@ -8,5 +8,7 @@ export * from './EntityField__Input';
 
 export * from './EntityIndex';
 
+export * from './Mixins';
+
 export * from './Seed';
 export * from './Seed__Input';

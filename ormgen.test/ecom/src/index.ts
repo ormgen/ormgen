@@ -7,8 +7,6 @@ const instance = createInstance({
 
 	generators: [
 		typesGenerator({
-			typesFilePath: 'ecom/output/types/index.ts',
-
 			customTypes: {
 				datetime: 'string',
 			},

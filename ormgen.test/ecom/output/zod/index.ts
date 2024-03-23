@@ -6,15 +6,15 @@
 import { z } from 'zod';
 import { meta as ProductMeta } from '../../src/entities/Product/index.meta';
 
-export const ORDER_STATUS = { ORDERED: 'ORDERED', SHIPPED: 'SHIPPED' } as const;
-export type ORDER_STATUS = keyof typeof ORDER_STATUS;
-export const ORDER_STATUS__SCHEMA = z.nativeEnum(ORDER_STATUS);
-export const ORDER_STATUS__VALUES = Object.keys(ORDER_STATUS) as [ORDER_STATUS, ...ORDER_STATUS[]];
-
 export const GLOBAL_ENUM = { A: 'A', B: 'B', C: 'C' } as const;
 export type GLOBAL_ENUM = keyof typeof GLOBAL_ENUM;
 export const GLOBAL_ENUM__SCHEMA = z.nativeEnum(GLOBAL_ENUM);
 export const GLOBAL_ENUM__VALUES = Object.keys(GLOBAL_ENUM) as [GLOBAL_ENUM, ...GLOBAL_ENUM[]];
+
+export const ORDER_STATUS = { ORDERED: 'ORDERED', SHIPPED: 'SHIPPED' } as const;
+export type ORDER_STATUS = keyof typeof ORDER_STATUS;
+export const ORDER_STATUS__SCHEMA = z.nativeEnum(ORDER_STATUS);
+export const ORDER_STATUS__VALUES = Object.keys(ORDER_STATUS) as [ORDER_STATUS, ...ORDER_STATUS[]];
 
 export namespace Order {
 	export const model = z.object({
@@ -23,6 +23,8 @@ export namespace Order {
 		orderDate: z.date(),
 		totalPrice: z.number(),
 		userUid: z.string(),
+		createdAt: z.date(),
+		updatedAt: z.date(),
 	});
 
 	export const seed = z
@@ -32,6 +34,8 @@ export namespace Order {
 			orderDate: z.date(),
 			totalPrice: z.number(),
 			userUid: z.string(),
+			createdAt: z.date(),
+			updatedAt: z.date(),
 		})
 		.partial({ totalPrice: true });
 

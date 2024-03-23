@@ -1,5 +1,6 @@
 {
 	"name": "@ormgen/test.ecom",
+	"license": "MIT",
 	"scripts": {
 		"test:types": "tsc --noEmit",
 		"test:types:watch": "tsc --noEmit --watch",

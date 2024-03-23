@@ -7,6 +7,7 @@ export async function install() {
 		typesContent: [
 			`export type EnumName = string;`,
 			`export type EntityName = string;`,
+			`export type Mixins = any;`,
 			`export type AllEntityModels = any;`,
 			`export type AllEntitySeeds = any;`,
 		].join('\n'),

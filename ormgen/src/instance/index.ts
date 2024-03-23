@@ -1,7 +1,8 @@
-import { init } from '~/instance/init';
 import { OrmgenConfig } from './index.config';
 import { sync } from './sync';
 import { seed } from './seed';
+import { InitConfig } from './init/index.config';
+import { init } from './init';
 
 export function createInstance(config: OrmgenConfig) {
 	async function runInit() {
@@ -9,12 +10,12 @@ export function createInstance(config: OrmgenConfig) {
 			cwd: config.cwd || process.cwd(),
 
 			search: {
-				entities: ['entities/*'],
-				entityEnum: ['enums.ts', 'enums/index.ts', 'index.enums.ts', 'index.enums/index.ts'],
-				entitySeed: ['seed.ts', 'seed/index.ts', 'index.seed.ts', 'index.seed/index.ts'],
+				entityPatterns: ['entities/*'],
+				entityEnumPatterns: ['enums.ts', 'enums/index.ts', 'index.enums.ts', 'index.enums/index.ts'],
+				entitySeedPatterns: ['seed.ts', 'seed/index.ts', 'index.seed.ts', 'index.seed/index.ts'],
 
-				globalEnums: ['enums/index.ts'],
-				globalMixins: ['mixins/index.ts'],
+				globalEnumsPath: 'enums/index.ts',
+				globalMixinsPath: 'mixins/index.ts',
 
 				...config.search,
 			},
@@ -33,3 +34,5 @@ export function createInstance(config: OrmgenConfig) {
 		},
 	};
 }
+
+export type { InitConfig };

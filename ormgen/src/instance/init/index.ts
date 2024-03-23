@@ -6,50 +6,54 @@ import { initEntityInput } from './initEntityInput';
 import { InitConfig } from './index.config';
 import { createSeed } from './createSeed';
 import { initEntitySeed } from './initEntitySeed';
+import { createMixins } from './createMixin';
+import { tryImport } from '~/helpers';
+import path from 'path';
 
 export async function init(config: InitConfig) {
 	const { cwd, search } = config;
-	const { root, entities, entityEnum, entitySeed, globalEnums } = search;
+	const { root, entityPatterns, entityEnumPatterns, entitySeedPatterns, globalEnumsPath, globalMixinsPath } = search;
 
 	const entityFolderPaths = findPaths({
 		prefixes: [cwd, root],
-		patterns: entities,
+		patterns: entityPatterns,
 		options: { onlyDirectories: true },
 	});
 
-	const globalEnumPaths = findPaths({
-		prefixes: [cwd, root],
-		patterns: globalEnums,
-		options: { onlyFiles: true },
-	});
-	// const globalMixinPaths = findPaths(config, globalMixins);
+	if (globalEnumsPath) {
+		const $globalEnumsPath = path.resolve(root, globalEnumsPath);
+
+		await tryImport($globalEnumsPath);
+	}
+
+	if (globalMixinsPath) {
+		const $globalMixinsPath = path.resolve(root, globalMixinsPath);
+
+		await createMixins($globalMixinsPath);
+	}
 
 	for (const entityFolderPath of entityFolderPaths) {
 		await initEntityInput(entityFolderPath);
 
 		const entityEnumPaths = findPaths({
 			prefixes: [entityFolderPath],
-			patterns: entityEnum,
+			patterns: entityEnumPatterns,
 			options: { onlyFiles: true },
 		});
 
 		const entitySeedPaths = findPaths({
 			prefixes: [entityFolderPath],
-			patterns: entitySeed,
+			patterns: entitySeedPatterns,
 			options: { onlyFiles: true },
 		});
 
 		for (const entityEnumPath of entityEnumPaths) {
-			await import(entityEnumPath);
+			await tryImport(entityEnumPath);
 		}
 
 		for (const entitySeedPath of entitySeedPaths) {
 			await initEntitySeed(entityFolderPath, entitySeedPath);
 		}
-	}
-
-	for (const enumPath of globalEnumPaths) {
-		await import(enumPath);
 	}
 
 	for (const entityInput of store.getEntityInputs()) {

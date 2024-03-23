@@ -4,14 +4,14 @@ import { createEntityNameLines } from './index.entities.name';
 import { createEntitiesUtils } from './index.entities.utils';
 import { TypesGeneratorConfig, configStore } from './index.config';
 import { GeneratedPackage, createObsMessage, runPrettierSync } from '~/helpers';
-import fs from 'fs-extra';
+import { createMixinLines } from './index.mixins';
 
 export function typesGenerator(config: TypesGeneratorConfig = {}): OrmGenerator {
-	const { nodeModulesPath = '', typesFilePath } = config;
+	const { nodeModulesPath = '' } = config;
 
 	configStore.config = config;
 
-	let lines = [createObsMessage()] as string[];
+	let lines = [createObsMessage(), ''];
 
 	function addLines(newLines: string[]) {
 		lines.push(...newLines);
@@ -19,9 +19,14 @@ export function typesGenerator(config: TypesGeneratorConfig = {}): OrmGenerator 
 
 	return {
 		sync: {
+			onStart() {
+				addLines(createMixinLines());
+				addLines(['']);
+			},
+
 			onEnums(enums) {
 				const enumNames = enums.map((e) => `'${e.name}'`);
-				const enumNamesString = enumNames.join(' | ');
+				const enumNamesString = enumNames.join(' | ') || 'never';
 				const enumLines = `export type EnumName = ${enumNamesString};`;
 
 				addLines([enumLines]);
@@ -41,16 +46,7 @@ export function typesGenerator(config: TypesGeneratorConfig = {}): OrmGenerator 
 
 				await GeneratedPackage.init({ nodeModulesPath, typesContent });
 
-				if (typesFilePath) {
-					await fs.ensureFile(typesFilePath);
-					await fs.copy(indexTypesPath, typesFilePath, { overwrite: true });
-				}
-			},
-
-			async onComplete() {
-				if (typesFilePath) {
-					runPrettierSync(typesFilePath);
-				}
+				runPrettierSync(indexTypesPath);
 			},
 		},
 	};
