@@ -6,7 +6,16 @@
 
 # Quick explanation
 
-Ormgen allows you to define your database entities in a file tree and generate anything you want from them - be it a prisma schema, types or whatever you'd like. It also allows you to seed your database with the data you define in your entities.
+Ormgen allows you to:
+
+-   Define your entities in a file based system.
+-   Generate anything you want from them - be it a prisma schema, types, zod or whatever you'd like.
+    -   Use built-in generators or create your own.
+-   Seed your database in with a per-entity way.
+
+|       Your entities        | Generated files (examples)  |
+| :------------------------: | :-------------------------: |
+| ![](docs/images/input.png) | ![](docs/images/output.png) |
 
 # Quick start
 
@@ -19,13 +28,8 @@ Or check the `Example` section for a more detailed guide.
 # Documentation
 
 1. [Background](docs/2.background.md)
-1. [Concepts](docs/3-0.Concepts.md)
-    1. [Entity](docs/3-1.Entity.md)
-    2. [Enum](docs/3-2.Enum.md)
-    3. [Mixins](docs/3-3.Mixins.md)
-    4. [Generator](docs/3-4.Generator.md)
-    5. [Instance](docs/3-5.Instance.md)
-1. [Generators](docs/4.Generators.md)
-1. [Cli](docs/5.Cli.md)
+1. [Concepts](docs/3-0.Concepts.md) (WIP)
+1. [Generators](docs/4.Generators.md) (WIP)
+1. [Cli](docs/5.Cli.md) (WIP)
 1. [Example](docs/10.Example.md)
 1. [Todo & Roadmap](docs/10.Roadmap.md)
