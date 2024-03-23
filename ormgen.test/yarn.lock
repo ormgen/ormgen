@@ -49,11 +49,13 @@ get-tsconfig@^4.7.2:
     resolve-pkg-maps "^1.0.0"
 
 "ormgen@file:../ormgen":
-  version "0.0.2"
+  version "0.0.8"
   resolved "file:../ormgen"
   dependencies:
     "@amono/find-up" "^0.0.5"
     case-anything "^2.1.13"
+    fast-glob "^3.3.2"
+    yargs "^17.7.2"
 
 resolve-pkg-maps@^1.0.0:
   version "1.0.0"
