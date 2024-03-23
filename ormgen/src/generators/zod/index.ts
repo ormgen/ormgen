@@ -1,12 +1,10 @@
-import { execSync } from 'child_process';
-
 import { Entity, Enum } from '~/modelling';
 import { OrmGenerator } from '../index.template';
 import fs from 'fs-extra';
 import { createEntityLines } from './index.lines.entity';
 import path from 'path';
 import { createImportMetaLines } from './index.lines.meta';
-import { createEnumLines } from './index.lines.enum';
+import { createEnumsLines } from './index.lines.enum';
 import { createObsMessage, runPrettierSync } from '~/helpers';
 
 interface ZodGeneratorConfig {
@@ -29,8 +27,8 @@ export function zodGenerator(config: ZodGeneratorConfig): OrmGenerator {
 
 	return {
 		sync: {
-			onEnum(e: Enum) {
-				addLines(createEnumLines(e), '');
+			onEnums(enums) {
+				addLines(createEnumsLines(enums));
 			},
 
 			onEntity(entity, entities) {

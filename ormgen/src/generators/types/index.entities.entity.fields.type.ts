@@ -1,7 +1,7 @@
 import { EntityField } from '~/modelling';
 import { configStore } from './index.config';
 
-function createFieldType(field: EntityField) {
+function createFieldType(field: EntityField): string | null {
 	const { customTypes = {} } = configStore.config as any;
 
 	const customType = customTypes[field.type];
@@ -21,9 +21,15 @@ function createFieldType(field: EntityField) {
 			return 'Date';
 		case 'json':
 			return 'any';
+		case 'enum':
+			return field.enum;
+		case 'relation':
+			return null;
+		case 'relationTarget':
+			return null;
+		case 'unknown':
+			return 'unknown';
 	}
-
-	return null;
 }
 
 export function createFieldTypeString(field: EntityField) {

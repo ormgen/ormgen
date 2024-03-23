@@ -15,18 +15,18 @@ export default createEntity(({ mx }) => {
 				type: 'text',
 			},
 
-			commentVector: {
-				type: 'unknown',
+			// commentVector: {
+			// 	type: 'unknown',
 
-				extra: {
-					prisma: {
-						customType: 'Unsupported("vector")',
-					},
-					zod: {
-						customType: 'z.number().array()',
-					},
-				},
-			},
+			// 	extra: {
+			// 		prisma: {
+			// 			customType: 'Unsupported("vector")',
+			// 		},
+			// 		zod: {
+			// 			customType: 'z.number().array()',
+			// 		},
+			// 	},
+			// },
 
 			createdAt: mx.$createdAtField(),
 

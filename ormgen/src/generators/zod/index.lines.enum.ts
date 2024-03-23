@@ -1,16 +1,15 @@
 import { Enum } from '~/modelling';
 
-export function createEnumLines(e: Enum) {
-	const { name, values } = e;
+export function createEnumsLines(enums: Enum[]) {
+	const importNames = enums.map((e) => {
+		return e.name;
+	});
 
-	const valueString = values.map((v) => `${v}: '${v}'`).join();
+	const lines: string[] = [`import { ${importNames.join(', ')} } from '@ormgen/__generated';`];
 
-	const lines = [
-		`export const ${e.name} = { ${valueString} } as const`,
-		`export type ${name} = keyof typeof ${name};`,
-		`export const ${name}__SCHEMA = z.nativeEnum(${name})`,
-		`export const ${name}__VALUES = Object.keys(${name}) as [${name}, ...${name}[]]`,
-	];
+	for (const e of enums) {
+		lines.push(`export const ${e.name}__SCHEMA = z.nativeEnum(${e.name})`);
+	}
 
-	return lines.filter(Boolean) as string[];
+	return lines;
 }

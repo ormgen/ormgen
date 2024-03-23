@@ -14,8 +14,8 @@ namespace Config {
 export namespace GeneratedPackage {
 	const packageJson = {
 		name: '@ormgen/__generated',
-		main: 'index.js',
-		types: 'index.d.ts',
+		main: 'index.ts',
+		types: 'index.ts',
 	};
 
 	const packageJsonString = JSON.stringify(packageJson, null, 2);
@@ -27,22 +27,20 @@ export namespace GeneratedPackage {
 
 		const packagePath = `${nmPath}/@ormgen/__generated`;
 		const packageJsonPath = `${packagePath}/package.json`;
-		const indexPath = `${packagePath}/index.js`;
-		const indexTypesPath = `${packagePath}/index.d.ts`;
+		const indexPath = `${packagePath}/index.ts`;
 
-		return { packagePath, packageJsonPath, indexPath, indexTypesPath };
+		return { packagePath, packageJsonPath, indexPath };
 	}
 
 	export async function init(config: Config.Init) {
 		const { typesContent } = config;
 
-		const { packagePath, packageJsonPath, indexPath, indexTypesPath } = await createPaths(config);
+		const { packagePath, packageJsonPath, indexPath } = await createPaths(config);
 
 		await fs.remove(packagePath);
 		await fs.ensureDir(packagePath);
 
 		await fs.writeFile(packageJsonPath, packageJsonString);
-		await fs.writeFile(indexPath, 'modules.exports = {}');
-		await fs.writeFile(indexTypesPath, typesContent);
+		await fs.writeFile(indexPath, typesContent);
 	}
 }

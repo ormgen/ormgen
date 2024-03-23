@@ -1,7 +1,20 @@
+import path from 'path';
 import { store } from '~/internals';
 
-export function createMixinLines(): string[] {
+function getMixinsFilePath() {
 	const { filePath } = store.mixins || {};
+
+	if (!filePath) {
+		return null;
+	}
+
+	const uri = path.parse(filePath);
+
+	return path.join(uri.dir, uri.name);
+}
+
+export function createMixinLines(): string[] {
+	const filePath = getMixinsFilePath();
 
 	const importDefaultMixins = `import { DefaultMixins } from 'ormgen'`;
 	const importExternalMixins = `import * as ExternalMixins from '${filePath}'`;

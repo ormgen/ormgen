@@ -4,14 +4,20 @@
 	"scripts": {
 		"test:types": "tsc --noEmit",
 		"test:types:watch": "tsc --noEmit --watch",
-		"ecom": "DATABASE_URL=postgres://test tsx ecom/src/index.ts",
-		"ecom:sync": "npm run ecom -- --sync",
-		"ecom:seed": "npm run ecom -- --seed"
+		"ecom": "DATABASE_URL=postgres://postgres:postgres@localhost:5432/ormgen",
+		"ecom:orm": "yarn ecom tsx ecom/src/index.ts",
+		"ecom:orm:sync": "yarn ecom:orm --sync",
+		"ecom:orm:seed": "yarn ecom:orm --seed",
+		"ecom:prisma:gen": "yarn ecom prisma generate --schema ecom/output/prisma/schema.prisma",
+		"ecom:prisma:push": "yarn ecom prisma db push --schema ecom/output/prisma/schema.prisma",
+		"ecom:prisma:sync": "yarn ecom:prisma:gen && yarn ecom:prisma:push"
 	},
 	"dependencies": {
+		"@prisma/client": "5.11.0",
 		"ormgen": "^0.0.8"
 	},
 	"devDependencies": {
+		"prisma": "^5.11.0",
 		"tsx": "^4.7.1",
 		"typescript": "^5.4.2"
 	}

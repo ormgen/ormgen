@@ -8,6 +8,7 @@ import fs from 'fs-extra';
 import { createEnumLines } from './index.lines.enum';
 import { createEntityLines } from './index.lines.entity';
 import { createObsMessage } from '~/helpers';
+import { seedEntity } from './index.seed';
 
 export function prismaGenerator(config: PrismaGeneratorConfig): OrmGenerator {
 	const { schemaPath = 'prisma/schema.prisma' } = config;
@@ -36,7 +37,7 @@ export function prismaGenerator(config: PrismaGeneratorConfig): OrmGenerator {
 
 		seed: {
 			onEntity(seed) {
-				console.log('seed', seed.name);
+				return seedEntity(seed);
 			},
 		},
 	};

@@ -3,7 +3,7 @@ import { createSeed } from 'ormgen';
 export default createSeed({
 	name: 'OrderItem',
 
-	data: [
+	seed: [
 		{
 			uid: 'orderItem-1',
 			orderUid: 'order-1',
