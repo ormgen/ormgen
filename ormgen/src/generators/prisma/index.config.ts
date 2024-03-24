@@ -1,4 +1,4 @@
-import { Entity__Input, Enum } from '~/modelling';
+// import { Entity__Input, Enum } from '~/modelling';
 
 export interface PrismaGeneratorConfig {
 	schemaPath?: string;
@@ -20,14 +20,14 @@ export interface PrismaGeneratorConfig {
 
 	extra?: string;
 
-	hooks?: {
-		Enum?: {
-			pre?(e: Enum): Enum;
-			post?(e: Enum): string;
-		};
-		Entity?: {
-			pre?(entity: Entity__Input): Entity__Input;
-			post?(entity: Entity__Input): string;
-		};
-	};
+	// hooks?: {
+	// 	Enum?: {
+	// 		pre?(e: Enum): Enum;
+	// 		post?(e: Enum): string;
+	// 	};
+	// 	Entity?: {
+	// 		pre?(entity: Entity__Input): Entity__Input;
+	// 		post?(entity: Entity__Input): string;
+	// 	};
+	// };
 }

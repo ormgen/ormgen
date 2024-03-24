@@ -28,8 +28,8 @@ Or check the `Example` section for a more detailed guide.
 # Documentation
 
 1. [Background](docs/1.BACKGROUND/INDEX.md)
-1. [Concepts](docs/2.CONCEPTS/1.INDEX.md) (WIP)
-1. [Generators](docs/3.GENERATORS/INDEX.md) (WIP)
-1. [Cli](docs/4.CLI/INDEX.md) (WIP)
+1. [Concepts](docs/2.CONCEPTS/1.INDEX.md)
+1. [Generators](docs/3.GENERATORS/INDEX.md)
+1. [Cli](docs/4.CLI/INDEX.md)
 1. [Example](docs/98.EXAMPLE/INDEX.md)
 1. [Todo & Roadmap](docs/99.ROADMAP/INDEX.md)

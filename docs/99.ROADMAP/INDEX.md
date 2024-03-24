@@ -1,5 +1,6 @@
 # Todo
 
+-   [ ] Better formatting for types file
 -   [ ] Documentation
 
 ## Roadmap
@@ -17,6 +18,5 @@
     -   [ ] Float
     -   [ ] Decimal
     -   [ ] Bytes
--   [ ] Refactor as a monorepo
 -   [ ] Seed
     -   [ ] Take in data from previous seeds

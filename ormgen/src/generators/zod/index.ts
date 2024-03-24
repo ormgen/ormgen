@@ -1,4 +1,4 @@
-import { Entity, Enum } from '~/modelling';
+import { Entity } from '~/modelling';
 import { OrmGenerator } from '../index.template';
 import fs from 'fs-extra';
 import { createEntityLines } from './index.lines.entity';
