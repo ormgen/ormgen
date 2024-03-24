@@ -24,7 +24,7 @@ export function createEntityFieldsLines(entity: Entity, isSeed: boolean) {
 
 	const fieldItems = Object.values(fields);
 
-	const lines = fieldItems
+	return fieldItems
 		.map((field) => {
 			const nameString = createNameString(field, isSeed);
 			const typeString = createFieldTypeString(field);
@@ -32,6 +32,4 @@ export function createEntityFieldsLines(entity: Entity, isSeed: boolean) {
 			return typeString && `${nameString}: ${typeString};`;
 		})
 		.filter(Boolean);
-
-	return lines as string[];
 }

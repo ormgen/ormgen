@@ -388,6 +388,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@total-typescript/ts-reset@npm:^0.5.1":
+  version: 0.5.1
+  resolution: "@total-typescript/ts-reset@npm:0.5.1"
+  checksum: 10c0/0339e975034ae648e83f08d0d408d9bda926fdb0cbaddf8efebd3105b378847be8bc9c2f1aa1435e2221f5958019bc2cb562211745a52fe076a109645c8a31f0
+  languageName: node
+  linkType: hard
+
 "@types/estree@npm:1.0.5":
   version: 1.0.5
   resolution: "@types/estree@npm:1.0.5"
@@ -1426,6 +1433,7 @@ __metadata:
   dependencies:
     "@amono/find-up": "npm:^0.0.5"
     "@prisma/client": "npm:^5.11.0"
+    "@total-typescript/ts-reset": "npm:^0.5.1"
     "@types/node": "npm:^20.11.28"
     "@types/yargs": "npm:^17.0.32"
     case-anything: "npm:^2.1.13"

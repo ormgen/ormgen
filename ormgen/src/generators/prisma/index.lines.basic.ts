@@ -11,7 +11,7 @@ function createDatasourceLines(config: PrismaGeneratorConfig): string[] {
 		extensions && `\textensions = [${extensions.join()}]`,
 		extra && `\t${extra}`,
 		'}',
-	].filter(Boolean) as string[];
+	].filter(Boolean);
 }
 
 function createClientGeneratorLines(config: PrismaGeneratorConfig): string[] {
@@ -25,7 +25,7 @@ function createClientGeneratorLines(config: PrismaGeneratorConfig): string[] {
 		previewFeatures && `\tpreviewFeatures = [${previewFeatures.join()}]`,
 		extra && `\t${extra}`,
 		'}',
-	].filter(Boolean) as string[];
+	].filter(Boolean);
 }
 
 export function createBasicLines(config: PrismaGeneratorConfig): string[] {

@@ -1,5 +1,5 @@
 {
-	"include": ["src/**/*.ts", "src.cli/**/*.ts"],
+	"include": ["src/**/*.ts", "src.cli/**/*.ts", "types/*.ts"],
 	"compilerOptions": {
 		"strict": true,
 

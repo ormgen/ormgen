@@ -25,5 +25,5 @@ export function createAttrs(field: EntityField): string[] {
 	const defaultAttr = createDefaultAttr(field);
 	const typeAttrs = createTypeAttrs(field);
 
-	return [idAttr, uniqueAttr, defaultAttr, ...typeAttrs, extra?.prisma?.customAttributes].filter(Boolean) as string[];
+	return [idAttr, uniqueAttr, defaultAttr, ...typeAttrs, extra?.prisma?.customAttributes].filter(Boolean);
 }

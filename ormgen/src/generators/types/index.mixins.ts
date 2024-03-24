@@ -22,5 +22,5 @@ export function createMixinLines(): string[] {
 	const exportExternalMixins = filePath ? 'typeof ExternalMixins' : 'never';
 	const exportMixins = `export type Mixins = DefaultMixins & ${exportExternalMixins}`;
 
-	return [importDefaultMixins, filePath && importExternalMixins, exportMixins].filter(Boolean) as string[];
+	return [importDefaultMixins, filePath && importExternalMixins, exportMixins].filter(Boolean);
 }

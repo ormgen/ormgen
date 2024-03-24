@@ -5,7 +5,7 @@ import { store } from '~/internals';
 export async function createSeed(config: InitConfig, input: Seed__Input) {
 	const entity = store.getEntity(input.name);
 
-	const dependsOnEntities = [] as string[];
+	const dependsOnEntities: string[] = [];
 
 	const seed: Seed = { ...input, dependsOnEntities, entity };
 
