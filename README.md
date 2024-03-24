@@ -27,9 +27,9 @@ Or check the `Example` section for a more detailed guide.
 
 # Documentation
 
-1. [Background](docs/2.background.md)
-1. [Concepts](docs/3-0.Concepts.md) (WIP)
-1. [Generators](docs/4.Generators.md) (WIP)
-1. [Cli](docs/5.Cli.md) (WIP)
-1. [Example](docs/10.Example.md)
-1. [Todo & Roadmap](docs/10.Roadmap.md)
+1. [Background](docs/1.BACKGROUND/INDEX.md)
+1. [Concepts](docs/2.CONCEPTS/INDEX.md) (WIP)
+1. [Generators](docs/3.GENERATORS/INDEX.md) (WIP)
+1. [Cli](docs/4.CLI/INDEX.md) (WIP)
+1. [Example](docs/98.EXAMPLE/INDEX.md)
+1. [Todo & Roadmap](docs/99.ROADMAP/INDEX.md)
