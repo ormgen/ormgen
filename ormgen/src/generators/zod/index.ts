@@ -51,7 +51,7 @@ export function zodGenerator(config: ZodGeneratorConfig): OrmGenerator {
 			},
 
 			onComplete() {
-				runFormatSync(filePath);
+				runFormatSync(absoluteOutputFilePath);
 			},
 		},
 
