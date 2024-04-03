@@ -5,5 +5,6 @@ export function createObsMessage(prefix = '//') {
 		prefix + '#### OBS: This file is generated, do not modify it manually ####',
 		prefix + '################################################################',
 		prefix + '################################################################',
+		'',
 	].join('\n');
 }
