@@ -5,10 +5,14 @@ export function runFormatSync(filePath: string) {
 	const { prettier = true, command } = configStore.instance?.formatter || {};
 
 	if (command) {
-		return execSync(command(filePath), { stdio: 'inherit' });
+		const cmd = command(filePath);
+
+		if (cmd) {
+			return execSync(cmd, { stdio: 'inherit' });
+		}
 	}
 
 	if (prettier) {
-		return execSync(`npx prettier --write "${filePath}" --with-node-modules --log-level warn`, { stdio: 'inherit' });
+		return execSync(`npx prettier --write --with-node-modules --log-level warn "${filePath}"`, { stdio: 'inherit' });
 	}
 }

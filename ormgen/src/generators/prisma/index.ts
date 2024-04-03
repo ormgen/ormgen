@@ -7,14 +7,17 @@ import { createBasicLines } from './index.lines.basic';
 import fs from 'fs-extra';
 import { createEnumLines } from './index.lines.enum';
 import { createEntityLines } from './index.lines.entity';
-import { createObsMessage } from '~/helpers';
+import { createObsMessage, runFormatSync } from '~/helpers';
 import { seedEntity } from './index.seed';
 import { configStore } from '~/internals';
+import path from 'path';
 
 export function prismaGenerator(config: PrismaGeneratorConfig): OrmGenerator {
 	configStore.prisma = config;
 
 	const { schemaPath = 'prisma/schema.prisma' } = config;
+
+	const absoluteSchemaPath = path.resolve(schemaPath);
 
 	const lines = [createObsMessage(), ...createBasicLines()];
 
@@ -35,14 +38,17 @@ export function prismaGenerator(config: PrismaGeneratorConfig): OrmGenerator {
 			},
 
 			onComplete() {
-				execSync(`npx prisma validate --schema ${schemaPath}`, { stdio: 'inherit' });
-				execSync(`npx prisma format --schema ${schemaPath}`, { stdio: 'inherit' });
+				runFormatSync(absoluteSchemaPath);
+
+				execSync(`npx prisma validate --schema ${absoluteSchemaPath}`, { stdio: 'inherit' });
+				execSync(`npx prisma format --schema ${absoluteSchemaPath}`, { stdio: 'inherit' });
 			},
 		},
 
 		seed: {
 			onEntity(seed) {
 				console.log('--', seed.name);
+
 				return seedEntity(seed);
 			},
 		},
