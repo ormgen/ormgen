@@ -9,28 +9,48 @@ export const GLOBAL_ENUM__SCHEMA = z.nativeEnum(GLOBAL_ENUM);
 export const ORDER_STATUS__SCHEMA = z.nativeEnum(ORDER_STATUS);
 import { meta as ProductMeta } from '../../src/entities/Product/index.meta';
 
+export namespace MembershipType {
+	export const model = z.object({
+		alias: z.string(),
+		name: z.string(),
+	});
+
+	export const seed = z
+		.object({
+			alias: z.string(),
+			name: z.string(),
+		})
+		.partial({});
+
+	export type ModelSchema = typeof model;
+	export type Model = z.infer<typeof model>;
+
+	export type SeedSchema = typeof seed;
+	export type Seed = z.infer<typeof seed>;
+}
+
 export namespace Order {
 	export const model = z.object({
 		uid: z.string(),
 		status: z.enum(['ORDERED', 'SHIPPED']),
-		orderDate: z.date(),
+		orderDate: z.coerce.string(),
 		totalPrice: z.number(),
 		userUid: z.string(),
-		createdAt: z.date(),
-		updatedAt: z.date(),
+		createdAt: z.coerce.string(),
+		updatedAt: z.coerce.string(),
 	});
 
 	export const seed = z
 		.object({
 			uid: z.string(),
 			status: z.enum(['ORDERED', 'SHIPPED']),
-			orderDate: z.date(),
+			orderDate: z.coerce.string(),
 			totalPrice: z.number(),
 			userUid: z.string(),
-			createdAt: z.date(),
-			updatedAt: z.date(),
+			createdAt: z.coerce.string(),
+			updatedAt: z.coerce.string(),
 		})
-		.partial({ totalPrice: true });
+		.partial({ orderDate: true, totalPrice: true, createdAt: true, updatedAt: true });
 
 	export type ModelSchema = typeof model;
 	export type Model = z.infer<typeof model>;
@@ -72,7 +92,7 @@ export namespace Product {
 		stockQuantity: z.number(),
 		sku: z.string(),
 		attributes: ProductMeta.attributes,
-		createdAt: z.date(),
+		createdAt: z.coerce.string(),
 	});
 
 	export const seed = z
@@ -84,9 +104,9 @@ export namespace Product {
 			stockQuantity: z.number(),
 			sku: z.string(),
 			attributes: ProductMeta.attributes,
-			createdAt: z.date(),
+			createdAt: z.coerce.string(),
 		})
-		.partial({ attributes: true });
+		.partial({ attributes: true, createdAt: true });
 
 	export type ModelSchema = typeof model;
 	export type Model = z.infer<typeof model>;
@@ -142,7 +162,7 @@ export namespace Review {
 		uid: z.string(),
 		rating: z.number(),
 		comment: z.string(),
-		createdAt: z.date(),
+		createdAt: z.coerce.string(),
 		userUid: z.string(),
 	});
 
@@ -151,10 +171,10 @@ export namespace Review {
 			uid: z.string(),
 			rating: z.number(),
 			comment: z.string(),
-			createdAt: z.date(),
+			createdAt: z.coerce.string(),
 			userUid: z.string(),
 		})
-		.partial({});
+		.partial({ createdAt: true });
 
 	export type ModelSchema = typeof model;
 	export type Model = z.infer<typeof model>;
@@ -169,9 +189,10 @@ export namespace User {
 		email: z.string(),
 		name: z.string(),
 		passwordHash: z.string(),
-		lastLogin: z.date(),
-		createdAt: z.date(),
-		updatedAt: z.date(),
+		lastLogin: z.coerce.string(),
+		membershipTypeAlias: z.string(),
+		createdAt: z.coerce.string(),
+		updatedAt: z.coerce.string(),
 	});
 
 	export const seed = z
@@ -180,11 +201,12 @@ export namespace User {
 			email: z.string(),
 			name: z.string(),
 			passwordHash: z.string(),
-			lastLogin: z.date(),
-			createdAt: z.date(),
-			updatedAt: z.date(),
+			lastLogin: z.coerce.string(),
+			membershipTypeAlias: z.string(),
+			createdAt: z.coerce.string(),
+			updatedAt: z.coerce.string(),
 		})
-		.partial({});
+		.partial({ createdAt: true, updatedAt: true });
 
 	export type ModelSchema = typeof model;
 	export type Model = z.infer<typeof model>;

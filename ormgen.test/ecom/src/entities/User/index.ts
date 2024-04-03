@@ -25,6 +25,15 @@ export default createEntity(({ mx }) => {
 				lastLogin: {
 					type: 'datetime',
 				},
+
+				membershipType: {
+					type: 'relation',
+
+					targetEntityName: 'MembershipType',
+					targetEntityFieldName: 'users',
+
+					onDelete: 'Restrict',
+				},
 			},
 			mx.timestamps(),
 		],

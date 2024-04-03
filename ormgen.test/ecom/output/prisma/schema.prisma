@@ -23,6 +23,12 @@ enum ORDER_STATUS {
   SHIPPED
 }
 
+model MembershipType {
+  alias String @id
+  name  String
+  users User[]
+}
+
 model Order {
   uid        String       @id
   status     ORDER_STATUS
@@ -85,13 +91,15 @@ model Review {
 }
 
 model User {
-  uid          String   @id
-  email        String   @unique
-  name         String
-  passwordHash String
-  lastLogin    DateTime
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @default(now()) @updatedAt
-  orders       Order[]
-  reviews      Review[]
+  uid                 String         @id
+  email               String         @unique
+  name                String
+  passwordHash        String
+  lastLogin           DateTime
+  membershipTypeAlias String
+  membershipType      MembershipType @relation(fields: [membershipTypeAlias], references: [alias], onDelete: Restrict)
+  createdAt           DateTime       @default(now())
+  updatedAt           DateTime       @default(now())
+  orders              Order[]
+  reviews             Review[]
 }
