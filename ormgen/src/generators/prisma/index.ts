@@ -38,8 +38,6 @@ export function prismaGenerator(config: PrismaGeneratorConfig): OrmGenerator {
 			},
 
 			onComplete() {
-				runFormatSync(absoluteSchemaPath);
-
 				execSync(`npx prisma validate --schema ${absoluteSchemaPath}`, { stdio: 'inherit' });
 				execSync(`npx prisma format --schema ${absoluteSchemaPath}`, { stdio: 'inherit' });
 			},
