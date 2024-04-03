@@ -3,7 +3,7 @@ import { EntityField } from '~/modelling';
 import { createMetaName } from './index.meta';
 
 function createModelFieldType(field: EntityField): string {
-	const { dateMode = 'string' } = configStore.zod!;
+	const { dateMode = 'string' } = configStore.instance!;
 
 	const fieldName = field.$name;
 	const entityName = field.$entityInput.name;

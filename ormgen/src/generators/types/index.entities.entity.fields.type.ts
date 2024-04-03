@@ -1,7 +1,9 @@
+import { capitalCase } from 'case-anything';
 import { configStore } from '~/internals';
 import { EntityField } from '~/modelling';
 
 function createFieldType(field: EntityField): string | null {
+	const { dateMode = 'string' } = configStore.instance!;
 	const { customTypes = {} } = configStore.types!;
 
 	const customType = (customTypes as any)[field.type];
@@ -18,7 +20,7 @@ function createFieldType(field: EntityField): string | null {
 		case 'int':
 			return 'number';
 		case 'datetime':
-			return 'Date';
+			return capitalCase(dateMode);
 		case 'json':
 			return 'any';
 		case 'enum':

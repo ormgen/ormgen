@@ -54,4 +54,11 @@ export interface InstanceConfig {
 
 		command?(filePath: string): any;
 	};
+
+	/**
+	 * How the generators should handle dates.
+	 * - 'string' - The dates should be formatted as strings (default)
+	 * - 'date' - The dates should be formatted as Date objects
+	 */
+	dateMode?: 'string' | 'date';
 }

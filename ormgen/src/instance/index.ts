@@ -2,8 +2,11 @@ import { InstanceConfig } from './index.config';
 import { sync } from './sync';
 import { seed } from './seed';
 import { init } from './init';
+import { configStore } from '~/internals';
 
 export function createInstance(config: InstanceConfig) {
+	configStore.instance = config;
+
 	async function runInit() {
 		await init({
 			cwd: config.cwd || process.cwd(),
