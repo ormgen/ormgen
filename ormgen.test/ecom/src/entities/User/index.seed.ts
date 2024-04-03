@@ -10,6 +10,7 @@ export default createSeed({
 			name: 'John Doe',
 			passwordHash: '',
 			lastLogin: new Date().toISOString(),
+			membershipTypeAlias: 'FREE',
 		},
 	],
 });
