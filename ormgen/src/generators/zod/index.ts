@@ -6,12 +6,7 @@ import path from 'path';
 import { createImportMetaLines } from './index.lines.meta';
 import { createEnumsLines } from './index.lines.enum';
 import { createObsMessage, runPrettierSync } from '~/helpers';
-
-interface ZodGeneratorConfig {
-	filePath?: string;
-
-	zodPackage?: string;
-}
+import { ZodGeneratorConfig } from './index.config';
 
 export function zodGenerator(config: ZodGeneratorConfig): OrmGenerator {
 	const { filePath = 'zod/index.ts', zodPackage = 'zod' } = config;
@@ -19,7 +14,7 @@ export function zodGenerator(config: ZodGeneratorConfig): OrmGenerator {
 	const relativeOutputFilePath = filePath;
 	const absoluteOutputFilePath = path.resolve(filePath);
 
-	const lines = [createObsMessage(), `import {z} from "${zodPackage}";`];
+	const lines = [createObsMessage(), `import { z } from "${zodPackage}";`];
 
 	function addLines(newLines: string[], ...rest: string[]) {
 		lines.push(...newLines, ...rest);
@@ -33,8 +28,8 @@ export function zodGenerator(config: ZodGeneratorConfig): OrmGenerator {
 				addLines(createEnumsLines(enums));
 			},
 
-			onEntity(entity, entities) {
-				addLines(createEntityLines(entity, entities), '');
+			onEntity(entity) {
+				addLines(createEntityLines(config, entity), '');
 			},
 
 			onMetaFile(absoluteMetaFilePath: string, entity: Entity) {
@@ -60,3 +55,5 @@ export function zodGenerator(config: ZodGeneratorConfig): OrmGenerator {
 		seed: {},
 	};
 }
+
+export type { ZodGeneratorConfig };

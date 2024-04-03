@@ -1,8 +1,11 @@
 import { store } from '~/internals';
 import { EntityField } from '~/modelling';
 import { createMetaName } from './index.meta';
+import { ZodGeneratorConfig } from './index.config';
 
-function createModelFieldType(field: EntityField): string {
+function createModelFieldType(config: ZodGeneratorConfig, field: EntityField): string {
+	const { dateMode = 'string' } = config;
+
 	const fieldName = field.$name;
 	const entityName = field.$entityInput.name;
 
@@ -16,7 +19,7 @@ function createModelFieldType(field: EntityField): string {
 		case 'boolean':
 			return 'z.boolean()';
 		case 'datetime':
-			return 'z.date()';
+			return `z.coerce.${dateMode}()`;
 		case 'enum':
 			const e = store.getEnum(field.enum);
 			const valueString = JSON.stringify(e.values);
@@ -31,10 +34,10 @@ function createModelFieldType(field: EntityField): string {
 	return '';
 }
 
-export function createModelField(field: EntityField): string {
+export function createModelField(config: ZodGeneratorConfig, field: EntityField): string {
 	const { $name, extra } = field;
 
-	const type = extra?.zod?.customType || createModelFieldType(field);
+	const type = extra?.zod?.customType || createModelFieldType(config, field);
 
 	if (extra?.zod?.hide) {
 		return '';

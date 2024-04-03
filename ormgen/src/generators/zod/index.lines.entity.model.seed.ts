@@ -4,6 +4,10 @@ export function createSeedPartials(entity: Entity) {
 	const fieldItems = Object.values(entity.fields);
 
 	const itemsWithDefaults = fieldItems.filter((field) => {
+		if (field.type === 'datetime') {
+			return field.defaultNow ? true : false;
+		}
+
 		return field.defaultValue !== undefined;
 	});
 
