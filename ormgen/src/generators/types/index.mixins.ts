@@ -16,7 +16,7 @@ function getMixinsFilePath() {
 export function createMixinLines(): string[] {
 	const filePath = getMixinsFilePath();
 
-	const importDefaultMixins = `import { DefaultMixins } from 'ormgen'`;
+	const importDefaultMixins = `import type { DefaultMixins } from 'ormgen'`;
 	const importExternalMixins = `import * as ExternalMixins from '${filePath}'`;
 
 	const exportExternalMixins = filePath ? 'typeof ExternalMixins' : 'never';
