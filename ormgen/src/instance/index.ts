@@ -1,10 +1,9 @@
-import { OrmgenConfig } from './index.config';
+import { InstanceConfig } from './index.config';
 import { sync } from './sync';
 import { seed } from './seed';
-import { InitConfig } from './init/index.config';
 import { init } from './init';
 
-export function createInstance(config: OrmgenConfig) {
+export function createInstance(config: InstanceConfig) {
 	async function runInit() {
 		await init({
 			cwd: config.cwd || process.cwd(),
@@ -35,4 +34,4 @@ export function createInstance(config: OrmgenConfig) {
 	};
 }
 
-export type { InitConfig };
+export type { InstanceConfig };

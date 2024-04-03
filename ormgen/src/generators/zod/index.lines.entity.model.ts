@@ -1,10 +1,9 @@
-import { store } from '~/internals';
+import { configStore, store } from '~/internals';
 import { EntityField } from '~/modelling';
 import { createMetaName } from './index.meta';
-import { ZodGeneratorConfig } from './index.config';
 
-function createModelFieldType(config: ZodGeneratorConfig, field: EntityField): string {
-	const { dateMode = 'string' } = config;
+function createModelFieldType(field: EntityField): string {
+	const { dateMode = 'string' } = configStore.zod!;
 
 	const fieldName = field.$name;
 	const entityName = field.$entityInput.name;
@@ -34,10 +33,10 @@ function createModelFieldType(config: ZodGeneratorConfig, field: EntityField): s
 	return '';
 }
 
-export function createModelField(config: ZodGeneratorConfig, field: EntityField): string {
+export function createModelField(field: EntityField): string {
 	const { $name, extra } = field;
 
-	const type = extra?.zod?.customType || createModelFieldType(config, field);
+	const type = extra?.zod?.customType || createModelFieldType(field);
 
 	if (extra?.zod?.hide) {
 		return '';

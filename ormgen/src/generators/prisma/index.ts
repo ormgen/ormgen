@@ -9,11 +9,14 @@ import { createEnumLines } from './index.lines.enum';
 import { createEntityLines } from './index.lines.entity';
 import { createObsMessage } from '~/helpers';
 import { seedEntity } from './index.seed';
+import { configStore } from '~/internals';
 
 export function prismaGenerator(config: PrismaGeneratorConfig): OrmGenerator {
+	configStore.prisma = config;
+
 	const { schemaPath = 'prisma/schema.prisma' } = config;
 
-	const lines = [createObsMessage(), ...createBasicLines(config)];
+	const lines = [createObsMessage(), ...createBasicLines()];
 
 	return {
 		name: 'Prisma',
@@ -45,3 +48,5 @@ export function prismaGenerator(config: PrismaGeneratorConfig): OrmGenerator {
 		},
 	};
 }
+
+export type { PrismaGeneratorConfig };

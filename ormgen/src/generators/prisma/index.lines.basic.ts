@@ -1,7 +1,7 @@
-import { PrismaGeneratorConfig } from './index.config';
+import { configStore } from '~/internals';
 
-function createDatasourceLines(config: PrismaGeneratorConfig): string[] {
-	const { provider, url, extensions, extra } = config.datasource;
+function createDatasourceLines(): string[] {
+	const { provider, url, extensions, extra } = configStore.prisma!.datasource;
 
 	return [
 		// <>
@@ -14,8 +14,8 @@ function createDatasourceLines(config: PrismaGeneratorConfig): string[] {
 	].filter(Boolean);
 }
 
-function createClientGeneratorLines(config: PrismaGeneratorConfig): string[] {
-	const { name = 'client', provider = 'prisma-client-js', binaryTargets, previewFeatures, extra } = config.clientGenerator || {};
+function createClientGeneratorLines(): string[] {
+	const { name = 'client', provider = 'prisma-client-js', binaryTargets, previewFeatures, extra } = configStore.prisma!.clientGenerator || {};
 
 	return [
 		// <>
@@ -28,6 +28,6 @@ function createClientGeneratorLines(config: PrismaGeneratorConfig): string[] {
 	].filter(Boolean);
 }
 
-export function createBasicLines(config: PrismaGeneratorConfig): string[] {
-	return [...createDatasourceLines(config), ...createClientGeneratorLines(config)];
+export function createBasicLines(): string[] {
+	return [...createDatasourceLines(), ...createClientGeneratorLines()];
 }

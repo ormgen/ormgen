@@ -64,3 +64,5 @@ export async function init(config: InitConfig) {
 		await createSeed(config, seedInput);
 	}
 }
+
+export type { InitConfig };

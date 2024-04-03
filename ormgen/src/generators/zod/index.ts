@@ -5,10 +5,13 @@ import { createEntityLines } from './index.lines.entity';
 import path from 'path';
 import { createImportMetaLines } from './index.lines.meta';
 import { createEnumsLines } from './index.lines.enum';
-import { createObsMessage, runPrettierSync } from '~/helpers';
+import { createObsMessage, runFormatSync } from '~/helpers';
 import { ZodGeneratorConfig } from './index.config';
+import { configStore } from '~/internals';
 
 export function zodGenerator(config: ZodGeneratorConfig): OrmGenerator {
+	configStore.zod = config;
+
 	const { filePath = 'zod/index.ts', zodPackage = 'zod' } = config;
 
 	const relativeOutputFilePath = filePath;
@@ -29,7 +32,7 @@ export function zodGenerator(config: ZodGeneratorConfig): OrmGenerator {
 			},
 
 			onEntity(entity) {
-				addLines(createEntityLines(config, entity), '');
+				addLines(createEntityLines(entity), '');
 			},
 
 			onMetaFile(absoluteMetaFilePath: string, entity: Entity) {
@@ -48,7 +51,7 @@ export function zodGenerator(config: ZodGeneratorConfig): OrmGenerator {
 			},
 
 			onComplete() {
-				runPrettierSync(filePath);
+				runFormatSync(filePath);
 			},
 		},
 

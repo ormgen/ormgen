@@ -2,15 +2,16 @@ import { OrmGenerator } from '../index.template';
 import { createEntitiesNamespaceLines } from './index.entities';
 import { createEntityNameLines } from './index.entities.name';
 import { createEntitiesUtils } from './index.entities.utils';
-import { TypesGeneratorConfig, configStore } from './index.config';
-import { GeneratedPackage, createObsMessage, runPrettierSync } from '~/helpers';
+import { TypesGeneratorConfig } from './index.config';
+import { GeneratedPackage, createObsMessage, runFormatSync } from '~/helpers';
 import { createMixinLines } from './index.mixins';
 import { createEnumLines } from './index.enum';
+import { configStore } from '~/internals';
 
 export function typesGenerator(config: TypesGeneratorConfig = {}): OrmGenerator {
-	const { nodeModulesPath = '' } = config;
+	configStore.types = config;
 
-	configStore.config = config;
+	const { nodeModulesPath = '' } = config;
 
 	let lines = [createObsMessage(), ''];
 
@@ -53,8 +54,10 @@ export function typesGenerator(config: TypesGeneratorConfig = {}): OrmGenerator 
 
 				await GeneratedPackage.init({ nodeModulesPath, typesContent });
 
-				runPrettierSync(indexPath);
+				runFormatSync(indexPath);
 			},
 		},
 	};
 }
+
+export type { TypesGeneratorConfig };

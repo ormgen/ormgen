@@ -1,10 +1,10 @@
+import { configStore } from '~/internals';
 import { EntityField } from '~/modelling';
-import { configStore } from './index.config';
 
 function createFieldType(field: EntityField): string | null {
-	const { customTypes = {} } = configStore.config as any;
+	const { customTypes = {} } = configStore.types!;
 
-	const customType = customTypes[field.type];
+	const customType = (customTypes as any)[field.type];
 
 	if (customType) {
 		return customType;

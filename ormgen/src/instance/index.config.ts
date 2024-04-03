@@ -1,6 +1,6 @@
 import { OrmGenerator } from '~/generators';
 
-export interface OrmgenConfig {
+export interface InstanceConfig {
 	cwd?: string;
 
 	search: {
@@ -45,4 +45,13 @@ export interface OrmgenConfig {
 	};
 
 	generators: OrmGenerator[];
+
+	/**
+	 * How to format the generated files.
+	 */
+	formatter?: {
+		prettier?: true;
+
+		command?(filePath: string): any;
+	};
 }

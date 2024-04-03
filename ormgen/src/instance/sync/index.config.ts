@@ -1,5 +1,5 @@
 import { OrmGenerator } from '~/generators';
-import { InitConfig } from '~/index';
+import { InitConfig } from '../init';
 
 type Search = Partial<InitConfig> & { root: string };
 

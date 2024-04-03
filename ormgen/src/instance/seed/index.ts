@@ -1,6 +1,6 @@
 import { store } from '~/internals';
 
-import { OrmgenConfig } from '../index.config';
+import { InstanceConfig } from '../index.config';
 import { findTargettedEntities } from '~/helpers';
 import { Seed } from '~/modelling';
 import { OrmGenerator } from '~/generators';
@@ -26,7 +26,7 @@ async function runSeed(gen: OrmGenerator, seed: Seed, seedStore: SeedStore) {
 	seedStore[entityName] = true;
 }
 
-export async function seed(config: OrmgenConfig) {
+export async function seed(config: InstanceConfig) {
 	for (const gen of config.generators) {
 		const seedStore: SeedStore = {};
 

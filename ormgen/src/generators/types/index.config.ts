@@ -6,7 +6,3 @@ export interface TypesGeneratorConfig {
 
 	customTypes?: PartialRecord<EntityFieldType.Primitive, string>;
 }
-
-export const configStore = {
-	config: {} as TypesGeneratorConfig,
-};

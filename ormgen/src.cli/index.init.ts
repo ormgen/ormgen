@@ -1,5 +1,5 @@
 import fs from 'fs-extra';
-import { runPrettierSync } from '~/helpers';
+import { runFormatSync } from '~/helpers';
 
 const files = [
 	{
@@ -106,6 +106,6 @@ export async function init() {
 		await fs.ensureFile(file.path);
 		await fs.writeFile(file.path, file.content);
 
-		runPrettierSync(file.path);
+		runFormatSync(file.path);
 	}
 }
