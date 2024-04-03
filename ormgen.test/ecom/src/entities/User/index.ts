@@ -6,27 +6,27 @@ export default createEntity(({ mx }) => {
 
 		id: 'uid',
 
-		fields: {
-			email: {
-				type: 'text',
+		fields: [
+			{
+				email: {
+					type: 'text',
 
-				isUnique: true,
+					isUnique: true,
+				},
+
+				name: {
+					type: 'text',
+				},
+
+				passwordHash: {
+					type: 'text',
+				},
+
+				lastLogin: {
+					type: 'datetime',
+				},
 			},
-
-			name: {
-				type: 'text',
-			},
-
-			passwordHash: {
-				type: 'text',
-			},
-
-			lastLogin: {
-				type: 'datetime',
-			},
-
-			createdAt: mx.$createdAtField(),
-			updatedAt: mx.$updatedAtField(),
-		},
+			mx.timestamps(),
+		],
 	};
 });
