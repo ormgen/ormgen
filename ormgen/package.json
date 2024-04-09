@@ -1,6 +1,6 @@
 {
 	"name": "ormgen",
-	"version": "0.0.21",
+	"version": "0.0.22",
 	"repository": "https://github.com/ormgen/ormgen",
 	"main": "dist/index.js",
 	"license": "MIT",
