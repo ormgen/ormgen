@@ -1,16 +1,17 @@
 import { execSync } from 'child_process';
 
+import path from 'path';
+import fs from 'fs-extra';
+
 import { OrmGenerator } from '../index.template';
 import { PrismaGeneratorConfig } from './index.config';
 import { createBasicLines } from './index.lines.basic';
 
-import fs from 'fs-extra';
 import { createEnumLines } from './index.lines.enum';
 import { createEntityLines } from './index.lines.entity';
 import { createObsMessage } from '~/helpers';
-import { seedEntity } from './index.seed';
 import { configStore } from '~/internals';
-import path from 'path';
+import { resetAllTables } from './index.reset';
 
 export function prismaGenerator(config: PrismaGeneratorConfig): OrmGenerator {
 	configStore.prisma = config;
@@ -44,10 +45,16 @@ export function prismaGenerator(config: PrismaGeneratorConfig): OrmGenerator {
 		},
 
 		seed: {
-			onEntity(seed) {
+			async onStart() {
+				if (config.seed?.resetAllTables) {
+					await resetAllTables();
+				}
+			},
+
+			async onEntity(seed) {
 				console.log('--', seed.name);
 
-				return seedEntity(seed);
+				// return seedEntity(seed);
 			},
 		},
 	};

@@ -18,6 +18,11 @@ export interface PrismaGeneratorConfig {
 		extra?: string;
 	};
 
+	seed?: {
+		onlyEmptyTables?: boolean;
+		resetAllTables?: boolean;
+	};
+
 	extra?: string;
 
 	// hooks?: {

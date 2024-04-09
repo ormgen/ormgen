@@ -1,15 +1,11 @@
+import { configStore } from '~/internals';
 import { Seed } from '~/modelling';
+import { getPrismaClient } from './index.instance';
 
 function createPrismaModelName(entityName: string) {
 	const [first, ...rest] = entityName.split('');
 
 	return first.toLowerCase() + rest.join('');
-}
-
-async function getPrismaClient() {
-	const { PrismaClient } = await import('@prisma/client');
-
-	return new PrismaClient();
 }
 
 function runSeed({ seed }: Seed) {
@@ -25,6 +21,14 @@ export async function seedEntity(seed: Seed) {
 	const prismaEntityName = createPrismaModelName(seed.name);
 
 	const data = await runSeed(seed);
+
+	if (configStore.prisma?.seed?.onlyEmptyTables) {
+		const count = await prismaClient[prismaEntityName].count();
+
+		if (count > 0) {
+			return;
+		}
+	}
 
 	if (data) {
 		await prismaClient[prismaEntityName].createMany({ data });

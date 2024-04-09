@@ -13,6 +13,8 @@ async function runSeed(gen: OrmGenerator, seed: Seed, seedStore: SeedStore) {
 	const entityName = entity.name;
 	const relatedEntities = findTargettedEntities(entity);
 
+	await gen.seed?.onStart?.();
+
 	for (const relatedEntity of relatedEntities) {
 		await runSeed(gen, store.getSeed(relatedEntity.name), seedStore);
 	}
