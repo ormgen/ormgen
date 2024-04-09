@@ -7,7 +7,7 @@ import { createBasicLines } from './index.lines.basic';
 import fs from 'fs-extra';
 import { createEnumLines } from './index.lines.enum';
 import { createEntityLines } from './index.lines.entity';
-import { createObsMessage, runFormatSync } from '~/helpers';
+import { createObsMessage } from '~/helpers';
 import { seedEntity } from './index.seed';
 import { configStore } from '~/internals';
 import path from 'path';
