@@ -1,8 +1,9 @@
+import fs from 'fs-extra';
+import path from 'path';
+
 import { Entity } from '~/modelling';
 import { OrmGenerator } from '../index.template';
-import fs from 'fs-extra';
 import { createEntityLines } from './index.lines.entity';
-import path from 'path';
 import { createImportMetaLines } from './index.lines.meta';
 import { createEnumsLines } from './index.lines.enum';
 import { createObsMessage, runFormatSync } from '~/helpers';
@@ -29,6 +30,7 @@ export function zodGenerator(config: ZodGeneratorConfig): OrmGenerator {
 		sync: {
 			onEnums(enums) {
 				addLines(createEnumsLines(enums));
+				addLines(['']);
 			},
 
 			onEntity(entity) {
