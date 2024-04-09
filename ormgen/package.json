@@ -1,6 +1,6 @@
 {
 	"name": "ormgen",
-	"version": "0.0.18",
+	"version": "0.0.21",
 	"repository": "https://github.com/ormgen/ormgen",
 	"main": "dist/index.js",
 	"license": "MIT",
@@ -20,8 +20,10 @@
 		"build": "yarn build:src && yarn build:cli",
 		"build:src": "tsup-node",
 		"build:cli": "tsup-node --config tsup.config.cli.ts",
+		"version:commit": "git add . && git commit -m 'New version' && git push",
+		"version:patch": "npm version patch && npm run version:commit",
 		"deploy": "npm run build && npm publish",
-		"deploy:patch": "npm version patch && npm run deploy",
+		"deploy:patch": "npm run version:patch && npm run deploy",
 		"test:types": "tsc --noEmit",
 		"test:types:watch": "tsc --noEmit --watch"
 	},
