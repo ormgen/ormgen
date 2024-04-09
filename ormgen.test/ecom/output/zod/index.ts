@@ -3,6 +3,7 @@
 //#### OBS: This file is generated, do not modify it manually ####
 //################################################################
 //################################################################
+
 import { z } from 'zod';
 import { GLOBAL_ENUM, ORDER_STATUS } from '@ormgen/__generated';
 export const GLOBAL_ENUM__SCHEMA = z.nativeEnum(GLOBAL_ENUM);
@@ -187,10 +188,10 @@ export namespace User {
 	export const model = z.object({
 		uid: z.string(),
 		email: z.string(),
-		name: z.string(),
+		name: z.string().nullable(),
 		passwordHash: z.string(),
 		lastLogin: z.coerce.string(),
-		membershipTypeAlias: z.string(),
+		membershipTypeAlias: z.string().nullable(),
 		createdAt: z.coerce.string(),
 		updatedAt: z.coerce.string(),
 	});
@@ -199,14 +200,14 @@ export namespace User {
 		.object({
 			uid: z.string(),
 			email: z.string(),
-			name: z.string(),
+			name: z.string().nullable(),
 			passwordHash: z.string(),
 			lastLogin: z.coerce.string(),
-			membershipTypeAlias: z.string(),
+			membershipTypeAlias: z.string().nullable(),
 			createdAt: z.coerce.string(),
 			updatedAt: z.coerce.string(),
 		})
-		.partial({ createdAt: true, updatedAt: true });
+		.partial({ name: true, membershipTypeAlias: true, createdAt: true, updatedAt: true });
 
 	export type ModelSchema = typeof model;
 	export type Model = z.infer<typeof model>;

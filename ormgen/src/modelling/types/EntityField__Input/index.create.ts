@@ -4,8 +4,8 @@ export interface Base<Type, DefaultValue, Flag> {
 	type: Type;
 
 	isPrimary?: Flag;
-	isNullable?: Flag;
 	isUnique?: Flag;
+	isNullable?: boolean;
 
 	defaultValue?: DefaultValue;
 

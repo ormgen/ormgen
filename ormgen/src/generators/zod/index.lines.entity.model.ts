@@ -34,16 +34,17 @@ function createModelFieldType(field: EntityField): string {
 }
 
 export function createModelField(field: EntityField): string {
-	const { $name, extra } = field;
+	const { $name, extra, isNullable } = field;
 
 	const type = extra?.zod?.customType || createModelFieldType(field);
+	const nullable = isNullable ? '.nullable()' : '';
 
 	if (extra?.zod?.hide) {
 		return '';
 	}
 
 	if (type) {
-		return `${$name}: ${type},`;
+		return `${$name}: ${type}${nullable},`;
 	}
 
 	return '';

@@ -16,6 +16,8 @@ export default createEntity(({ mx }) => {
 
 				name: {
 					type: 'text',
+
+					isNullable: true,
 				},
 
 				passwordHash: {
@@ -28,6 +30,8 @@ export default createEntity(({ mx }) => {
 
 				membershipType: {
 					type: 'relation',
+
+					isNullable: true,
 
 					targetEntityName: 'MembershipType',
 					targetEntityFieldName: 'users',

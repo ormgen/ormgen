@@ -10,7 +10,7 @@ interface Config {
 // Messy implementation due to TS messup
 export function createRelationKeyField(config: Config) {
 	const { fieldName, field } = config;
-	const { $entityInput, $targetEntityInput } = field;
+	const { $entityInput, $targetEntityInput, isNullable } = field;
 
 	const base: EntityField.ID = {
 		type: 'text',
@@ -21,5 +21,5 @@ export function createRelationKeyField(config: Config) {
 
 	const type = getPrimaryFieldType($targetEntityInput);
 
-	return { ...base, type } as EntityField.ID;
+	return { ...base, type, isNullable } as EntityField.ID;
 }

@@ -3,6 +3,7 @@
 //#### OBS: This file is generated, do not modify it manually ####
 //################################################################
 //################################################################
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -91,15 +92,15 @@ model Review {
 }
 
 model User {
-  uid                 String         @id
-  email               String         @unique
-  name                String
+  uid                 String          @id
+  email               String          @unique
+  name                String?
   passwordHash        String
   lastLogin           DateTime
-  membershipTypeAlias String
-  membershipType      MembershipType @relation(fields: [membershipTypeAlias], references: [alias], onDelete: Restrict)
-  createdAt           DateTime       @default(now())
-  updatedAt           DateTime       @default(now())
+  membershipTypeAlias String?
+  membershipType      MembershipType? @relation(fields: [membershipTypeAlias], references: [alias], onDelete: Restrict)
+  createdAt           DateTime        @default(now())
+  updatedAt           DateTime        @default(now())
   orders              Order[]
   reviews             Review[]
 }
