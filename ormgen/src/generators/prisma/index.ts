@@ -12,6 +12,7 @@ import { createEntityLines } from './index.lines.entity';
 import { createObsMessage } from '~/helpers';
 import { configStore } from '~/internals';
 import { resetAllTables } from './index.reset';
+import { seedEntity } from './index.seed';
 
 export function prismaGenerator(config: PrismaGeneratorConfig): OrmGenerator {
 	configStore.prisma = config;
@@ -54,7 +55,7 @@ export function prismaGenerator(config: PrismaGeneratorConfig): OrmGenerator {
 			async onEntity(seed) {
 				console.log('--', seed.name);
 
-				// return seedEntity(seed);
+				return seedEntity(seed);
 			},
 		},
 	};
