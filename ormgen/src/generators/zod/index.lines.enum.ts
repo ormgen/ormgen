@@ -5,15 +5,16 @@ export function createEnumsLines(enums: Enum[]) {
 		return e.name;
 	});
 
-	const lines: string[] = [];
+	const importLines: string[] = [];
+	const exportLines: string[] = [];
 
 	if (importNames.length) {
-		lines.push(`import { ${importNames.join(', ')} } from '@ormgen/__generated';`);
+		importLines.push(`import { ${importNames.join(', ')} } from '@ormgen/__generated';`);
 	}
 
 	for (const e of enums) {
-		lines.push(`export const ${e.name}__SCHEMA = z.nativeEnum(${e.name})`);
+		exportLines.push(`export const ${e.name}__SCHEMA = z.nativeEnum(${e.name})`);
 	}
 
-	return lines;
+	return { importLines, exportLines };
 }

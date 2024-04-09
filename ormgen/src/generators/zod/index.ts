@@ -9,6 +9,7 @@ import { createEnumsLines } from './index.lines.enum';
 import { createObsMessage, runFormatSync } from '~/helpers';
 import { ZodGeneratorConfig } from './index.config';
 import { configStore } from '~/internals';
+import { createDateSchemaLines } from './index.lines.date';
 
 export function zodGenerator(config: ZodGeneratorConfig): OrmGenerator {
 	configStore.zod = config;
@@ -18,23 +19,23 @@ export function zodGenerator(config: ZodGeneratorConfig): OrmGenerator {
 	const relativeOutputFilePath = filePath;
 	const absoluteOutputFilePath = path.resolve(filePath);
 
-	const lines = [createObsMessage(), `import { z } from "${zodPackage}";`];
-
-	function addLines(newLines: string[], ...rest: string[]) {
-		lines.push(...newLines, ...rest);
-	}
+	const importLines: string[] = [`import { z } from "${zodPackage}";`];
+	const exportLines: string[] = [];
+	const entityLines: string[] = [];
 
 	return {
 		name: 'Zod',
 
 		sync: {
 			onEnums(enums) {
-				addLines(createEnumsLines(enums));
-				addLines(['']);
+				const res = createEnumsLines(enums);
+
+				importLines.push(...res.importLines, '');
+				exportLines.push(...res.exportLines, '');
 			},
 
 			onEntity(entity) {
-				addLines(createEntityLines(entity), '');
+				entityLines.push(...createEntityLines(entity), '');
 			},
 
 			onMetaFile(absoluteMetaFilePath: string, entity: Entity) {
@@ -44,12 +45,16 @@ export function zodGenerator(config: ZodGeneratorConfig): OrmGenerator {
 					entity,
 				});
 
-				addLines(metaLines, '');
+				importLines.push(...metaLines, '');
 			},
 
 			async onWrite() {
+				const content = [createObsMessage(), '', ...importLines, '', ...exportLines, '', ...createDateSchemaLines(), '', ...entityLines].join(
+					'\n',
+				);
+
 				await fs.ensureFile(relativeOutputFilePath);
-				await fs.writeFile(relativeOutputFilePath, lines.join('\n'));
+				await fs.writeFile(relativeOutputFilePath, content);
 			},
 
 			onComplete() {

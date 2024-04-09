@@ -6,9 +6,13 @@
 
 import { z } from 'zod';
 import { GLOBAL_ENUM, ORDER_STATUS } from '@ormgen/__generated';
+
+import { meta as ProductMeta } from '../../src/entities/Product/index.meta';
+
 export const GLOBAL_ENUM__SCHEMA = z.nativeEnum(GLOBAL_ENUM);
 export const ORDER_STATUS__SCHEMA = z.nativeEnum(ORDER_STATUS);
-import { meta as ProductMeta } from '../../src/entities/Product/index.meta';
+
+export const datetimeSchema = z.coerce.date().transform((val) => val.toISOString());
 
 export namespace MembershipType {
 	export const model = z.object({
@@ -34,22 +38,22 @@ export namespace Order {
 	export const model = z.object({
 		uid: z.string(),
 		status: z.enum(['ORDERED', 'SHIPPED']),
-		orderDate: z.coerce.string(),
+		orderDate: datetimeSchema,
 		totalPrice: z.number(),
 		userUid: z.string(),
-		createdAt: z.coerce.string(),
-		updatedAt: z.coerce.string(),
+		createdAt: datetimeSchema,
+		updatedAt: datetimeSchema,
 	});
 
 	export const seed = z
 		.object({
 			uid: z.string(),
 			status: z.enum(['ORDERED', 'SHIPPED']),
-			orderDate: z.coerce.string(),
+			orderDate: datetimeSchema,
 			totalPrice: z.number(),
 			userUid: z.string(),
-			createdAt: z.coerce.string(),
-			updatedAt: z.coerce.string(),
+			createdAt: datetimeSchema,
+			updatedAt: datetimeSchema,
 		})
 		.partial({ orderDate: true, totalPrice: true, createdAt: true, updatedAt: true });
 
@@ -93,7 +97,7 @@ export namespace Product {
 		stockQuantity: z.number(),
 		sku: z.string(),
 		attributes: ProductMeta.attributes,
-		createdAt: z.coerce.string(),
+		createdAt: datetimeSchema,
 	});
 
 	export const seed = z
@@ -105,7 +109,7 @@ export namespace Product {
 			stockQuantity: z.number(),
 			sku: z.string(),
 			attributes: ProductMeta.attributes,
-			createdAt: z.coerce.string(),
+			createdAt: datetimeSchema,
 		})
 		.partial({ attributes: true, createdAt: true });
 
@@ -163,7 +167,7 @@ export namespace Review {
 		uid: z.string(),
 		rating: z.number(),
 		comment: z.string(),
-		createdAt: z.coerce.string(),
+		createdAt: datetimeSchema,
 		userUid: z.string(),
 	});
 
@@ -172,7 +176,7 @@ export namespace Review {
 			uid: z.string(),
 			rating: z.number(),
 			comment: z.string(),
-			createdAt: z.coerce.string(),
+			createdAt: datetimeSchema,
 			userUid: z.string(),
 		})
 		.partial({ createdAt: true });
@@ -190,10 +194,10 @@ export namespace User {
 		email: z.string(),
 		name: z.string().nullable(),
 		passwordHash: z.string(),
-		lastLogin: z.coerce.string(),
+		lastLogin: datetimeSchema,
 		membershipTypeAlias: z.string().nullable(),
-		createdAt: z.coerce.string(),
-		updatedAt: z.coerce.string(),
+		createdAt: datetimeSchema,
+		updatedAt: datetimeSchema,
 	});
 
 	export const seed = z
@@ -202,10 +206,10 @@ export namespace User {
 			email: z.string(),
 			name: z.string().nullable(),
 			passwordHash: z.string(),
-			lastLogin: z.coerce.string(),
+			lastLogin: datetimeSchema,
 			membershipTypeAlias: z.string().nullable(),
-			createdAt: z.coerce.string(),
-			updatedAt: z.coerce.string(),
+			createdAt: datetimeSchema,
+			updatedAt: datetimeSchema,
 		})
 		.partial({ name: true, membershipTypeAlias: true, createdAt: true, updatedAt: true });
 

@@ -1,10 +1,8 @@
-import { configStore, store } from '~/internals';
+import { store } from '~/internals';
 import { EntityField } from '~/modelling';
 import { createMetaName } from './index.meta';
 
 function createModelFieldType(field: EntityField): string {
-	const { dateMode = 'string' } = configStore.instance!;
-
 	const fieldName = field.$name;
 	const entityName = field.$entityInput.name;
 
@@ -18,7 +16,7 @@ function createModelFieldType(field: EntityField): string {
 		case 'boolean':
 			return 'z.boolean()';
 		case 'datetime':
-			return `z.coerce.${dateMode}()`;
+			return 'datetimeSchema';
 		case 'enum':
 			const e = store.getEnum(field.enum);
 			const valueString = JSON.stringify(e.values);
