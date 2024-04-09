@@ -5,7 +5,11 @@ export function createEnumsLines(enums: Enum[]) {
 		return e.name;
 	});
 
-	const lines: string[] = [`import { ${importNames.join(', ')} } from '@ormgen/__generated';`];
+	const lines: string[] = [];
+
+	if (importNames.length) {
+		lines.push(`import { ${importNames.join(', ')} } from '@ormgen/__generated';`);
+	}
 
 	for (const e of enums) {
 		lines.push(`export const ${e.name}__SCHEMA = z.nativeEnum(${e.name})`);
