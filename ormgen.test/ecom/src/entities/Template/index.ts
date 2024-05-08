@@ -15,6 +15,8 @@ export default createEntity({
 
 			relationName: 'parent',
 
+			sourceEntityKeyFieldName: 'specificUid',
+
 			targetEntityName: 'Template',
 			targetEntityFieldName: 'children',
 

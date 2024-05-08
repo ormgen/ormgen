@@ -192,14 +192,14 @@ export namespace Template {
 	export const model = z.object({
 		uid: z.string(),
 		name: z.string(),
-		templateUid: z.string(),
+		specificUid: z.string(),
 	});
 
 	export const seed = z
 		.object({
 			uid: z.string(),
 			name: z.string(),
-			templateUid: z.string(),
+			specificUid: z.string(),
 		})
 		.partial({});
 

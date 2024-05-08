@@ -11,6 +11,11 @@ export interface RelationType extends Base<'relation', undefined, undefined> {
 	relationName?: string;
 
 	/**
+	 * If you want to specifically set the field name of the field holding the foreign key value.
+	 */
+	sourceEntityKeyFieldName?: string;
+
+	/**
 	 * The name of the entity you want connect with.
 	 */
 	targetEntityName: string;

@@ -94,8 +94,8 @@ model Review {
 model Template {
   uid         String     @id
   name        String
-  templateUid String
-  parent      Template   @relation(name: "parent", fields: [templateUid], references: [uid], onDelete: Cascade)
+  specificUid String
+  parent      Template   @relation(name: "parent", fields: [specificUid], references: [uid], onDelete: Cascade)
   children    Template[] @relation(name: "parent")
 }
 

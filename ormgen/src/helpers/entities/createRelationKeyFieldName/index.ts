@@ -8,7 +8,11 @@ interface Config {
 }
 
 export function createRelationKeyFieldName(config: Config) {
-	const { targetEntity } = config;
+	const { field, targetEntity } = config;
+
+	if (field.sourceEntityKeyFieldName) {
+		return field.sourceEntityKeyFieldName;
+	}
 
 	const targetEntityName = targetEntity.name;
 	const targetFieldName = createRelationTargetFieldName(config);
