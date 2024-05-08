@@ -1,10 +1,15 @@
 import { EntityField } from '~/modelling';
 import { createRelationAttr } from './index.lines.entity.field.attrs.relation';
 import { createDefaultAttr } from './index.lines.entity.field.attrs.default';
+import { createRelationTargetAttr } from './index.lines.entity.field.attrs.relationTarget';
 
 function createTypeAttrs(field: EntityField): string[] {
 	if (field.type === 'relation') {
 		return [createRelationAttr(field)];
+	}
+
+	if (field.type === 'relationTarget') {
+		return [createRelationTargetAttr(field)];
 	}
 
 	if (field.type === 'datetime') {

@@ -188,6 +188,28 @@ export namespace Review {
 	export type Seed = z.infer<typeof seed>;
 }
 
+export namespace Template {
+	export const model = z.object({
+		uid: z.string(),
+		name: z.string(),
+		templateUid: z.string(),
+	});
+
+	export const seed = z
+		.object({
+			uid: z.string(),
+			name: z.string(),
+			templateUid: z.string(),
+		})
+		.partial({});
+
+	export type ModelSchema = typeof model;
+	export type Model = z.infer<typeof model>;
+
+	export type SeedSchema = typeof seed;
+	export type Seed = z.infer<typeof seed>;
+}
+
 export namespace User {
 	export const model = z.object({
 		uid: z.string(),
