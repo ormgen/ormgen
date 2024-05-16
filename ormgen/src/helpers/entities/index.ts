@@ -1,5 +1,5 @@
-export * from './findTargettingEntites';
-export * from './findTargettedEntities';
+export * from './findTargetedEntities';
+export * from './findTargetingEntites';
 
 export * from './createRelationKeyField';
 export * from './createRelationKeyFieldName';
