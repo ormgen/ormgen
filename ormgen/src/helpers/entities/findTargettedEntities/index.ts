@@ -8,7 +8,7 @@ export function findTargettedEntities(sourceEntity: Entity) {
 	const fieldItems = Object.values(fields);
 
 	const relationFieldItems = fieldItems.filter((field) => {
-		return field.type === 'relation';
+		return field.type === 'relation' && field.targetEntityFieldName !== sourceEntity.name;
 	}) as EntityField.Relation[];
 
 	return relationFieldItems.map((field) => {
