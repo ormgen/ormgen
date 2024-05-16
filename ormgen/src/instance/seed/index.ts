@@ -1,9 +1,9 @@
 import { store } from '~/internals';
 
-import { InstanceConfig } from '../index.config';
-import { findTargettedEntities } from '~/helpers';
-import { Seed } from '~/modelling';
 import { OrmGenerator } from '~/generators';
+import { findTargetedEntities } from '~/helpers';
+import { Seed } from '~/modelling';
+import { InstanceConfig } from '../index.config';
 
 type SeedStore = Record<string, boolean>;
 
@@ -11,7 +11,7 @@ async function runSeed(gen: OrmGenerator, seed: Seed, seedStore: SeedStore) {
 	const { entity } = seed;
 
 	const entityName = entity.name;
-	const relatedEntities = findTargettedEntities(entity);
+	const relatedEntities = findTargetedEntities(entity);
 
 	for (const relatedEntity of relatedEntities) {
 		await runSeed(gen, store.getSeed(relatedEntity.name), seedStore);
