@@ -1,6 +1,7 @@
 import { Entity } from '~/modelling';
 import { createModelField } from './index.lines.entity.model';
 import { createSeedPartials } from './index.lines.entity.model.seed';
+import { createMetaName } from './index.meta';
 
 export function createEntityLines(entity: Entity): string[] {
 	const fieldItems = Object.values(entity.fields);
@@ -13,6 +14,8 @@ export function createEntityLines(entity: Entity): string[] {
 
 	const seedPartials = createSeedPartials(entity);
 
+	const metaName = createMetaName(entity);
+
 	return [
 		// <>
 		`export namespace ${entity.name} {`,
@@ -24,11 +27,15 @@ export function createEntityLines(entity: Entity): string[] {
 		...modelFieldLines,
 		`})${seedPartials}`,
 		'',
+		`export const meta = ${metaName}`,
+		'',
 		`export type ModelSchema = typeof model;`,
 		`export type Model = z.infer<typeof model>;`,
 		'',
 		`export type SeedSchema = typeof seed;`,
 		`export type Seed = z.infer<typeof seed>;`,
+
+		`export type Meta = typeof meta;`,
 		`}`,
 	];
 }
