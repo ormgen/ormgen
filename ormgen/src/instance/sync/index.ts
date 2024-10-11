@@ -13,6 +13,10 @@ export async function sync(config: InstanceConfig) {
 		await gen.sync?.onEnums?.(enums);
 		await gen.sync?.onEntities?.(entities);
 
+		for (const e of enums) {
+			await gen.sync?.onEnum?.(e, enums);
+		}
+
 		for (const entity of entities) {
 			const entityMetaPaths = findPaths({
 				prefixes: [entity.absolutePath],
@@ -23,14 +27,8 @@ export async function sync(config: InstanceConfig) {
 			for (const entityMetaPath of entityMetaPaths) {
 				await gen.sync?.onMetaFile?.(entityMetaPath, entity);
 			}
-		}
 
-		for (const e of enums) {
-			await gen.sync?.onEnum?.(e, enums);
-		}
-
-		for (const entity of entities) {
-			await gen.sync?.onEntity?.(entity, entities);
+			await gen.sync?.onEntity?.(entity, entities, entityMetaPaths);
 		}
 
 		await gen.sync?.onWrite?.();

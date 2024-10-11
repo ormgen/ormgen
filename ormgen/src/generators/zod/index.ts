@@ -34,8 +34,8 @@ export function zodGenerator(config: ZodGeneratorConfig): OrmGenerator {
 				exportLines.push(...res.exportLines, '');
 			},
 
-			onEntity(entity) {
-				entityLines.push(...createEntityLines(entity), '');
+			onEntity(entity, entities, entityMetaPaths) {
+				entityLines.push(...createEntityLines(entity, entityMetaPaths), '');
 			},
 
 			onMetaFile(absoluteMetaFilePath: string, entity: Entity) {

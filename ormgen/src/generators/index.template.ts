@@ -11,7 +11,7 @@ export interface OrmGenerator {
 		onEnum?(e: Enum, enums: Enum[]): Promisable<any>;
 
 		onEntities?(entities: Entity[]): Promisable<any>;
-		onEntity?(entity: Entity, entities: Entity[]): Promisable<any>;
+		onEntity?(entity: Entity, entities: Entity[], entityMetaPaths: string[]): Promisable<any>;
 
 		onMetaFile?(entityMetaFilePath: string, entity: Entity): Promisable<any>;
 
