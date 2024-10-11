@@ -9,6 +9,7 @@ export interface Entity__Input {
 	description?: string;
 
 	id: Entity__Input.ID;
+	idMeta?: Entity__Input.IdMeta;
 
 	fields: EntityFields__Input | EntityFields__Input[];
 
@@ -19,4 +20,8 @@ export interface Entity__Input {
 
 export namespace Entity__Input {
 	export type ID = 'id' | 'uid' | 'alias' | null;
+
+	export interface IdMeta {
+		autoIncrement?: boolean;
+	}
 }
