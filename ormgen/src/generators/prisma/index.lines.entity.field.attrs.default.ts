@@ -3,8 +3,10 @@ import { EntityField } from '~/modelling';
 function createDefaultValueString(field: EntityField) {
 	const { type, defaultValue } = field;
 
-	if (field.$entityInput.idMeta?.autoIncrement) {
-		return 'autoincrement()';
+	if (field.isPrimary) {
+		if (field.$entityInput.idMeta?.autoIncrement) {
+			return 'autoincrement()';
+		}
 	}
 
 	if (type === 'datetime') {
