@@ -10,6 +10,7 @@ import { createObsMessage, runFormatSync } from '~/helpers';
 import { ZodGeneratorConfig } from './index.config';
 import { configStore } from '~/internals';
 import { createDateSchemaLines } from './index.lines.date';
+import { createUtilLines } from './index.lines.utils';
 
 export function zodGenerator(config: ZodGeneratorConfig): OrmGenerator {
 	configStore.zod = config;
@@ -49,9 +50,10 @@ export function zodGenerator(config: ZodGeneratorConfig): OrmGenerator {
 			},
 
 			async onWrite() {
-				const content = [createObsMessage(), '', ...importLines, '', ...exportLines, '', ...createDateSchemaLines(), '', ...entityLines].join(
-					'\n',
-				);
+				const content = [createObsMessage(), importLines, exportLines, createDateSchemaLines(), createUtilLines(), entityLines]
+					.map((group) => [group, '']) // Space between all groups
+					.flat(10)
+					.join('\n');
 
 				await fs.ensureFile(relativeOutputFilePath);
 				await fs.writeFile(relativeOutputFilePath, content);
