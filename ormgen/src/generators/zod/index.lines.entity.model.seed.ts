@@ -4,6 +4,10 @@ export function createSeedPartials(entity: Entity) {
 	const fieldItems = Object.values(entity.fields);
 
 	const optionalItems = fieldItems.filter((field) => {
+		if (field.isPrimary && entity.idMeta?.autoIncrement) {
+			return true;
+		}
+
 		if (field.type === 'relation' || field.type === 'relationTarget') {
 			return false;
 		}
@@ -27,5 +31,8 @@ export function createSeedPartials(entity: Entity) {
 		return Object.assign({}, acc, { [item]: true });
 	}, {});
 
-	return `.partial(${JSON.stringify(partials)})`;
+	const partialsString = JSON.stringify(partials);
+	const partialString = `.partial(${partialsString})`;
+
+	return partialString;
 }
