@@ -37,7 +37,7 @@ export function createEntityLines(entity: Entity, entityMetaPaths: string[]): st
 		`export type SeedSchema = typeof seed;`,
 		`export type Seed = z.infer<typeof seed>;`,
 		'',
-		hasMeta ? `export type Meta = typeof meta;` : '',
+		hasMeta ? `export type Meta = z.infer<typeof meta>;` : '',
 		`}`,
 	];
 }
