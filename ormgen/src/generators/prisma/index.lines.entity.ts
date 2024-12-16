@@ -7,9 +7,9 @@ function createIndexField(index: EntityIndex) {
 
 	switch (variant) {
 		case 'id':
-			return `@@id(name: "${name}", fields: [${fields.join(', ')}], type: ${type})`;
+			return `@@id(name: "${name}", fields: [${fields.join(', ')}])`;
 		case 'unique':
-			return `@@unique(name: "${name}", fields: [${fields.join(', ')}], type: ${type})`;
+			return `@@unique(name: "${name}", fields: [${fields.join(', ')}])`;
 		case 'index':
 			return `@@index(name: "${name}", fields: [${fields.join(', ')}], type: ${type})`;
 	}
