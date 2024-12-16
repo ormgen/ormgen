@@ -1,5 +1,6 @@
 export interface EntityIndex {
-	type: 'id' | 'unique';
 	name: string;
 	fields: string[];
+	variant: 'id' | 'unique' | 'index';
+	type?: 'BTree' | 'Hash' | 'Gin' | 'Gist' | 'SpGist' | 'Brin';
 }

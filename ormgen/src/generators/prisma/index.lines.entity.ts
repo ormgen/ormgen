@@ -3,13 +3,15 @@ import { EntityIndex } from '~/modelling/types/EntityIndex';
 import { createField } from './index.lines.entity.field';
 
 function createIndexField(index: EntityIndex) {
-	const { name, fields, type } = index;
+	const { name, fields, variant, type = 'BTree' } = index;
 
-	switch (type) {
+	switch (variant) {
 		case 'id':
-			return `@@id(name: "${name}", [${fields.join(', ')}])`;
+			return `@@id(name: "${name}", fields: [${fields.join(', ')}], type: ${type})`;
 		case 'unique':
-			return `@@unique(name: "${name}", [${fields.join(', ')}])`;
+			return `@@unique(name: "${name}", fields: [${fields.join(', ')}], type: ${type})`;
+		case 'index':
+			return `@@index(name: "${name}", fields: [${fields.join(', ')}], type: ${type})`;
 	}
 }
 
