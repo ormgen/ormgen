@@ -22,12 +22,15 @@ export function createEntityLines(entity: Entity) {
 
 	return [
 		`model ${name} {`,
+		entity.extra?.prisma?.entityTop,
 
 		...fieldArray.map(([name, field]) => {
 			return createField(name, field);
 		}),
 
 		...indexes.map(createIndexField),
+
+		entity.extra?.prisma?.entityBottom,
 		'}',
 	].filter(Boolean);
 }
