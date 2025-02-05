@@ -22,7 +22,7 @@ export async function seedEntity(seed: Seed) {
 
 	const data = await runSeed(seed);
 
-	if (configStore.prisma?.seed?.onlyEmptyTables) {
+	if (configStore.instance?.seed?.onlyEmptyTables) {
 		const count = await prismaClient[prismaEntityName].count();
 
 		if (count > 0) {

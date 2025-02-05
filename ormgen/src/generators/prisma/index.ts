@@ -11,7 +11,7 @@ import { createEnumLines } from './index.lines.enum';
 import { createEntityLines } from './index.lines.entity';
 import { createObsMessage } from '~/helpers';
 import { configStore } from '~/internals';
-import { resetAllTables } from './index.reset';
+import { resetTables } from './index.reset';
 import { seedEntity } from './index.seed';
 
 export function prismaGenerator(config: PrismaGeneratorConfig): OrmGenerator {
@@ -47,8 +47,8 @@ export function prismaGenerator(config: PrismaGeneratorConfig): OrmGenerator {
 
 		seed: {
 			async onStart() {
-				if (config.seed?.resetAllTables) {
-					await resetAllTables();
+				if (configStore.instance?.seed?.resetTables) {
+					await resetTables();
 				}
 			},
 

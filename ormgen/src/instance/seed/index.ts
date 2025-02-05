@@ -1,4 +1,4 @@
-import { store } from '~/internals';
+import { configStore, store } from '~/internals';
 
 import { OrmGenerator } from '~/generators';
 import { findTargetedEntities } from '~/helpers';
@@ -10,11 +10,17 @@ type SeedStore = Record<string, boolean>;
 async function runSeed(gen: OrmGenerator, seed: Seed, seedStore: SeedStore) {
 	const { entity } = seed;
 
+	const { excludedTables = [] } = configStore.instance?.seed || {};
+
 	const entityName = entity.name;
 	const relatedEntities = findTargetedEntities(entity);
 
 	for (const relatedEntity of relatedEntities) {
 		await runSeed(gen, store.getSeed(relatedEntity.name), seedStore);
+	}
+
+	if (excludedTables.includes(entityName)) {
+		return;
 	}
 
 	if (seedStore[entityName]) {

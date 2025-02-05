@@ -1,5 +1,7 @@
 // import { Entity__Input, Enum } from '~/modelling';
 
+import { EntityName } from '~/generated';
+
 export interface PrismaGeneratorConfig {
 	schemaPath?: string;
 
@@ -16,11 +18,6 @@ export interface PrismaGeneratorConfig {
 		binaryTargets?: string[];
 		previewFeatures?: string[];
 		extra?: string;
-	};
-
-	seed?: {
-		onlyEmptyTables?: boolean;
-		resetAllTables?: boolean;
 	};
 
 	extra?: string;

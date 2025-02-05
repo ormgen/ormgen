@@ -1,7 +1,7 @@
 import { EntityField } from '~/modelling';
 
 export function createRelationTargetAttr(field: EntityField.RelationTarget) {
-	const { sourceEntityName, $sourceEntityField } = field;
+	const { $sourceEntityField } = field;
 
 	const { relationName } = $sourceEntityField;
 

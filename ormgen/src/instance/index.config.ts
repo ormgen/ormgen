@@ -1,3 +1,4 @@
+import { EntityName } from '~/generated';
 import { OrmGenerator } from '~/generators';
 
 export interface InstanceConfig {
@@ -53,6 +54,26 @@ export interface InstanceConfig {
 		prettier?: true;
 
 		command?(filePath: string): any;
+	};
+
+	/**
+	 * Settings for the seeding process.
+	 */
+	seed?: {
+		/**
+		 * Only seed empty tables.
+		 */
+		onlyEmptyTables?: boolean;
+
+		/**
+		 * Reset all tables before seeding (except the ones defined in "excludedTables")
+		 */
+		resetTables?: boolean;
+
+		/**
+		 * Exclude these tables from being resetted and seeded.
+		 */
+		excludedTables?: EntityName[];
 	};
 
 	/**
