@@ -8,7 +8,7 @@ export async function resetAllTables() {
 	for (const key of keys) {
 		const model = prismaClient[key];
 
-		if (model.deleteMany) {
+		if (model?.deleteMany) {
 			await model.deleteMany({});
 		}
 	}
