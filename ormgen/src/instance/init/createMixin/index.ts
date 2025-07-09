@@ -7,7 +7,7 @@ export async function createMixins(mixinsFilePath: string): Promise<Mixins> {
 
 	const mixins: Mixins = {
 		filePath: mixinsFilePath,
-		content: imports.default,
+		content: imports?.default || imports,
 	};
 
 	store.mixins = mixins;

@@ -1,3 +1,5 @@
+import { Entity } from '~/modelling';
+
 export interface ZodGeneratorConfig {
 	/**
 	 * The file path to write the generated code to.
@@ -8,4 +10,25 @@ export interface ZodGeneratorConfig {
 	 * Where you want to import zod from.
 	 */
 	zodPackage?: string;
+
+	/**
+	 * A function to create the import path for the meta file.
+	 * Defaults to the relative path between the metafile and the output file.
+	 */
+	createMetaImportPath?: ZodGeneratorConfig.CreateMetaImportPathFn;
+}
+
+export namespace ZodGeneratorConfig {
+	export interface CreateMetaImportPathConfig {
+		defaultImportPath: string;
+
+		isFolderMeta: boolean;
+
+		entity: Entity;
+
+		absoluteOutputFilePath: string;
+		absoluteMetaFilePath: string;
+	}
+
+	export type CreateMetaImportPathFn = (config: CreateMetaImportPathConfig) => string;
 }

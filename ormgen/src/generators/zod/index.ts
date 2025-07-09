@@ -15,7 +15,7 @@ import { createUtilLines } from './index.lines.utils';
 export function zodGenerator(config: ZodGeneratorConfig): OrmGenerator {
 	configStore.zod = config;
 
-	const { filePath = 'zod/index.ts', zodPackage = 'zod' } = config;
+	const { filePath = 'zod/index.ts', zodPackage = 'zod', createMetaImportPath } = config;
 
 	const relativeOutputFilePath = filePath;
 	const absoluteOutputFilePath = path.resolve(filePath);
@@ -41,6 +41,7 @@ export function zodGenerator(config: ZodGeneratorConfig): OrmGenerator {
 
 			onMetaFile(absoluteMetaFilePath: string, entity: Entity) {
 				const metaLines = createImportMetaLines({
+					createMetaImportPath,
 					absoluteOutputFilePath,
 					absoluteMetaFilePath,
 					entity,

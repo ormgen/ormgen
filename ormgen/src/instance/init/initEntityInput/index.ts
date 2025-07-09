@@ -7,7 +7,7 @@ export async function initEntityInput(entityFolderPath: string) {
 
 	const folderName = path.basename(entityFolderPath);
 
-	const defaultExport = imports.default.default;
+	const defaultExport = imports?.default?.default || imports?.default || imports;
 
 	if (!defaultExport) {
 		throw new Error(`Entity needs to be the default export at ${entityFolderPath}`);

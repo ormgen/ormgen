@@ -8,7 +8,7 @@ export async function initEntitySeed(entityFolderPath: string, entitySeedPath: s
 
 	const entityName = path.basename(entityFolderPath);
 
-	const defaultExport = imports.default.default;
+	const defaultExport = imports?.default?.default || imports?.default || imports;
 
 	if (!defaultExport) {
 		throw new Error(`Entity seed needs to be the default export at ${entitySeedPath}`);
