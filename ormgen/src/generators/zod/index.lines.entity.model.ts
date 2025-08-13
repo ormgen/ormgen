@@ -31,18 +31,28 @@ function createModelFieldType(field: EntityField): string {
 	return '';
 }
 
+function createModelFieldArrayModifier(field: EntityField): string {
+	if ('isArray' in field) {
+		return field.isArray ? '.array()' : '';
+	}
+
+	return '';
+}
+
 export function createModelField(field: EntityField): string {
 	const { $name, extra, isNullable } = field;
 
 	const type = extra?.zod?.customType || createModelFieldType(field);
-	const nullable = isNullable ? '.nullable()' : '';
+
+	const modifier__nullable = isNullable ? '.nullable()' : '';
+	const modifier__array = createModelFieldArrayModifier(field);
 
 	if (extra?.zod?.hide) {
 		return '';
 	}
 
 	if (type) {
-		return `${$name}: ${type}${nullable},`;
+		return `${$name}: ${type}${modifier__nullable}${modifier__array},`;
 	}
 
 	return '';
