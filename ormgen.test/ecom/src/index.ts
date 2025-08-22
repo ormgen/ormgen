@@ -18,15 +18,15 @@ const instance = createInstance({
 				provider: '"postgresql"',
 				url: 'env("DATABASE_URL")',
 			},
-
-			seed: {
-				resetAllTables: true,
-			},
 		}),
 		zodGenerator({
 			filePath: 'ecom/output/zod/index.ts',
 		}),
 	],
+
+	seed: {
+		resetTables: true,
+	},
 });
 
 if (process.argv.includes('--sync')) {

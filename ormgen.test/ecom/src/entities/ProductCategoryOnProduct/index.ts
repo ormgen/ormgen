@@ -29,7 +29,7 @@ export default createEntity({
 		{
 			name: 'productAndCategory',
 			fields: ['productUid', 'productCategoryUid'],
-			type: 'id',
+			variant: 'id',
 		},
 	],
 });

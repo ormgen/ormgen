@@ -37,7 +37,7 @@ export default createEntity(({ mx }) => {
 			{
 				name: 'nameAndSku',
 				fields: ['name', 'sku'],
-				type: 'unique',
+				variant: 'unique',
 			},
 		],
 	};

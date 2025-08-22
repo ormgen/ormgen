@@ -1,8 +1,15 @@
-import { EntityFieldType, Entity__Input } from '~/modelling';
+import { Entity, EntityFieldType, Entity__Input } from '~/modelling';
 import { flattenArrayable } from '../../utils/flattenArrayable';
 
-export function getPrimaryFieldType(entityInput: Entity__Input): EntityFieldType.ID {
-	switch (entityInput.id) {
+interface Config {
+	entity: Entity__Input | Entity;
+	errorMessage: string | undefined;
+}
+
+export function getPrimaryFieldType(config: Config): EntityFieldType.ID {
+	const { entity, errorMessage = `Primary field not found for entity: ${entity.name}` } = config;
+
+	switch (entity.id) {
 		case 'id':
 			return 'int';
 		case 'uid':
@@ -11,7 +18,7 @@ export function getPrimaryFieldType(entityInput: Entity__Input): EntityFieldType
 			return 'text';
 	}
 
-	const fields = flattenArrayable(entityInput.fields);
+	const fields = flattenArrayable(entity.fields);
 	const fieldItems = Object.values(fields);
 
 	const primaryField = fieldItems.find((field) => {
@@ -19,7 +26,7 @@ export function getPrimaryFieldType(entityInput: Entity__Input): EntityFieldType
 	});
 
 	if (!primaryField) {
-		throw new Error(`Primary field not found for entity: ${entityInput.name}`);
+		throw new Error(errorMessage);
 	}
 
 	return primaryField.type as EntityFieldType.ID;

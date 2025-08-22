@@ -4,10 +4,14 @@ export default createEntity(({ mx }) => {
 	return {
 		name: 'User',
 
-		id: 'uid',
+		id: null,
 
 		fields: [
 			{
+				uid: {
+					type: 'int',
+					isPrimary: true,
+				},
 				email: {
 					type: 'text',
 

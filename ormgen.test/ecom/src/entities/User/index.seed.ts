@@ -5,7 +5,7 @@ export default createSeed({
 
 	seed: [
 		{
-			uid: 'user-1',
+			uid: 1,
 			email: '',
 			name: 'John Doe',
 			passwordHash: '',

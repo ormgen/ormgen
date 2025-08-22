@@ -14,6 +14,9 @@ export const ORDER_STATUS__SCHEMA = z.nativeEnum(ORDER_STATUS);
 
 export const datetimeSchema = z.coerce.date().transform((val) => val.toISOString());
 
+// Extracts all zod types from a zod schema or object
+export type InferZodTypes<T> = T extends z.ZodTypeAny ? z.infer<T> : T extends Record<string, any> ? { [V in keyof T]: InferZodTypes<T[V]> } : T;
+
 export namespace MembershipType {
 	export const model = z.object({
 		alias: z.string(),
@@ -40,7 +43,7 @@ export namespace Order {
 		status: z.enum(['ORDERED', 'SHIPPED']),
 		orderDate: datetimeSchema,
 		totalPrice: z.number(),
-		userUid: z.string(),
+		userUid: z.number(),
 		createdAt: datetimeSchema,
 		updatedAt: datetimeSchema,
 	});
@@ -51,7 +54,7 @@ export namespace Order {
 			status: z.enum(['ORDERED', 'SHIPPED']),
 			orderDate: datetimeSchema,
 			totalPrice: z.number(),
-			userUid: z.string(),
+			userUid: z.number(),
 			createdAt: datetimeSchema,
 			updatedAt: datetimeSchema,
 		})
@@ -113,11 +116,15 @@ export namespace Product {
 		})
 		.partial({ attributes: true, createdAt: true });
 
+	export const meta = ProductMeta;
+
 	export type ModelSchema = typeof model;
 	export type Model = z.infer<typeof model>;
 
 	export type SeedSchema = typeof seed;
 	export type Seed = z.infer<typeof seed>;
+
+	export type Meta = InferZodTypes<typeof meta>;
 }
 
 export namespace ProductCategory {
@@ -168,7 +175,7 @@ export namespace Review {
 		rating: z.number(),
 		comment: z.string(),
 		createdAt: datetimeSchema,
-		userUid: z.string(),
+		userUid: z.number(),
 	});
 
 	export const seed = z
@@ -177,7 +184,7 @@ export namespace Review {
 			rating: z.number(),
 			comment: z.string(),
 			createdAt: datetimeSchema,
-			userUid: z.string(),
+			userUid: z.number(),
 		})
 		.partial({ createdAt: true });
 
@@ -212,7 +219,7 @@ export namespace Template {
 
 export namespace User {
 	export const model = z.object({
-		uid: z.string(),
+		uid: z.number(),
 		email: z.string(),
 		name: z.string().nullable(),
 		passwordHash: z.string(),
@@ -224,7 +231,7 @@ export namespace User {
 
 	export const seed = z
 		.object({
-			uid: z.string(),
+			uid: z.number(),
 			email: z.string(),
 			name: z.string().nullable(),
 			passwordHash: z.string(),

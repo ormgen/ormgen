@@ -19,7 +19,10 @@ export function createRelationKeyField(config: Config) {
 		$entityInput,
 	};
 
-	const type = getPrimaryFieldType($targetEntityInput);
+	const type = getPrimaryFieldType({
+		entity: $targetEntityInput,
+		errorMessage: `Target entity (${field.targetEntityName}) requires a primary field`,
+	});
 
 	return { ...base, type, isNullable } as EntityField.ID;
 }

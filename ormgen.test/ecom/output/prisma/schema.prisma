@@ -35,7 +35,7 @@ model Order {
   status     ORDER_STATUS
   orderDate  DateTime     @default(now())
   totalPrice Int          @default(0)
-  userUid    String
+  userUid    Int
   user       User         @relation(fields: [userUid], references: [uid], onDelete: Restrict)
   createdAt  DateTime     @default(now())
   updatedAt  DateTime     @default(now())
@@ -63,7 +63,7 @@ model Product {
   orderItems    OrderItem[]
   onCategories  ProductCategoryOnProduct[]
 
-  @@unique(name: "nameAndSku", [name, sku])
+  @@unique(name: "nameAndSku", fields: [name, sku])
 }
 
 model ProductCategory {
@@ -79,7 +79,7 @@ model ProductCategoryOnProduct {
   productCategoryUid String
   productCategory    ProductCategory @relation(fields: [productCategoryUid], references: [uid], onDelete: Cascade)
 
-  @@id(name: "productAndCategory", [productUid, productCategoryUid])
+  @@id(name: "productAndCategory", fields: [productUid, productCategoryUid])
 }
 
 model Review {
@@ -87,7 +87,7 @@ model Review {
   rating    Int
   comment   String
   createdAt DateTime @default(now())
-  userUid   String
+  userUid   Int
   user      User     @relation(fields: [userUid], references: [uid], onDelete: Cascade)
 }
 
@@ -100,7 +100,7 @@ model Template {
 }
 
 model User {
-  uid                 String          @id
+  uid                 Int             @id
   email               String          @unique
   name                String?
   passwordHash        String

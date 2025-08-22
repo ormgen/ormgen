@@ -9,7 +9,7 @@ export default createSeed({
 			status: 'ORDERED',
 			orderDate: new Date().toISOString(),
 			totalPrice: 100,
-			userUid: 'user-1',
+			userUid: 1,
 		},
 	],
 });
