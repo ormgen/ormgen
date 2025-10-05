@@ -9,26 +9,26 @@ import { ZodGeneratorConfig } from './index.config';
 interface Config {
 	entity: Entity;
 	absoluteOutputFilePath: string;
-	absoluteMetaFilePath: string;
+	absoluteEntityMetaFilePath: string;
 	createMetaImportPath: ZodGeneratorConfig.CreateMetaImportPathFn | undefined;
 }
 
 function createDefaultMetaImportPath(config: Config) {
-	const { absoluteOutputFilePath, absoluteMetaFilePath } = config;
+	const { absoluteOutputFilePath, absoluteEntityMetaFilePath } = config;
 
 	const absoluteOutputDir = path.dirname(absoluteOutputFilePath);
 
-	const relativeFilePath = path.relative(absoluteOutputDir, absoluteMetaFilePath);
+	const relativeFilePath = path.relative(absoluteOutputDir, absoluteEntityMetaFilePath);
 
 	return relativeFilePath.split('.').slice(0, -1).join('.');
 }
 
 export function createImportMetaLines(config: Config) {
-	const { absoluteMetaFilePath, entity, createMetaImportPath } = config;
+	const { absoluteEntityMetaFilePath, entity, createMetaImportPath } = config;
 
 	const defaultImportPath = createDefaultMetaImportPath(config);
 
-	const isFolderMeta = fs.statSync(absoluteMetaFilePath).isDirectory();
+	const isFolderMeta = fs.statSync(absoluteEntityMetaFilePath).isDirectory();
 
 	const posibleImportPath = createMetaImportPath?.({
 		isFolderMeta,

@@ -10,25 +10,31 @@ export async function sync(config: InstanceConfig) {
 		const entities = store.getEntities();
 
 		await gen.sync?.onStart?.();
-		await gen.sync?.onEnums?.(enums);
-		await gen.sync?.onEntities?.(entities);
+		await gen.sync?.onEnums?.({ enums });
+		await gen.sync?.onEntities?.({ entities });
 
 		for (const e of enums) {
-			await gen.sync?.onEnum?.(e, enums);
+			await gen.sync?.onEnum?.({ enumShape: e, enums });
 		}
 
 		for (const entity of entities) {
-			const entityMetaPaths = findPaths({
+			const absoluteEntityMetaFilePaths = findPaths({
 				prefixes: [entity.absolutePath],
 				patterns: entityMeta,
 				options: { onlyFiles: true },
 			});
 
-			for (const entityMetaPath of entityMetaPaths) {
-				await gen.sync?.onMetaFile?.(entityMetaPath, entity);
+			const absoluteEntityMetaFilePath = absoluteEntityMetaFilePaths.find((absoluteEntityMetaFilePath) => {
+				return entities.some((entity) => {
+					return absoluteEntityMetaFilePath.includes(`/${entity.name}/`);
+				});
+			});
+
+			for (const absoluteEntityMetaFilePath of absoluteEntityMetaFilePaths) {
+				await gen.sync?.onMetaFile?.({ absoluteEntityMetaFilePath, entity });
 			}
 
-			await gen.sync?.onEntity?.(entity, entities, entityMetaPaths);
+			await gen.sync?.onEntity?.({ entity, entities, absoluteEntityMetaFilePath });
 		}
 
 		await gen.sync?.onWrite?.();

@@ -1,6 +1,6 @@
-import { Enum } from '~/modelling';
+import { EnumShape } from '~/modelling';
 
-export function createEnumLines(e: Enum) {
+export function createEnumLines(e: EnumShape) {
 	const { name, values, skipDatabase } = e;
 
 	if (skipDatabase) {

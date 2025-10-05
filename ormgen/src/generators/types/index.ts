@@ -28,7 +28,7 @@ export function typesGenerator(config: TypesGeneratorConfig = {}): OrmGenerator 
 				addLines(['']);
 			},
 
-			onEnums(enums) {
+			onEnums({ enums }) {
 				const enumNames = enums.map((e) => `'${e.name}'`);
 				const enumNamesString = enumNames.join(' | ') || 'never';
 				const enumLines = `export type EnumName = ${enumNamesString};`;
@@ -36,11 +36,11 @@ export function typesGenerator(config: TypesGeneratorConfig = {}): OrmGenerator 
 				addLines([enumLines]);
 			},
 
-			onEnum(e) {
-				addLines(createEnumLines(e));
+			onEnum({ enumShape }) {
+				addLines(createEnumLines(enumShape));
 			},
 
-			onEntities(entities) {
+			onEntities({ entities }) {
 				addLines(createEntityNameLines(entities));
 				addLines(['']);
 				addLines(createEntitiesNamespaceLines(entities));

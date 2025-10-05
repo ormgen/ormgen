@@ -1,7 +1,6 @@
 import fs from 'fs-extra';
 import path from 'path';
 
-import { Entity } from '~/modelling';
 import { OrmGenerator } from '../index.template';
 import { createEntityLines } from './index.lines.entity';
 import { createImportMetaLines } from './index.lines.meta';
@@ -28,22 +27,22 @@ export function zodGenerator(config: ZodGeneratorConfig): OrmGenerator {
 		name: 'Zod',
 
 		sync: {
-			onEnums(enums) {
+			onEnums({ enums }) {
 				const res = createEnumsLines(enums);
 
 				importLines.push(...res.importLines, '');
 				exportLines.push(...res.exportLines, '');
 			},
 
-			onEntity(entity, entities, entityMetaPaths) {
-				entityLines.push(...createEntityLines(entity, entityMetaPaths), '');
+			onEntity({ entity, absoluteEntityMetaFilePath }) {
+				entityLines.push(...createEntityLines({ entity, absoluteEntityMetaFilePath }), '');
 			},
 
-			onMetaFile(absoluteMetaFilePath: string, entity: Entity) {
+			onMetaFile({ entity, absoluteEntityMetaFilePath }) {
 				const metaLines = createImportMetaLines({
 					createMetaImportPath,
 					absoluteOutputFilePath,
-					absoluteMetaFilePath,
+					absoluteEntityMetaFilePath,
 					entity,
 				});
 

@@ -1,4 +1,4 @@
-export interface Enum {
+export interface EnumShape {
 	name: string;
 
 	values: string[];

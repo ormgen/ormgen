@@ -27,7 +27,7 @@ export namespace ZodGeneratorConfig {
 		entity: Entity;
 
 		absoluteOutputFilePath: string;
-		absoluteMetaFilePath: string;
+		absoluteEntityMetaFilePath: string;
 	}
 
 	export type CreateMetaImportPathFn = (config: CreateMetaImportPathConfig) => string;

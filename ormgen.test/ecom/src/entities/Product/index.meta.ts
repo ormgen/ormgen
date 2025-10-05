@@ -6,10 +6,6 @@ export const meta = {
 		z.object({ material: z.string() }),
 		z.object({ resolution: z.number() }),
 	]),
+
+	stockQuantity: z.number().int().min(0).max(1_000_000),
 };
-
-type MetaType = typeof meta;
-
-export interface Meta {
-	attributes: z.infer<MetaType['attributes']>;
-}

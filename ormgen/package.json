@@ -4,7 +4,6 @@
 	"repository": "https://github.com/ormgen/ormgen",
 	"main": "dist/index.js",
 	"license": "MIT",
-	"packageManager": "yarn@4.1.1",
 	"files": [
 		"dist",
 		"dist.cli"
@@ -15,9 +14,9 @@
 	},
 	"scripts": {
 		"postinstall": "node postinstall || exit 0",
-		"dev:src": "yarn build:src --watch",
-		"dev:cli": "yarn build:cli --watch",
-		"build": "yarn build:src && yarn build:cli",
+		"dev:src": "npm run build:src -- --watch",
+		"dev:cli": "npm run build:cli -- --watch",
+		"build": "npm run build:src && npm run build:cli",
 		"build:src": "tsup-node",
 		"build:cli": "tsup-node --config tsup.config.cli.ts",
 		"version:commit": "git add . && git commit -m 'New version' && git push",

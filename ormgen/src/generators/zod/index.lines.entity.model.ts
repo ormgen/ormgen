@@ -1,14 +1,40 @@
 import { store } from '~/internals';
-import { EntityField } from '~/modelling';
+import { Entity, EntityField } from '~/modelling';
 import { createMetaName } from './index.meta';
 
-function createModelFieldType(field: EntityField): string {
-	const fieldName = field.$name;
-	const entityName = field.$entityInput.name;
+interface Config {
+	entity: Entity;
+	entityField: EntityField;
+	absoluteEntityMetaFilePath: string | undefined;
+}
+
+function isMetaField(config: Config) {
+	const { entityField, absoluteEntityMetaFilePath } = config;
+
+	if (!absoluteEntityMetaFilePath) {
+		return false;
+	}
+
+	const { meta } = require(absoluteEntityMetaFilePath);
+
+	const metaSchema = meta[entityField.$name];
+
+	return !!metaSchema;
+}
+
+function createModelFieldType(config: Config): string {
+	const { entityField } = config;
+
+	const fieldName = entityField.$name;
+	const entityName = entityField.$entityInput.name;
 
 	const entity = store.getEntity(entityName);
 
-	switch (field.type) {
+	if (isMetaField(config)) {
+		return createMetaName(entity) + `.${fieldName}`;
+	}
+
+	switch (entityField.type) {
 		case 'text':
 			return 'z.string()';
 		case 'int':
@@ -18,34 +44,35 @@ function createModelFieldType(field: EntityField): string {
 		case 'datetime':
 			return 'datetimeSchema';
 		case 'enum':
-			const e = store.getEnum(field.enum);
-			const valueString = JSON.stringify(e.values);
+			const enumShape = store.getEnum(entityField.enum);
+			const valueString = JSON.stringify(enumShape.values);
 
 			return `z.enum(${valueString})`;
 		case 'json':
-			const metaName = createMetaName(entity);
-
-			return `${metaName}.${fieldName}`;
+			return 'z.any()';
 	}
 
 	return '';
 }
 
-function createModelFieldArrayModifier(field: EntityField): string {
-	if ('isArray' in field) {
-		return field.isArray ? '.array()' : '';
+function createModelFieldArrayModifier(config: Config): string {
+	const { entityField } = config;
+
+	if ('isArray' in entityField) {
+		return entityField.isArray ? '.array()' : '';
 	}
 
 	return '';
 }
 
-export function createModelField(field: EntityField): string {
-	const { $name, extra, isNullable } = field;
+export function createModelField(config: Config): string {
+	const { entityField } = config;
+	const { $name, extra, isNullable } = entityField;
 
-	const type = extra?.zod?.customType || createModelFieldType(field);
+	const type = extra?.zod?.customType || createModelFieldType(config);
 
 	const modifier__nullable = isNullable ? '.nullable()' : '';
-	const modifier__array = createModelFieldArrayModifier(field);
+	const modifier__array = createModelFieldArrayModifier(config);
 
 	if (extra?.zod?.hide) {
 		return '';

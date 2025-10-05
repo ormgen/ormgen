@@ -1,7 +1,7 @@
-import { Entity__Input, Entity, Enum, Seed__Input, Seed, Mixins } from '~/modelling/types';
+import { Entity__Input, Entity, EnumShape, Seed__Input, Seed, Mixins } from '~/modelling/types';
 
 const store__enums = {
-	enums: new Map<string, Enum>(),
+	enums: new Map<string, EnumShape>(),
 
 	getEnums() {
 		return Array.from(store__enums.enums.values());

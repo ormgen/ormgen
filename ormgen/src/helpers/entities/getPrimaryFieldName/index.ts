@@ -30,7 +30,5 @@ export function getPrimaryFieldName(config: Config) {
 		return name;
 	}
 
-	console.log(JSON.stringify(config, null, 2));
-
 	throw new Error(errorMessage);
 }

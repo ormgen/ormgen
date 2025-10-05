@@ -1,6 +1,6 @@
-import { Enum } from '~/modelling';
+import { EnumShape } from '~/modelling';
 
-export function createEnumsLines(enums: Enum[]) {
+export function createEnumsLines(enums: EnumShape[]) {
 	const importNames = enums.map((e) => {
 		return e.name;
 	});

@@ -1,4 +1,4 @@
-import { Entity, Enum, Seed } from '~/modelling';
+import { Entity, EnumShape, Seed } from '~/modelling';
 import { Promisable } from '~/helpers/utils';
 
 export interface OrmGenerator {
@@ -7,13 +7,13 @@ export interface OrmGenerator {
 	sync?: {
 		onStart?(): Promisable<any>;
 
-		onEnums?(enums: Enum[]): Promisable<any>;
-		onEnum?(e: Enum, enums: Enum[]): Promisable<any>;
+		onEnums?(config: { enums: EnumShape[] }): Promisable<any>;
+		onEnum?(config: { enumShape: EnumShape; enums: EnumShape[] }): Promisable<any>;
 
-		onEntities?(entities: Entity[]): Promisable<any>;
-		onEntity?(entity: Entity, entities: Entity[], entityMetaPaths: string[]): Promisable<any>;
+		onEntities?(config: { entities: Entity[] }): Promisable<any>;
+		onEntity?(config: { entity: Entity; entities: Entity[]; absoluteEntityMetaFilePath: string | undefined }): Promisable<any>;
 
-		onMetaFile?(entityMetaFilePath: string, entity: Entity): Promisable<any>;
+		onMetaFile?(config: { absoluteEntityMetaFilePath: string; entity: Entity }): Promisable<any>;
 
 		onWrite?(): Promisable<any>;
 		onComplete?(): Promisable<any>;

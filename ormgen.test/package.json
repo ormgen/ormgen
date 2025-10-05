@@ -1,20 +1,21 @@
 {
 	"name": "@ormgen/test.ecom",
 	"license": "MIT",
+	"instruction": "Use npm in order for the ormgen linking to work",
 	"scripts": {
 		"test:types": "tsc --noEmit",
 		"test:types:watch": "tsc --noEmit --watch",
 		"ecom": "DATABASE_URL=postgres://postgres:postgres@localhost:5432/ormgen",
-		"ecom:orm": "yarn ecom tsx ecom/src/index.ts",
-		"ecom:orm:sync": "yarn ecom:orm --sync",
-		"ecom:orm:seed": "yarn ecom:orm --seed",
-		"ecom:prisma:gen": "yarn ecom prisma generate --schema ecom/output/prisma/schema.prisma",
-		"ecom:prisma:push": "yarn ecom prisma db push --schema ecom/output/prisma/schema.prisma",
-		"ecom:prisma:sync": "yarn ecom:prisma:gen && yarn ecom:prisma:push"
+		"ecom:orm": "npm run ecom -- tsx ecom/src/index.ts",
+		"ecom:orm:sync": "npm run ecom:orm -- --sync",
+		"ecom:orm:seed": "npm run ecom:orm -- --seed",
+		"ecom:prisma:gen": "npm run ecom -- prisma generate --schema ecom/output/prisma/schema.prisma",
+		"ecom:prisma:push": "npm run ecom -- prisma db push --schema ecom/output/prisma/schema.prisma",
+		"ecom:prisma:sync": "npm run ecom:prisma:gen && npm run ecom:prisma:push"
 	},
 	"dependencies": {
 		"@prisma/client": "5.11.0",
-		"ormgen": "^0.0.17"
+		"ormgen": "0.0.1"
 	},
 	"devDependencies": {
 		"prisma": "^5.11.0",

@@ -27,11 +27,11 @@ export function prismaGenerator(config: PrismaGeneratorConfig): OrmGenerator {
 		name: 'Prisma',
 
 		sync: {
-			onEnum(e) {
-				lines.push(...createEnumLines(e));
+			onEnum({ enumShape }) {
+				lines.push(...createEnumLines(enumShape));
 			},
 
-			onEntity(entity) {
+			onEntity({ entity }) {
 				lines.push(...createEntityLines(entity));
 			},
 
