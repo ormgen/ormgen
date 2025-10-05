@@ -18,6 +18,12 @@ function createTypeAttrs(field: EntityField): string[] {
 		}
 	}
 
+	if ("$isRelationKey" in field) {
+		if (field.$targetEntityField.targetMode === 'one') {
+			return ['@unique'];
+		}
+	}
+
 	return [];
 }
 

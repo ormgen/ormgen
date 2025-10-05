@@ -19,6 +19,15 @@ export namespace EntityField {
 
 	export type Relation = CreateType<EntityField__Input.Relation, { $targetEntityInput: Entity__Input }>;
 
+	export type RelationKey = CreateType<
+		EntityField__Input.Text | EntityField__Input.Int,
+		{
+			$isRelationKey: true,
+			$targetEntityInput: Entity__Input;
+			$targetEntityField: EntityField__Input.Relation;
+		}
+	>;
+
 	export type RelationTarget = CreateType<
 		EntityField__Input.RelationTarget,
 		{
@@ -31,7 +40,7 @@ export namespace EntityField {
 
 	export type Primitive = Text | Int | Boolean | DateTime | Enum | Json | Unknown;
 
-	export type Any = Primitive | Relation | RelationTarget;
+	export type Any = Primitive | Relation | RelationTarget | RelationKey;
 }
 
 export type EntityField = EntityField.Any;

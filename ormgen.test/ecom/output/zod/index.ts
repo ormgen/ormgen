@@ -169,6 +169,30 @@ export namespace ProductCategoryOnProduct {
 	export type Seed = z.infer<typeof seed>;
 }
 
+export namespace ProductInventory {
+	export const model = z.object({
+		uid: z.string(),
+		stockQuantity: z.number(),
+		lastUpdatedAt: datetimeSchema,
+		productUid: z.string(),
+	});
+
+	export const seed = z
+		.object({
+			uid: z.string(),
+			stockQuantity: z.number(),
+			lastUpdatedAt: datetimeSchema,
+			productUid: z.string(),
+		})
+		.partial({});
+
+	export type ModelSchema = typeof model;
+	export type Model = z.infer<typeof model>;
+
+	export type SeedSchema = typeof seed;
+	export type Seed = z.infer<typeof seed>;
+}
+
 export namespace Review {
 	export const model = z.object({
 		uid: z.string(),

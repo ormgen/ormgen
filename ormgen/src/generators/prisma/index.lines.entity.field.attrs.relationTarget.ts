@@ -5,9 +5,10 @@ export function createRelationTargetAttr(field: EntityField.RelationTarget) {
 
 	const { relationName } = $sourceEntityField;
 
-	if (!relationName) {
-		return '';
+	if (relationName) {
+		return `@relation(name: "${relationName}")`;
 	}
 
-	return `@relation(name: "${relationName}")`;
+	return ''
+
 }

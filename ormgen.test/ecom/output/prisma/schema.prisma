@@ -62,6 +62,7 @@ model Product {
   createdAt     DateTime                   @default(now())
   orderItems    OrderItem[]
   onCategories  ProductCategoryOnProduct[]
+  inventory     ProductInventory?
 
   @@unique(name: "nameAndSku", fields: [name, sku])
 }
@@ -80,6 +81,14 @@ model ProductCategoryOnProduct {
   productCategory    ProductCategory @relation(fields: [productCategoryUid], references: [uid], onDelete: Cascade)
 
   @@id(name: "productAndCategory", fields: [productUid, productCategoryUid])
+}
+
+model ProductInventory {
+  uid           String   @id
+  stockQuantity Int
+  lastUpdatedAt DateTime
+  productUid    String   @unique
+  product       Product  @relation(fields: [productUid], references: [uid])
 }
 
 model Review {

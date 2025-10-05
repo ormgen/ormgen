@@ -3,7 +3,7 @@ import { Base } from './index.create';
 export interface RelationType extends Base<'relation', undefined, undefined> {
 	type: 'relation';
 
-	onDelete: 'Cascade' | 'SetNull' | 'Restrict';
+	onDelete: 'Cascade' | 'SetNull' | 'Restrict' | null;
 
 	/**
 	 * Some ORM's gives the relations names in order to match them between entities.

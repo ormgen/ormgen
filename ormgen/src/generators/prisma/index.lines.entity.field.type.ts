@@ -12,7 +12,7 @@ function createFieldTypeModifier(field: EntityField): string {
 	if (field.type === 'relationTarget') {
 		const isOne = field.$sourceEntityField.targetMode === 'one';
 
-		return isOne ? '' : '[]';
+		return isOne ? '?' : '[]';
 	}
 
 	return field.isArray ? '[]' : '';

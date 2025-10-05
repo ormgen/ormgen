@@ -12,5 +12,11 @@ export function createRelationAttr(field: EntityField.Relation) {
 
 	const relationNameString = relationName ? `name: "${relationName}", ` : '';
 
-	return `@relation(${relationNameString} fields: [${keyFieldName}], references: [${targetFieldName}], onDelete: ${onDelete})`;
+	let relationString = `@relation(${relationNameString} fields: [${keyFieldName}], references: [${targetFieldName}]`;
+
+	if (onDelete) {
+		relationString += `, onDelete: ${onDelete}`;
+	}
+
+	return relationString + ')';
 }

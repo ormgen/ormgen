@@ -12,11 +12,14 @@ export function createRelationKeyField(config: Config) {
 	const { fieldName, field } = config;
 	const { $entityInput, $targetEntityInput, isNullable } = field;
 
-	const base: EntityField.ID = {
+	const base: EntityField.RelationKey = {
 		type: 'text',
 		$input: null,
 		$name: fieldName,
 		$entityInput,
+		$targetEntityInput,
+		$targetEntityField: field,
+		$isRelationKey: true,
 	};
 
 	const type = getPrimaryFieldType({
